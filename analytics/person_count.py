@@ -63,47 +63,46 @@ def analyze_video(input_path: str, output_path: str, model_name: str = DEFAULT_M
         if not ok:
             break
 
-        # Analyze every 2 frames for better person detection (was every 8 frames)
-        if frame_idx % 2 == 0:
-            results = model(frame, stream=False, verbose=False)
-            persons = 0
-            total_objects = 0
-            object_counts = {}
-            
-            for result in results:
-                boxes = result.boxes
-                if boxes is None:
+        # Analyze EVERY frame for maximum person detection accuracy
+        results = model(frame, stream=False, verbose=False)
+        persons = 0
+        total_objects = 0
+        object_counts = {}
+        
+        for result in results:
+            boxes = result.boxes
+            if boxes is None:
+                continue
+            for box in boxes:
+                cls = int(box.cls[0]) if hasattr(box, 'cls') and len(box.cls) > 0 else None
+                if cls is None:
                     continue
-                for box in boxes:
-                    cls = int(box.cls[0]) if hasattr(box, 'cls') and len(box.cls) > 0 else None
-                    if cls is None:
-                        continue
-                    
-                    obj_name = result.names.get(cls, 'unknown')
-                    total_objects += 1
-                    
-                    # Count each object type
-                    if obj_name not in object_counts:
-                        object_counts[obj_name] = 0
-                    object_counts[obj_name] += 1
-                    
-                    # Count persons specifically
-                    if obj_name == 'person':
-                        persons += 1
-            
-            # Detect motion between frames
-            motion_detected = bool(detect_motion(frame, prev_frame))  # Convert to Python bool
-            
-            counts.append({
-                "frame": frame_idx,
-                "timestamp_seconds": round(frame_idx / fps, 2) if fps else 0,
-                "person_count": persons,
-                "total_objects": total_objects,
-                "object_types": object_counts,
-                "motion_detected": motion_detected,
-            })
-            
-            prev_frame = frame.copy()
+                
+                obj_name = result.names.get(cls, 'unknown')
+                total_objects += 1
+                
+                # Count each object type
+                if obj_name not in object_counts:
+                    object_counts[obj_name] = 0
+                object_counts[obj_name] += 1
+                
+                # Count persons specifically
+                if obj_name == 'person':
+                    persons += 1
+        
+        # Detect motion between frames
+        motion_detected = bool(detect_motion(frame, prev_frame))  # Convert to Python bool
+        
+        counts.append({
+            "frame": frame_idx,
+            "timestamp_seconds": round(frame_idx / fps, 2) if fps else 0,
+            "person_count": persons,
+            "total_objects": total_objects,
+            "object_types": object_counts,
+            "motion_detected": motion_detected,
+        })
+        
+        prev_frame = frame.copy()
         
         frame_idx += 1
 
