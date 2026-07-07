@@ -1,0 +1,13 @@
+{
+  "name": "testing-grayvms-stream",
+  "version": "0.1.0",
+  "description": "Simple MJPEG streamer for Testing_GrayVMS",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "analyze": "python analytics/person_count.py video.mp4 analytics/person_counts.json"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
