@@ -38,79 +38,199 @@ const dashboardHtml = `<!doctype html>
     <style>
       :root { color-scheme: dark; }
       body {
-        font-family: Inter, system-ui, Arial, sans-serif;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         margin: 0;
-        padding: 1.25rem;
-        background: radial-gradient(circle at top, #2b2b2b 0%, #111111 45%, #090909 100%);
-        color: #f2ece6;
+        padding: 2rem;
+        background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 25%, #2d2d2d 50%, #1a1a1a 75%, #0a0a0a 100%);
+        color: #e8e8e8;
+        min-height: 100vh;
       }
       h1 {
-        margin: 0 0 1rem;
-        font-size: 1.6rem;
-        letter-spacing: 0.02em;
-        color: #e4d8ca;
+        margin: 0 0 2rem;
+        font-size: 2.2rem;
+        letter-spacing: 0.05em;
+        color: #d4af37;
+        text-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
+        font-weight: 700;
+      }
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
       }
       .content {
         display: flex;
-        gap: 1.25rem;
+        gap: 2rem;
         align-items: flex-start;
         flex-wrap: wrap;
       }
-      .video-panel, .analytics {
-        border: 1px solid rgba(255,255,255,0.08);
-        box-shadow: 0 10px 30px rgba(0,0,0,0.35);
-        border-radius: 14px;
-        backdrop-filter: blur(10px);
-      }
       .video-panel {
         flex: 1 1 560px;
-        padding: 0.8rem;
-        background: rgba(20, 20, 20, 0.92);
+        min-width: 300px;
+      }
+      .panel-box {
+        border: 2px solid #d4af37;
+        box-shadow: 0 8px 32px rgba(212, 175, 55, 0.15), inset 0 1px 0 rgba(212, 175, 55, 0.1);
+        border-radius: 12px;
+        background: linear-gradient(135deg, #1a1a1a 0%, #242424 100%);
+        padding: 1.2rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .panel-box::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #d4af37, transparent);
       }
       .stream {
-        width: min(60vw, 760px);
+        width: 100%;
         max-width: 100%;
         height: auto;
         display: block;
-        border-radius: 10px;
+        border-radius: 8px;
         background: #000;
+        border: 1px solid rgba(212, 175, 55, 0.2);
       }
-      .analytics {
-        flex: 1 1 360px;
-        padding: 0.95rem 1rem;
-        background: linear-gradient(145deg, #181717 0%, #2b211d 100%);
-        max-width: 500px;
+      .analytics-section {
+        flex: 1 1 380px;
+        min-width: 300px;
       }
-      .analytics h2 { margin: 0 0 0.6rem; font-size: 1.15rem; color: #c9a98a; }
-      .analytics p { margin: 0.28rem 0; font-size: 0.95rem; }
-      .analytics strong { display: inline-block; min-width: 150px; color: #d0c2b7; }
+      .analytics-title {
+        font-size: 1.4rem;
+        color: #d4af37;
+        margin: 0 0 1.5rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+      .stats-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+      }
+      .stat-box {
+        background: linear-gradient(135deg, #1f1f1f 0%, #2a2a2a 100%);
+        border: 1.5px solid #d4af37;
+        border-radius: 10px;
+        padding: 1rem;
+        text-align: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(212, 175, 55, 0.1);
+        position: relative;
+        overflow: hidden;
+      }
+      .stat-box::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+        transition: left 0.5s;
+      }
+      .stat-box:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(212, 175, 55, 0.2);
+        border-color: #f0d46f;
+      }
+      .stat-label {
+        font-size: 0.85rem;
+        color: #999;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+      }
+      .stat-value {
+        font-size: 2rem;
+        color: #d4af37;
+        font-weight: 700;
+        font-family: 'Courier New', monospace;
+      }
+      .info-box {
+        background: linear-gradient(135deg, #1f1f1f 0%, #2a2a2a 100%);
+        border: 1.5px solid #d4af37;
+        border-radius: 10px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+      }
+      .info-label {
+        font-size: 0.9rem;
+        color: #999;
+        margin-bottom: 0.3rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      .info-value {
+        font-size: 1rem;
+        color: #e8e8e8;
+        word-break: break-all;
+        font-family: 'Courier New', monospace;
+      }
       .json-box {
-        margin-top: 0.8rem;
-        padding: 0.75rem;
-        background: rgba(6, 6, 6, 0.95);
-        color: #e5d8c9;
+        margin-top: 1rem;
+        padding: 1rem;
+        background: rgba(15, 15, 15, 0.8);
+        color: #b0b0b0;
         border-radius: 8px;
         overflow-x: auto;
-        font-size: 0.9rem;
+        font-size: 0.8rem;
         white-space: pre-wrap;
-        border: 1px solid rgba(201, 169, 138, 0.16);
+        border: 1px solid #d4af37;
+        max-height: 300px;
+        overflow-y: auto;
+        font-family: 'Courier New', monospace;
+      }
+      @media (max-width: 768px) {
+        h1 { font-size: 1.8rem; }
+        .content { flex-direction: column; gap: 1.5rem; }
+        .stats-grid { grid-template-columns: 1fr; }
       }
     </style>
   </head>
   <body>
-    <h1>GrayVMS Live View</h1>
-    <div class="content">
-      <div class="video-panel">
-        <video class="stream" controls autoplay loop muted playsinline src="/video.mp4"></video>
-      </div>
-      <div class="analytics">
-        <h2>Person Analytics</h2>
-        <p><strong>Video:</strong> <span id="analytics-video">Loading...</span></p>
-        <p><strong>Frames analyzed:</strong> <span id="analytics-sampled">-</span></p>
-        <p><strong>Max people:</strong> <span id="analytics-max">-</span></p>
-        <p><strong>Average people:</strong> <span id="analytics-average">-</span></p>
-        <p><strong>Min people:</strong> <span id="analytics-min">-</span></p>
-        <div class="json-box" id="analytics-json">Loading JSON data...</div>
+    <div class="container">
+      <h1>🎬 GrayVMS Live View</h1>
+      <div class="content">
+        <div class="video-panel">
+          <div class="panel-box">
+            <video class="stream" controls autoplay loop muted playsinline src="/video.mp4"></video>
+          </div>
+        </div>
+        <div class="analytics-section">
+          <div class="analytics-title">📊 Person Analytics</div>
+          <div class="info-box">
+            <div class="info-label">Video File</div>
+            <div class="info-value" id="analytics-video">Loading...</div>
+          </div>
+          <div class="stats-grid">
+            <div class="stat-box">
+              <div class="stat-label">Max People</div>
+              <div class="stat-value" id="analytics-max">-</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Avg People</div>
+              <div class="stat-value" id="analytics-average">-</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Min People</div>
+              <div class="stat-value" id="analytics-min">-</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Frames</div>
+              <div class="stat-value" id="analytics-sampled">-</div>
+            </div>
+          </div>
+          <div class="panel-box">
+            <div style="color: #d4af37; font-size: 0.9rem; margin-bottom: 0.5rem; font-weight: 600;">Raw Data</div>
+            <div class="json-box" id="analytics-json">Loading JSON data...</div>
+          </div>
+        </div>
       </div>
     </div>
     <script>
@@ -130,6 +250,7 @@ const dashboardHtml = `<!doctype html>
         }
       }
       refreshAnalytics();
+      setInterval(refreshAnalytics, 5000);
     </script>
   </body>
 </html>`;
