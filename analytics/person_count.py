@@ -91,7 +91,7 @@ def analyze_video(input_path: str, output_path: str, model_name: str = DEFAULT_M
                         persons += 1
             
             # Detect motion between frames
-            motion_detected = detect_motion(frame, prev_frame)
+            motion_detected = bool(detect_motion(frame, prev_frame))  # Convert to Python bool
             
             counts.append({
                 "frame": frame_idx,
