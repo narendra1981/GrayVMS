@@ -208,6 +208,7 @@ const dashboardHtml = `<!doctype html>
             <div class="info-label">Video File</div>
             <div class="info-value" id="analytics-video">Loading...</div>
           </div>
+          <div style="color: #d4af37; font-size: 0.9rem; margin-bottom: 0.8rem; font-weight: 600;">👤 People Detection</div>
           <div class="stats-grid">
             <div class="stat-box">
               <div class="stat-label">Max People</div>
@@ -222,8 +223,46 @@ const dashboardHtml = `<!doctype html>
               <div class="stat-value" id="analytics-min">-</div>
             </div>
             <div class="stat-box">
-              <div class="stat-label">Frames</div>
+              <div class="stat-label">Sampled</div>
               <div class="stat-value" id="analytics-sampled">-</div>
+            </div>
+          </div>
+          <div style="color: #d4af37; font-size: 0.9rem; margin-bottom: 0.8rem; margin-top: 1.2rem; font-weight: 600;">🎯 Object Detection</div>
+          <div class="stats-grid">
+            <div class="stat-box">
+              <div class="stat-label">Max Objects</div>
+              <div class="stat-value" id="analytics-max-objects">-</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Avg Objects</div>
+              <div class="stat-value" id="analytics-avg-objects">-</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Min Objects</div>
+              <div class="stat-value" id="analytics-min-objects">-</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Motion %</div>
+              <div class="stat-value" id="analytics-motion-percent">-</div>
+            </div>
+          </div>
+          <div style="color: #d4af37; font-size: 0.9rem; margin-bottom: 0.8rem; margin-top: 1.2rem; font-weight: 600;">🔍 Motion Analysis</div>
+          <div class="stats-grid">
+            <div class="stat-box">
+              <div class="stat-label">Frames w/ Motion</div>
+              <div class="stat-value" id="analytics-motion-frames">-</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Total Duration</div>
+              <div class="stat-value" id="analytics-duration">-</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">FPS</div>
+              <div class="stat-value" id="analytics-fps">-</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Frame Count</div>
+              <div class="stat-value" id="analytics-frame-count">-</div>
             </div>
           </div>
           <div class="panel-box">
@@ -239,14 +278,31 @@ const dashboardHtml = `<!doctype html>
           const res = await fetch('/analytics/person_counts.json');
           if (!res.ok) return;
           const data = await res.json();
+          
+          // Video info
           document.getElementById('analytics-video').textContent = data.video || 'N/A';
+          
+          // People detection
           document.getElementById('analytics-sampled').textContent = data.sampled_frames ?? '-';
           document.getElementById('analytics-max').textContent = data.max_people ?? '-';
           document.getElementById('analytics-average').textContent = data.average_people ?? '-';
           document.getElementById('analytics-min').textContent = data.min_people ?? '-';
+          
+          // Object detection
+          document.getElementById('analytics-max-objects').textContent = data.max_objects ?? '-';
+          document.getElementById('analytics-avg-objects').textContent = data.average_objects ?? '-';
+          document.getElementById('analytics-min-objects').textContent = data.min_objects ?? '-';
+          document.getElementById('analytics-motion-percent').textContent = (data.motion_percentage ?? 0) + '%';
+          
+          // Motion analysis
+          document.getElementById('analytics-motion-frames').textContent = data.frames_with_motion ?? '-';
+          document.getElementById('analytics-duration').textContent = (data.duration_seconds ?? 0) + 's';
+          document.getElementById('analytics-fps').textContent = data.fps ?? '-';
+          document.getElementById('analytics-frame-count').textContent = data.frame_count ?? '-';
+          
           document.getElementById('analytics-json').textContent = JSON.stringify(data, null, 2);
         } catch (e) {
-          document.getElementById('analytics-json').textContent = 'Analytics unavailable';
+          document.getElementById('analytics-json').textContent = 'Analytics unavailable: ' + e.message;
         }
       }
       refreshAnalytics();
@@ -343,10 +399,65 @@ app.get('/analytics/person_counts.json', (req, res) => {
   });
 });
 
+// Background analysis task - runs Python analytics periodically
+function runAnalysisTask() {
+  const videoPath = resolvePreferredVideo();
+  const outputPath = path.join(__dirname, 'analytics', 'person_counts.json');
+  const modelPath = path.join(__dirname, 'yolov8n.pt');
+  
+  // Check if video file exists
+  if (!fs.existsSync(videoPath)) return;
+  
+  const python = spawn('python3', [
+    path.join(__dirname, 'analytics', 'person_count.py'),
+    videoPath,
+    outputPath,
+    modelPath
+  ], { stdio: ['ignore', 'pipe', 'pipe'] });
+
+  python.on('error', (err) => {
+    console.error('Analysis error:', err.message);
+  });
+}
+
+// Manual endpoint to trigger analysis
+app.get('/analyze', (req, res) => {
+  runAnalysisTask();
+  res.json({ status: 'Analysis started' });
+});
+
+// Start background analysis every 5 seconds
+let analysisInterval = null;
+function startBackgroundAnalysis() {
+  // Run initial analysis immediately
+  runAnalysisTask();
+  
+  // Then run every 5 seconds
+  analysisInterval = setInterval(runAnalysisTask, 5000);
+  console.log('Background analysis started (running every 5 seconds)');
+}
+
 app.get('/', (req, res) => res.type('html').send(dashboardHtml));
+
+// Stop analysis if port is shut down
+function stopBackgroundAnalysis() {
+  if (analysisInterval) {
+    clearInterval(analysisInterval);
+    console.log('Background analysis stopped');
+  }
+}
 
 app.listen(port, () => {
   console.log(`Testing GrayVMS streamer running on http://localhost:${port}`);
   if (useTestPattern) console.log('Using test pattern (TEST_PATTERN=1)');
   else if (!rtsp) console.log(`Using local device: ${device} (set RTSP_URL to stream from RTSP)`);
+  
+  // Start background analysis task
+  startBackgroundAnalysis();
+});
+
+// Handle graceful shutdown
+process.on('SIGINT', () => {
+  stopBackgroundAnalysis();
+  process.exit(0);
 });

@@ -1,122 +1,22 @@
 {
-  "video": "video.mp4",
-  "frame_count": 326,
-  "duration_seconds": 10.87,
-  "fps": 30.0,
-  "sampled_frames": 22,
+  "video": "Test.mp4",
+  "frame_count": 66,
+  "duration_seconds": 44.64,
+  "fps": 1.48,
+  "sampled_frames": 66,
   "person_counts": [
     {
       "frame": 0,
       "timestamp_seconds": 0.0,
-      "person_count": 14
+      "person_count": 0,
+      "total_objects": 0,
+      "object_types": {},
+      "motion_detected": false
     },
     {
-      "frame": 15,
-      "timestamp_seconds": 0.5,
-      "person_count": 12
-    },
-    {
-      "frame": 30,
-      "timestamp_seconds": 1.0,
-      "person_count": 13
-    },
-    {
-      "frame": 45,
-      "timestamp_seconds": 1.5,
-      "person_count": 10
-    },
-    {
-      "frame": 60,
-      "timestamp_seconds": 2.0,
-      "person_count": 10
-    },
-    {
-      "frame": 75,
-      "timestamp_seconds": 2.5,
-      "person_count": 13
-    },
-    {
-      "frame": 90,
-      "timestamp_seconds": 3.0,
-      "person_count": 13
-    },
-    {
-      "frame": 105,
-      "timestamp_seconds": 3.5,
-      "person_count": 15
-    },
-    {
-      "frame": 120,
-      "timestamp_seconds": 4.0,
-      "person_count": 15
-    },
-    {
-      "frame": 135,
-      "timestamp_seconds": 4.5,
-      "person_count": 12
-    },
-    {
-      "frame": 150,
-      "timestamp_seconds": 5.0,
-      "person_count": 14
-    },
-    {
-      "frame": 165,
-      "timestamp_seconds": 5.5,
-      "person_count": 12
-    },
-    {
-      "frame": 180,
-      "timestamp_seconds": 6.0,
-      "person_count": 12
-    },
-    {
-      "frame": 195,
-      "timestamp_seconds": 6.5,
-      "person_count": 12
-    },
-    {
-      "frame": 210,
-      "timestamp_seconds": 7.0,
-      "person_count": 16
-    },
-    {
-      "frame": 225,
-      "timestamp_seconds": 7.5,
-      "person_count": 11
-    },
-    {
-      "frame": 240,
-      "timestamp_seconds": 8.0,
-      "person_count": 16
-    },
-    {
-      "frame": 255,
-      "timestamp_seconds": 8.5,
-      "person_count": 13
-    },
-    {
-      "frame": 270,
-      "timestamp_seconds": 9.0,
-      "person_count": 12
-    },
-    {
-      "frame": 285,
-      "timestamp_seconds": 9.5,
-      "person_count": 13
-    },
-    {
-      "frame": 300,
-      "timestamp_seconds": 10.0,
-      "person_count": 15
-    },
-    {
-      "frame": 315,
-      "timestamp_seconds": 10.5,
-      "person_count": 11
-    }
-  ],
-  "max_people": 16,
-  "min_people": 10,
-  "average_people": 12.91
-}
+      "frame": 1,
+      "timestamp_seconds": 0.68,
+      "person_count": 0,
+      "total_objects": 0,
+      "object_types": {},
+      "motion_detected": 
