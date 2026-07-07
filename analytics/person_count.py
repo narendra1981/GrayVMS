@@ -63,7 +63,8 @@ def analyze_video(input_path: str, output_path: str, model_name: str = DEFAULT_M
         if not ok:
             break
 
-        if frame_idx % max(1, int(fps // 2)) == 0:
+        # Analyze every 2 frames for better person detection (was every 8 frames)
+        if frame_idx % 2 == 0:
             results = model(frame, stream=False, verbose=False)
             persons = 0
             total_objects = 0
