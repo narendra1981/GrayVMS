@@ -41,6 +41,91 @@ def detect_motion(frame: np.ndarray, prev_frame: np.ndarray = None, threshold: i
         return False
 
 
+def count_persons_multi_threshold(model, frame) -> tuple:
+    """Run detection at multiple confidence thresholds to catch more people"""
+    all_boxes = []
+    
+    # Try multiple confidence thresholds
+    for conf_threshold in [0.5, 0.4, 0.3, 0.2]:
+        results = model(frame, conf=conf_threshold, stream=False, verbose=False)
+        for result in results:
+            if result.boxes is not None:
+                for box in result.boxes:
+                    # Store box coordinates and class
+                    xyxy = box.xyxy[0].cpu().numpy() if hasattr(box.xyxy[0], 'cpu') else box.xyxy[0]
+                    cls = int(box.cls[0]) if hasattr(box, 'cls') and len(box.cls) > 0 else None
+                    if cls is not None:
+                        all_boxes.append({
+                            'box': xyxy,
+                            'cls': cls,
+                            'conf': float(box.conf[0]) if hasattr(box, 'conf') else 0.0,
+                            'names': result.names
+                        })
+    
+    # Remove duplicate detections (overlapping boxes)
+    if not all_boxes:
+        return 0, 0, {}
+    
+    # Group by class
+    class_boxes = {}
+    for item in all_boxes:
+        cls = item['cls']
+        if cls not in class_boxes:
+            class_boxes[cls] = []
+        class_boxes[cls].append(item)
+    
+    # NMS for each class to remove overlaps
+    persons = 0
+    total_objects = 0
+    object_counts = {}
+    
+    for cls_id, boxes in class_boxes.items():
+        # Sort by confidence
+        boxes.sort(key=lambda x: x['conf'], reverse=True)
+        
+        kept_boxes = []
+        for box_data in boxes:
+            box = box_data['box']
+            is_overlap = False
+            
+            # Check overlap with already kept boxes
+            for kept_box in kept_boxes:
+                # Calculate IoU
+                x1_min, y1_min, x1_max, y1_max = box
+                x2_min, y2_min, x2_max, y2_max = kept_box
+                
+                inter_x_min = max(x1_min, x2_min)
+                inter_y_min = max(y1_min, y2_min)
+                inter_x_max = min(x1_max, x2_max)
+                inter_y_max = min(y1_max, y2_max)
+                
+                if inter_x_max > inter_x_min and inter_y_max > inter_y_min:
+                    inter_area = (inter_x_max - inter_x_min) * (inter_y_max - inter_y_min)
+                    box1_area = (x1_max - x1_min) * (y1_max - y1_min)
+                    box2_area = (x2_max - x2_min) * (y2_max - y2_min)
+                    union_area = box1_area + box2_area - inter_area
+                    iou = inter_area / union_area if union_area > 0 else 0
+                    
+                    # If overlap > 30%, consider it duplicate
+                    if iou > 0.3:
+                        is_overlap = True
+                        break
+            
+            if not is_overlap:
+                kept_boxes.append(box)
+                total_objects += 1
+                
+                obj_name = box_data['names'].get(cls_id, 'unknown')
+                if obj_name not in object_counts:
+                    object_counts[obj_name] = 0
+                object_counts[obj_name] += 1
+                
+                if obj_name == 'person':
+                    persons += 1
+    
+    return persons, total_objects, object_counts
+
+
 def analyze_video(input_path: str, output_path: str, model_name: str = DEFAULT_MODEL) -> Dict[str, Any]:
     input_path = str(Path(input_path).resolve())
     output_path = str(Path(output_path).resolve())
@@ -63,32 +148,8 @@ def analyze_video(input_path: str, output_path: str, model_name: str = DEFAULT_M
         if not ok:
             break
 
-        # Analyze EVERY frame for maximum person detection accuracy
-        results = model(frame, stream=False, verbose=False)
-        persons = 0
-        total_objects = 0
-        object_counts = {}
-        
-        for result in results:
-            boxes = result.boxes
-            if boxes is None:
-                continue
-            for box in boxes:
-                cls = int(box.cls[0]) if hasattr(box, 'cls') and len(box.cls) > 0 else None
-                if cls is None:
-                    continue
-                
-                obj_name = result.names.get(cls, 'unknown')
-                total_objects += 1
-                
-                # Count each object type
-                if obj_name not in object_counts:
-                    object_counts[obj_name] = 0
-                object_counts[obj_name] += 1
-                
-                # Count persons specifically
-                if obj_name == 'person':
-                    persons += 1
+        # Analyze EVERY frame with multi-threshold detection for maximum people detection
+        persons, total_objects, object_counts = count_persons_multi_threshold(model, frame)
         
         # Detect motion between frames
         motion_detected = bool(detect_motion(frame, prev_frame))  # Convert to Python bool
