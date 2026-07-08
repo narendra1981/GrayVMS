@@ -13,10 +13,25 @@ const videoFileDefault = 'video.mp4'; // fallback filename in public/
 
 function resolvePreferredVideo() {
   // Priority: explicit env VIDEO_FILE (absolute or relative to project root),
-  // then a project-root `output_2min.avi` if present, then `public/video.mp4`.
+  // then browser-friendly project-root videos (mp4/webm/ogg),
+  // then legacy AVI, then `public/video.mp4`.
   if (envVideoFile) return path.isAbsolute(envVideoFile) ? envVideoFile : path.join(__dirname, envVideoFile);
-  const candidateRoot = path.join(__dirname, 'output_2min.avi');
-  if (fs.existsSync(candidateRoot)) return candidateRoot;
+
+  const playableCandidates = [
+    path.join(__dirname, 'video.mp4'),
+    path.join(__dirname, 'Test.mp4'),
+    path.join(__dirname, 'Test_1.mp4'),
+    path.join(__dirname, 'July_07.mp4'),
+    path.join(__dirname, 'video_1.mp4'),
+  ];
+
+  for (const candidate of playableCandidates) {
+    if (fs.existsSync(candidate)) return candidate;
+  }
+
+  const legacyAvi = path.join(__dirname, 'output_2min.avi');
+  if (fs.existsSync(legacyAvi)) return legacyAvi;
+
   return path.join(__dirname, 'public', videoFileDefault);
 }
 
@@ -246,7 +261,37 @@ const dashboardHtml = `<!doctype html>
               <div class="stat-value" id="analytics-motion-percent">-</div>
             </div>
           </div>
-          <div style="color: #d4af37; font-size: 0.9rem; margin-bottom: 0.8rem; margin-top: 1.2rem; font-weight: 600;">🔍 Motion Analysis</div>
+          <div style="color: #d4af37; font-size: 0.9rem; margin-bottom: 0.8rem; margin-top: 1.2rem; font-weight: 600;">� Crowd Analysis</div>
+          <div class="stats-grid">
+            <div class="stat-box">
+              <div class="stat-label">Crowd Frames</div>
+              <div class="stat-value" id="analytics-crowd-frames">-</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Crowd %</div>
+              <div class="stat-value" id="analytics-crowd-percent">-</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Max Crowd Size</div>
+              <div class="stat-value" id="analytics-max-crowd">-</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Avg Crowd Size</div>
+              <div class="stat-value" id="analytics-avg-crowd">-</div>
+            </div>
+          </div>
+          <div style="color: #d4af37; font-size: 0.9rem; margin-bottom: 0.8rem; margin-top: 1.2rem; font-weight: 600;">📊 Density Analysis</div>
+          <div class="stats-grid">
+            <div class="stat-box">
+              <div class="stat-label">Max Density</div>
+              <div class="stat-value" id="analytics-max-density">-</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Avg Density</div>
+              <div class="stat-value" id="analytics-avg-density">-</div>
+            </div>
+          </div>
+          <div style="color: #d4af37; font-size: 0.9rem; margin-bottom: 0.8rem; margin-top: 1.2rem; font-weight: 600;">�🔍 Motion Analysis</div>
           <div class="stats-grid">
             <div class="stat-box">
               <div class="stat-label">Frames w/ Motion</div>
@@ -293,6 +338,18 @@ const dashboardHtml = `<!doctype html>
           document.getElementById('analytics-avg-objects').textContent = data.average_objects ?? '-';
           document.getElementById('analytics-min-objects').textContent = data.min_objects ?? '-';
           document.getElementById('analytics-motion-percent').textContent = (data.motion_percentage ?? 0) + '%';
+          
+          // Crowd analysis
+          const crowdAnalysis = data.crowd_analysis || {};
+          document.getElementById('analytics-crowd-frames').textContent = crowdAnalysis.total_crowd_frames ?? '-';
+          document.getElementById('analytics-crowd-percent').textContent = (crowdAnalysis.crowd_percentage ?? 0) + '%';
+          document.getElementById('analytics-max-crowd').textContent = crowdAnalysis.max_crowd_size ?? '-';
+          document.getElementById('analytics-avg-crowd').textContent = crowdAnalysis.average_crowd_size ?? '-';
+          
+          // Density analysis
+          const densityAnalysis = data.density_analysis || {};
+          document.getElementById('analytics-max-density').textContent = (densityAnalysis.max_density ?? 0) + '%';
+          document.getElementById('analytics-avg-density').textContent = (densityAnalysis.average_density ?? 0) + '%';
           
           // Motion analysis
           document.getElementById('analytics-motion-frames').textContent = data.frames_with_motion ?? '-';
