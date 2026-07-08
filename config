@@ -1,0 +1,11 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+[user]
+	name = azureuser
+	email = azureuser@localhost
+[remote "origin"]
+	url = https://narendra1981@3.6.109.141/alex/Multi-tenant-app.git
+	fetch = +refs/heads/*:refs/remotes/origin/*

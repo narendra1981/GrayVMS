@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Testing GrayVMS — Live Stream</title>
+    <style>
+      body { font-family: system-ui, Arial; margin: 1rem; }
+      .content {
+        display: flex;
+        gap: 1.5rem;
+        align-items: flex-start;
+        flex-wrap: wrap;
+      }
+      .video-panel {
+        flex: 1 1 320px;
+        min-width: 280px;
+      }
+      .stream {
+        width: min(58vw, 720px);
+        max-width: 100%;
+        height: auto;
+        display: block;
+        border: 1px solid #ccc;
+        background: #000;
+      }
+      .analytics {
+        flex: 1 1 360px;
+        padding: 0.75rem 1rem;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        background: #f9f9f9;
+        max-width: 480px;
+      }
+      .analytics h2 { margin: 0 0 0.5rem; font-size: 1.1rem; }
+      .analytics p { margin: 0.25rem 0; }
+      .analytics strong { display: inline-block; min-width: 140px; }
+      .json-box {
+        margin-top: 0.75rem;
+        padding: 0.75rem;
+        background: #111;
+        color: #f8f8f8;
+        border-radius: 6px;
+        overflow-x: auto;
+        font-size: 0.9rem;
+        white-space: pre-wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Testing GrayVMS — Live Stream</h1>
+    <p>Stream source: <code id="source">/video.mp4 (preferred) or /stream</code></p>
+    <div class="content">
+      <div class="video-panel">
+        <video class="stream" id="streamVideo" controls autoplay loop muted playsinline>
+          <source src="/video.mp4" type="video/mp4">
+          <!-- Fallback to MJPEG endpoint if no stored video is available -->
+          <img id="streamImg" src="/stream" alt="Live stream (MJPEG)"/>
+        </video>
+      </div>
+
+      <div class="analytics">
+        <h2>Person Analytics</h2>
+        <p><strong>Video:</strong> <span id="analytics-video">Loading...</span></p>
+        <p><strong>Frames analyzed:</strong> <span id="analytics-sampled">-</span></p>
+        <p><strong>Max people:</strong> <span id="analytics-max">-</span></p>
+        <p><strong>Average people:</strong> <span id="analytics-average">-</span></p>
+        <p><strong>Min people:</strong> <span id="analytics-min">-</span></p>
+        <div class="json-box" id="analytics-json">Loading JSON data...</div>
+      </div>
+    </div>
+
+    <p>If the video is blank, place a file named <code>video.mp4</code> in this folder, or set the `VIDEO_FILE` environment variable. For live capture ensure <code>ffmpeg</code> and a camera or RTSP source are available.</p>
+    <script>
+      async function updateVideoInfo() {
+        try {
+          const res = await fetch('/video-info');
+          if (!res.ok) return;
+          const info = await res.json();
+          const el = document.getElementById('source');
+          if (info.available) el.textContent = `/video.mp4 (serving: ${info.file})`;
+          else el.textContent = '/stream (live)';
+        } catch (e) {
+          /* ignore */
+        }
+      }
+
+      async function updateAnalytics() {
+        try {
+          const res = await fetch('/analytics/person_counts.json');
+          if (!res.ok) return;
+          const data = await res.json();
+          document.getElementById('analytics-video').textContent = data.video || 'N/A';
+          document.getElementById('analytics-sampled').textContent = data.sampled_frames ?? '-';
+          document.getElementById('analytics-max').textContent = data.max_people ?? '-';
+          document.getElementById('analytics-average').textContent = data.average_people ?? '-';
+          document.getElementById('analytics-min').textContent = data.min_people ?? '-';
+          document.getElementById('analytics-json').textContent = JSON.stringify(data, null, 2);
+        } catch (e) {
+          /* ignore */
+        }
+      }
+
+      updateVideoInfo();
+      updateAnalytics();
+    </script>
+  </body>
+</html>
