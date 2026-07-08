@@ -201,6 +201,35 @@ const dashboardHtml = `<!doctype html>
         overflow-y: auto;
         font-family: 'Courier New', monospace;
       }
+      .trend-chart-wrap {
+        margin-top: 0.8rem;
+        padding: 0.8rem;
+        border: 1.5px solid #d4af37;
+        border-radius: 10px;
+        background: rgba(15, 15, 15, 0.8);
+      }
+      .trend-legend {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 0.6rem;
+        font-size: 0.8rem;
+        color: #bcbcbc;
+      }
+      .trend-dot {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+        margin-right: 0.35rem;
+      }
+      .trend-canvas {
+        width: 100%;
+        height: 190px;
+        display: block;
+        border-radius: 8px;
+        background: #111;
+        border: 1px solid rgba(212, 175, 55, 0.25);
+      }
       @media (max-width: 768px) {
         h1 { font-size: 1.8rem; }
         .content { flex-direction: column; gap: 1.5rem; }
@@ -215,6 +244,32 @@ const dashboardHtml = `<!doctype html>
         <div class="video-panel">
           <div class="panel-box">
             <video class="stream" controls autoplay loop muted playsinline src="/video.mp4"></video>
+          </div>
+          <div style="color: #d4af37; font-size: 0.9rem; margin-bottom: 0.8rem; margin-top: 1.2rem; font-weight: 600;">📉 Crowd Trend</div>
+          <div class="stats-grid">
+            <div class="stat-box">
+              <div class="stat-label">People Trend</div>
+              <div class="stat-value" id="analytics-people-trend">-</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Density Trend</div>
+              <div class="stat-value" id="analytics-density-trend">-</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">People Slope</div>
+              <div class="stat-value" id="analytics-people-slope">-</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Density Slope</div>
+              <div class="stat-value" id="analytics-density-slope">-</div>
+            </div>
+          </div>
+          <div class="trend-chart-wrap">
+            <div class="trend-legend">
+              <span><span class="trend-dot" style="background:#d4af37;"></span>People Count</span>
+              <span><span class="trend-dot" style="background:#1ecbe1;"></span>Crowd Density %</span>
+            </div>
+            <canvas id="analytics-trend-canvas" class="trend-canvas"></canvas>
           </div>
         </div>
         <div class="analytics-section">
@@ -310,6 +365,49 @@ const dashboardHtml = `<!doctype html>
               <div class="stat-value" id="analytics-frame-count">-</div>
             </div>
           </div>
+          <div style="color: #d4af37; font-size: 0.9rem; margin-bottom: 0.8rem; margin-top: 1.2rem; font-weight: 600;">📈 Advanced Analytics</div>
+          <div class="stats-grid">
+            <div class="stat-box">
+              <div class="stat-label">Median People</div>
+              <div class="stat-value" id="analytics-median">-</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">People Std Dev</div>
+              <div class="stat-value" id="analytics-stddev">-</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Peak Time</div>
+              <div class="stat-value" id="analytics-peak-time">-</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">People Change/s</div>
+              <div class="stat-value" id="analytics-change-sec">-</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Rapid Change Frames</div>
+              <div class="stat-value" id="analytics-rapid-frames">-</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Unique Obj Types</div>
+              <div class="stat-value" id="analytics-unique-types">-</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Avg Obj Diversity</div>
+              <div class="stat-value" id="analytics-diversity">-</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Crowd Events</div>
+              <div class="stat-value" id="analytics-crowd-events">-</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Longest Crowd</div>
+              <div class="stat-value" id="analytics-longest-crowd">-</div>
+            </div>
+          </div>
+          <div class="info-box">
+            <div class="info-label">Top Detected Objects</div>
+            <div class="info-value" id="analytics-top-objects">-</div>
+          </div>
           <div class="panel-box">
             <div style="color: #d4af37; font-size: 0.9rem; margin-bottom: 0.5rem; font-weight: 600;">Raw Data</div>
             <div class="json-box" id="analytics-json">Loading JSON data...</div>
@@ -318,6 +416,63 @@ const dashboardHtml = `<!doctype html>
       </div>
     </div>
     <script>
+      function drawSeries(ctx, points, color, width, pad, chartW, chartH) {
+        if (!points || points.length === 0) return;
+        ctx.beginPath();
+        ctx.lineWidth = width;
+        ctx.strokeStyle = color;
+        points.forEach((point, index) => {
+          const x = pad + (index * chartW) / Math.max(1, points.length - 1);
+          const y = pad + chartH - (point * chartH);
+          if (index === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        });
+        ctx.stroke();
+      }
+
+      function drawCrowdTrend(data) {
+        const canvas = document.getElementById('analytics-trend-canvas');
+        if (!canvas || !data || !Array.isArray(data.person_counts) || data.person_counts.length === 0) return;
+
+        const width = Math.max(320, Math.floor(canvas.clientWidth || 320));
+        const height = 190;
+        if (canvas.width !== width || canvas.height !== height) {
+          canvas.width = width;
+          canvas.height = height;
+        }
+
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+
+        const pad = 20;
+        const chartW = width - pad * 2;
+        const chartH = height - pad * 2;
+
+        const points = data.person_counts;
+        const peopleValues = points.map((item) => Number(item.person_count) || 0);
+        const densityValues = points.map((item) => Number(item.crowd_density) || 0);
+
+        const maxPeople = Math.max(1, ...peopleValues);
+        const maxDensity = Math.max(1, ...densityValues);
+        const peopleNorm = peopleValues.map((v) => v / maxPeople);
+        const densityNorm = densityValues.map((v) => v / maxDensity);
+
+        ctx.clearRect(0, 0, width, height);
+
+        ctx.strokeStyle = 'rgba(255,255,255,0.08)';
+        ctx.lineWidth = 1;
+        for (let i = 0; i <= 4; i += 1) {
+          const y = pad + (chartH * i) / 4;
+          ctx.beginPath();
+          ctx.moveTo(pad, y);
+          ctx.lineTo(pad + chartW, y);
+          ctx.stroke();
+        }
+
+        drawSeries(ctx, densityNorm, '#1ecbe1', 2, pad, chartW, chartH);
+        drawSeries(ctx, peopleNorm, '#d4af37', 2.5, pad, chartW, chartH);
+      }
+
       async function refreshAnalytics() {
         try {
           const res = await fetch('/analytics/person_counts.json');
@@ -356,6 +511,31 @@ const dashboardHtml = `<!doctype html>
           document.getElementById('analytics-duration').textContent = (data.duration_seconds ?? 0) + 's';
           document.getElementById('analytics-fps').textContent = data.fps ?? '-';
           document.getElementById('analytics-frame-count').textContent = data.frame_count ?? '-';
+
+          // Advanced analytics
+          const objectAnalysis = data.object_analysis || {};
+          const topObjects = (objectAnalysis.top_detected_objects || [])
+            .map((item) => item.type + ':' + item.count)
+            .join(', ');
+          document.getElementById('analytics-median').textContent = data.median_people ?? '-';
+          document.getElementById('analytics-stddev').textContent = data.people_std_dev ?? '-';
+          document.getElementById('analytics-peak-time').textContent = (data.peak_occupancy_time_seconds ?? 0) + 's';
+          document.getElementById('analytics-change-sec').textContent = data.average_people_change_per_second ?? '-';
+          document.getElementById('analytics-rapid-frames').textContent = data.rapid_change_frames ?? '-';
+          document.getElementById('analytics-unique-types').textContent = objectAnalysis.unique_object_types ?? '-';
+          document.getElementById('analytics-diversity').textContent = objectAnalysis.average_object_type_diversity ?? '-';
+          document.getElementById('analytics-crowd-events').textContent = crowdAnalysis.crowd_event_count ?? '-';
+          document.getElementById('analytics-longest-crowd').textContent = (crowdAnalysis.longest_crowd_event_seconds ?? 0) + 's';
+          document.getElementById('analytics-top-objects').textContent = topObjects || 'N/A';
+
+          // Crowd trend
+          const trend = data.crowd_trend || {};
+          document.getElementById('analytics-people-trend').textContent = trend.people_trend_direction || '-';
+          document.getElementById('analytics-density-trend').textContent = trend.density_trend_direction || '-';
+          document.getElementById('analytics-people-slope').textContent = trend.people_trend_slope_per_sample ?? '-';
+          document.getElementById('analytics-density-slope').textContent = trend.density_trend_slope_per_sample ?? '-';
+
+          drawCrowdTrend(data);
           
           document.getElementById('analytics-json').textContent = JSON.stringify(data, null, 2);
         } catch (e) {
@@ -364,6 +544,7 @@ const dashboardHtml = `<!doctype html>
       }
       refreshAnalytics();
       setInterval(refreshAnalytics, 5000);
+      window.addEventListener('resize', refreshAnalytics);
     </script>
   </body>
 </html>`;

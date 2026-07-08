@@ -244,6 +244,8 @@ def analyze_video(input_path: str, output_path: str, model_name: str = DEFAULT_M
     crowd_frames = 0
     max_crowd_size = 0
     all_crowd_sizes = []
+    object_totals: Dict[str, int] = {}
+    object_type_diversity: List[int] = []
     
     while True:
         ok, frame = cap.read()
@@ -272,13 +274,24 @@ def analyze_video(input_path: str, output_path: str, model_name: str = DEFAULT_M
             crowd_size = crowd_info['crowd_size']
             all_crowd_sizes.append(crowd_size)
             max_crowd_size = max(max_crowd_size, crowd_size)
+
+        for obj_name, count in object_counts.items():
+            object_totals[obj_name] = object_totals.get(obj_name, 0) + int(count)
+
+        object_type_count = len([name for name, count in object_counts.items() if count > 0])
+        object_type_diversity.append(object_type_count)
+
+        prev_people = counts[-1]["person_count"] if counts else persons
+        people_delta = persons - prev_people
         
         counts.append({
             "frame": source_frame_idx,
             "timestamp_seconds": round(source_frame_idx / fps, 2) if fps else 0,
             "person_count": persons,
+            "people_delta": people_delta,
             "total_objects": total_objects,
             "object_types": object_counts,
+            "object_type_diversity": object_type_count,
             "motion_detected": motion_detected,
             "crowd_density": crowd_info['density'],
             "is_crowd": crowd_info['is_crowd'],
@@ -293,6 +306,39 @@ def analyze_video(input_path: str, output_path: str, model_name: str = DEFAULT_M
     # Calculate statistics
     moving_frames = sum(1 for item in counts if item.get("motion_detected", False))
     avg_crowd_size = np.mean(all_crowd_sizes) if all_crowd_sizes else 0
+    person_series = [item["person_count"] for item in counts]
+    density_series = [item.get("crowd_density", 0) for item in counts]
+    people_deltas = [abs(item.get("people_delta", 0)) for item in counts[1:]]
+
+    def _trend_direction(slope: float, epsilon: float = 0.03) -> str:
+        if slope > epsilon:
+            return "rising"
+        if slope < -epsilon:
+            return "falling"
+        return "stable"
+
+    crowd_event_count = 0
+    longest_crowd_event = 0
+    current_event = 0
+    for item in counts:
+        if item.get("is_crowd"):
+            current_event += 1
+            if current_event == 1:
+                crowd_event_count += 1
+        else:
+            longest_crowd_event = max(longest_crowd_event, current_event)
+            current_event = 0
+    longest_crowd_event = max(longest_crowd_event, current_event)
+
+    max_people = max(person_series, default=0)
+    peak_frames = [item for item in counts if item.get("person_count", 0) == max_people]
+    peak_time = peak_frames[0].get("timestamp_seconds", 0) if peak_frames else 0
+
+    people_slope = float(np.polyfit(np.arange(len(person_series)), person_series, 1)[0]) if len(person_series) >= 2 else 0.0
+    density_slope = float(np.polyfit(np.arange(len(density_series)), density_series, 1)[0]) if len(density_series) >= 2 else 0.0
+
+    top_objects = sorted(object_totals.items(), key=lambda kv: kv[1], reverse=True)[:5]
+    samples_per_second = (fps / DEFAULT_FRAME_STRIDE) if fps else 0
     
     summary = {
         "video": os.path.basename(input_path),
@@ -300,15 +346,34 @@ def analyze_video(input_path: str, output_path: str, model_name: str = DEFAULT_M
         "duration_seconds": round(total_seconds, 2),
         "fps": round(fps, 2),
         "sampled_frames": len(counts),
+        "sample_interval_frames": DEFAULT_FRAME_STRIDE,
         "person_counts": counts,
-        "max_people": max((item["person_count"] for item in counts), default=0),
-        "min_people": min((item["person_count"] for item in counts), default=0),
-        "average_people": round(sum(item["person_count"] for item in counts) / len(counts), 2) if counts else 0,
+        "max_people": max_people,
+        "min_people": min(person_series, default=0),
+        "average_people": round(np.mean(person_series), 2) if person_series else 0,
+        "median_people": round(float(np.median(person_series)), 2) if person_series else 0,
+        "people_std_dev": round(float(np.std(person_series)), 2) if person_series else 0,
+        "peak_occupancy_time_seconds": round(peak_time, 2),
+        "average_people_change_per_sample": round(float(np.mean(people_deltas)), 2) if people_deltas else 0,
+        "average_people_change_per_second": round(float(np.mean(people_deltas) * samples_per_second), 2) if people_deltas and samples_per_second else 0,
+        "rapid_change_frames": sum(1 for delta in people_deltas if delta >= 3),
+        "crowd_trend": {
+            "people_trend_slope_per_sample": round(people_slope, 4),
+            "people_trend_direction": _trend_direction(people_slope),
+            "density_trend_slope_per_sample": round(density_slope, 4),
+            "density_trend_direction": _trend_direction(density_slope),
+        },
         "max_objects": max((item["total_objects"] for item in counts), default=0),
         "min_objects": min((item["total_objects"] for item in counts), default=0),
         "average_objects": round(sum(item["total_objects"] for item in counts) / len(counts), 2) if counts else 0,
         "frames_with_motion": moving_frames,
         "motion_percentage": round((moving_frames / len(counts) * 100), 2) if counts else 0,
+        "object_analysis": {
+            "unique_object_types": len(object_totals),
+            "average_object_type_diversity": round(float(np.mean(object_type_diversity)), 2) if object_type_diversity else 0,
+            "max_object_type_diversity": max(object_type_diversity, default=0),
+            "top_detected_objects": [{"type": name, "count": count} for name, count in top_objects],
+        },
         # New crowd metrics
         "crowd_analysis": {
             "total_crowd_frames": crowd_frames,
@@ -316,6 +381,9 @@ def analyze_video(input_path: str, output_path: str, model_name: str = DEFAULT_M
             "max_crowd_size": max_crowd_size,
             "average_crowd_size": round(avg_crowd_size, 2),
             "frames_with_crowds": crowd_frames,
+            "crowd_event_count": crowd_event_count,
+            "longest_crowd_event_frames": longest_crowd_event,
+            "longest_crowd_event_seconds": round((longest_crowd_event / samples_per_second), 2) if samples_per_second else 0,
         },
         "density_analysis": {
             "max_density": round(max((item.get("crowd_density", 0) for item in counts), default=0), 2),

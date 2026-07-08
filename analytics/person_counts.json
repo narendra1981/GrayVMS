@@ -4,15 +4,18 @@
   "duration_seconds": 10.87,
   "fps": 30.0,
   "sampled_frames": 163,
+  "sample_interval_frames": 2,
   "person_counts": [
     {
       "frame": 0,
       "timestamp_seconds": 0.0,
       "person_count": 7,
+      "people_delta": 0,
       "total_objects": 7,
       "object_types": {
         "person": 7
       },
+      "object_type_diversity": 1,
       "motion_detected": false,
       "crowd_density": 44.0099983215332,
       "is_crowd": false,
@@ -22,10 +25,12 @@
       "frame": 2,
       "timestamp_seconds": 0.07,
       "person_count": 6,
+      "people_delta": -1,
       "total_objects": 6,
       "object_types": {
         "person": 6
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 44.790000915527344,
       "is_crowd": false,
@@ -35,10 +40,12 @@
       "frame": 4,
       "timestamp_seconds": 0.13,
       "person_count": 9,
+      "people_delta": 3,
       "total_objects": 9,
       "object_types": {
         "person": 9
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 50.56999969482422,
       "is_crowd": false,
@@ -48,10 +55,12 @@
       "frame": 6,
       "timestamp_seconds": 0.2,
       "person_count": 6,
+      "people_delta": -3,
       "total_objects": 6,
       "object_types": {
         "person": 6
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 42.31999969482422,
       "is_crowd": false,
@@ -61,10 +70,12 @@
       "frame": 8,
       "timestamp_seconds": 0.27,
       "person_count": 6,
+      "people_delta": 0,
       "total_objects": 6,
       "object_types": {
         "person": 6
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 42.93000030517578,
       "is_crowd": false,
@@ -74,10 +85,12 @@
       "frame": 10,
       "timestamp_seconds": 0.33,
       "person_count": 8,
+      "people_delta": 2,
       "total_objects": 8,
       "object_types": {
         "person": 8
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 49.93000030517578,
       "is_crowd": false,
@@ -87,10 +100,12 @@
       "frame": 12,
       "timestamp_seconds": 0.4,
       "person_count": 7,
+      "people_delta": -1,
       "total_objects": 7,
       "object_types": {
         "person": 7
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 47.209999084472656,
       "is_crowd": false,
@@ -100,10 +115,12 @@
       "frame": 14,
       "timestamp_seconds": 0.47,
       "person_count": 8,
+      "people_delta": 1,
       "total_objects": 8,
       "object_types": {
         "person": 8
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 49.20000076293945,
       "is_crowd": false,
@@ -113,10 +130,12 @@
       "frame": 16,
       "timestamp_seconds": 0.53,
       "person_count": 7,
+      "people_delta": -1,
       "total_objects": 7,
       "object_types": {
         "person": 7
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 48.560001373291016,
       "is_crowd": false,
@@ -126,10 +145,12 @@
       "frame": 18,
       "timestamp_seconds": 0.6,
       "person_count": 7,
+      "people_delta": 0,
       "total_objects": 7,
       "object_types": {
         "person": 7
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 47.790000915527344,
       "is_crowd": false,
@@ -139,10 +160,12 @@
       "frame": 20,
       "timestamp_seconds": 0.67,
       "person_count": 6,
+      "people_delta": -1,
       "total_objects": 6,
       "object_types": {
         "person": 6
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 47.97999954223633,
       "is_crowd": false,
@@ -152,10 +175,12 @@
       "frame": 22,
       "timestamp_seconds": 0.73,
       "person_count": 8,
+      "people_delta": 2,
       "total_objects": 8,
       "object_types": {
         "person": 8
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 48.86000061035156,
       "is_crowd": false,
@@ -165,10 +190,12 @@
       "frame": 24,
       "timestamp_seconds": 0.8,
       "person_count": 8,
+      "people_delta": 0,
       "total_objects": 8,
       "object_types": {
         "person": 8
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 47.900001525878906,
       "is_crowd": false,
@@ -178,11 +205,13 @@
       "frame": 26,
       "timestamp_seconds": 0.87,
       "person_count": 9,
+      "people_delta": 1,
       "total_objects": 10,
       "object_types": {
         "person": 9,
         "handbag": 1
       },
+      "object_type_diversity": 2,
       "motion_detected": true,
       "crowd_density": 49.95000076293945,
       "is_crowd": false,
@@ -192,10 +221,12 @@
       "frame": 28,
       "timestamp_seconds": 0.93,
       "person_count": 8,
+      "people_delta": -1,
       "total_objects": 8,
       "object_types": {
         "person": 8
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 49.689998626708984,
       "is_crowd": false,
@@ -205,10 +236,12 @@
       "frame": 30,
       "timestamp_seconds": 1.0,
       "person_count": 8,
+      "people_delta": 0,
       "total_objects": 8,
       "object_types": {
         "person": 8
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 47.869998931884766,
       "is_crowd": false,
@@ -218,10 +251,12 @@
       "frame": 32,
       "timestamp_seconds": 1.07,
       "person_count": 7,
+      "people_delta": -1,
       "total_objects": 7,
       "object_types": {
         "person": 7
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 45.83000183105469,
       "is_crowd": false,
@@ -231,10 +266,12 @@
       "frame": 34,
       "timestamp_seconds": 1.13,
       "person_count": 6,
+      "people_delta": -1,
       "total_objects": 6,
       "object_types": {
         "person": 6
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 42.02000045776367,
       "is_crowd": false,
@@ -244,10 +281,12 @@
       "frame": 36,
       "timestamp_seconds": 1.2,
       "person_count": 4,
+      "people_delta": -2,
       "total_objects": 4,
       "object_types": {
         "person": 4
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 37.4900016784668,
       "is_crowd": false,
@@ -257,10 +296,12 @@
       "frame": 38,
       "timestamp_seconds": 1.27,
       "person_count": 5,
+      "people_delta": 1,
       "total_objects": 5,
       "object_types": {
         "person": 5
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 39.130001068115234,
       "is_crowd": false,
@@ -270,10 +311,12 @@
       "frame": 40,
       "timestamp_seconds": 1.33,
       "person_count": 4,
+      "people_delta": -1,
       "total_objects": 4,
       "object_types": {
         "person": 4
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 37.95000076293945,
       "is_crowd": false,
@@ -283,10 +326,12 @@
       "frame": 42,
       "timestamp_seconds": 1.4,
       "person_count": 6,
+      "people_delta": 2,
       "total_objects": 6,
       "object_types": {
         "person": 6
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 45.20000076293945,
       "is_crowd": false,
@@ -296,10 +341,12 @@
       "frame": 44,
       "timestamp_seconds": 1.47,
       "person_count": 8,
+      "people_delta": 2,
       "total_objects": 8,
       "object_types": {
         "person": 8
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 46.7400016784668,
       "is_crowd": false,
@@ -309,10 +356,12 @@
       "frame": 46,
       "timestamp_seconds": 1.53,
       "person_count": 8,
+      "people_delta": 0,
       "total_objects": 8,
       "object_types": {
         "person": 8
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 47.040000915527344,
       "is_crowd": false,
@@ -322,10 +371,12 @@
       "frame": 48,
       "timestamp_seconds": 1.6,
       "person_count": 7,
+      "people_delta": -1,
       "total_objects": 7,
       "object_types": {
         "person": 7
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 43.02000045776367,
       "is_crowd": false,
@@ -335,10 +386,12 @@
       "frame": 50,
       "timestamp_seconds": 1.67,
       "person_count": 6,
+      "people_delta": -1,
       "total_objects": 6,
       "object_types": {
         "person": 6
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 41.38999938964844,
       "is_crowd": false,
@@ -348,10 +401,12 @@
       "frame": 52,
       "timestamp_seconds": 1.73,
       "person_count": 5,
+      "people_delta": -1,
       "total_objects": 5,
       "object_types": {
         "person": 5
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 38.779998779296875,
       "is_crowd": false,
@@ -361,10 +416,12 @@
       "frame": 54,
       "timestamp_seconds": 1.8,
       "person_count": 9,
+      "people_delta": 4,
       "total_objects": 9,
       "object_types": {
         "person": 9
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 46.369998931884766,
       "is_crowd": false,
@@ -374,10 +431,12 @@
       "frame": 56,
       "timestamp_seconds": 1.87,
       "person_count": 6,
+      "people_delta": -3,
       "total_objects": 6,
       "object_types": {
         "person": 6
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 39.900001525878906,
       "is_crowd": false,
@@ -387,10 +446,12 @@
       "frame": 58,
       "timestamp_seconds": 1.93,
       "person_count": 5,
+      "people_delta": -1,
       "total_objects": 5,
       "object_types": {
         "person": 5
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 38.209999084472656,
       "is_crowd": false,
@@ -400,10 +461,12 @@
       "frame": 60,
       "timestamp_seconds": 2.0,
       "person_count": 6,
+      "people_delta": 1,
       "total_objects": 6,
       "object_types": {
         "person": 6
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 41.41999816894531,
       "is_crowd": false,
@@ -413,10 +476,12 @@
       "frame": 62,
       "timestamp_seconds": 2.07,
       "person_count": 8,
+      "people_delta": 2,
       "total_objects": 8,
       "object_types": {
         "person": 8
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 48.060001373291016,
       "is_crowd": false,
@@ -426,10 +491,12 @@
       "frame": 64,
       "timestamp_seconds": 2.13,
       "person_count": 7,
+      "people_delta": -1,
       "total_objects": 7,
       "object_types": {
         "person": 7
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 45.41999816894531,
       "is_crowd": false,
@@ -439,11 +506,13 @@
       "frame": 66,
       "timestamp_seconds": 2.2,
       "person_count": 2,
+      "people_delta": -5,
       "total_objects": 3,
       "object_types": {
         "person": 2,
         "handbag": 1
       },
+      "object_type_diversity": 2,
       "motion_detected": true,
       "crowd_density": 0.0,
       "is_crowd": false,
@@ -453,11 +522,13 @@
       "frame": 68,
       "timestamp_seconds": 2.27,
       "person_count": 8,
+      "people_delta": 6,
       "total_objects": 9,
       "object_types": {
         "person": 8,
         "handbag": 1
       },
+      "object_type_diversity": 2,
       "motion_detected": true,
       "crowd_density": 47.060001373291016,
       "is_crowd": false,
@@ -467,10 +538,12 @@
       "frame": 70,
       "timestamp_seconds": 2.33,
       "person_count": 9,
+      "people_delta": 1,
       "total_objects": 9,
       "object_types": {
         "person": 9
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 49.70000076293945,
       "is_crowd": false,
@@ -480,10 +553,12 @@
       "frame": 72,
       "timestamp_seconds": 2.4,
       "person_count": 9,
+      "people_delta": 0,
       "total_objects": 9,
       "object_types": {
         "person": 9
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 47.18000030517578,
       "is_crowd": false,
@@ -493,10 +568,12 @@
       "frame": 74,
       "timestamp_seconds": 2.47,
       "person_count": 7,
+      "people_delta": -2,
       "total_objects": 7,
       "object_types": {
         "person": 7
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 44.65999984741211,
       "is_crowd": false,
@@ -506,10 +583,12 @@
       "frame": 76,
       "timestamp_seconds": 2.53,
       "person_count": 6,
+      "people_delta": -1,
       "total_objects": 6,
       "object_types": {
         "person": 6
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 42.22999954223633,
       "is_crowd": false,
@@ -519,10 +598,12 @@
       "frame": 78,
       "timestamp_seconds": 2.6,
       "person_count": 8,
+      "people_delta": 2,
       "total_objects": 8,
       "object_types": {
         "person": 8
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 46.650001525878906,
       "is_crowd": false,
@@ -532,10 +613,12 @@
       "frame": 80,
       "timestamp_seconds": 2.67,
       "person_count": 8,
+      "people_delta": 0,
       "total_objects": 8,
       "object_types": {
         "person": 8
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 45.0,
       "is_crowd": false,
@@ -545,10 +628,12 @@
       "frame": 82,
       "timestamp_seconds": 2.73,
       "person_count": 7,
+      "people_delta": -1,
       "total_objects": 7,
       "object_types": {
         "person": 7
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 44.45000076293945,
       "is_crowd": false,
@@ -558,10 +643,12 @@
       "frame": 84,
       "timestamp_seconds": 2.8,
       "person_count": 8,
+      "people_delta": 1,
       "total_objects": 8,
       "object_types": {
         "person": 8
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 45.900001525878906,
       "is_crowd": false,
@@ -571,10 +658,12 @@
       "frame": 86,
       "timestamp_seconds": 2.87,
       "person_count": 7,
+      "people_delta": -1,
       "total_objects": 7,
       "object_types": {
         "person": 7
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 43.13999938964844,
       "is_crowd": false,
@@ -584,10 +673,12 @@
       "frame": 88,
       "timestamp_seconds": 2.93,
       "person_count": 6,
+      "people_delta": -1,
       "total_objects": 6,
       "object_types": {
         "person": 6
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 44.470001220703125,
       "is_crowd": false,
@@ -597,10 +688,12 @@
       "frame": 90,
       "timestamp_seconds": 3.0,
       "person_count": 6,
+      "people_delta": 0,
       "total_objects": 6,
       "object_types": {
         "person": 6
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 45.0099983215332,
       "is_crowd": false,
@@ -610,10 +703,12 @@
       "frame": 92,
       "timestamp_seconds": 3.07,
       "person_count": 6,
+      "people_delta": 0,
       "total_objects": 6,
       "object_types": {
         "person": 6
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 45.119998931884766,
       "is_crowd": false,
@@ -623,10 +718,12 @@
       "frame": 94,
       "timestamp_seconds": 3.13,
       "person_count": 5,
+      "people_delta": -1,
       "total_objects": 5,
       "object_types": {
         "person": 5
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 38.880001068115234,
       "is_crowd": false,
@@ -636,10 +733,12 @@
       "frame": 96,
       "timestamp_seconds": 3.2,
       "person_count": 7,
+      "people_delta": 2,
       "total_objects": 7,
       "object_types": {
         "person": 7
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 43.790000915527344,
       "is_crowd": false,
@@ -649,10 +748,12 @@
       "frame": 98,
       "timestamp_seconds": 3.27,
       "person_count": 9,
+      "people_delta": 2,
       "total_objects": 9,
       "object_types": {
         "person": 9
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 49.34000015258789,
       "is_crowd": false,
@@ -662,10 +763,12 @@
       "frame": 100,
       "timestamp_seconds": 3.33,
       "person_count": 8,
+      "people_delta": -1,
       "total_objects": 8,
       "object_types": {
         "person": 8
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 49.72999954223633,
       "is_crowd": false,
@@ -675,10 +778,12 @@
       "frame": 102,
       "timestamp_seconds": 3.4,
       "person_count": 7,
+      "people_delta": -1,
       "total_objects": 7,
       "object_types": {
         "person": 7
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 46.70000076293945,
       "is_crowd": false,
@@ -688,10 +793,12 @@
       "frame": 104,
       "timestamp_seconds": 3.47,
       "person_count": 6,
+      "people_delta": -1,
       "total_objects": 6,
       "object_types": {
         "person": 6
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 43.45000076293945,
       "is_crowd": false,
@@ -701,10 +808,12 @@
       "frame": 106,
       "timestamp_seconds": 3.53,
       "person_count": 6,
+      "people_delta": 0,
       "total_objects": 6,
       "object_types": {
         "person": 6
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 44.540000915527344,
       "is_crowd": false,
@@ -714,10 +823,12 @@
       "frame": 108,
       "timestamp_seconds": 3.6,
       "person_count": 8,
+      "people_delta": 2,
       "total_objects": 8,
       "object_types": {
         "person": 8
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 48.75,
       "is_crowd": false,
@@ -727,10 +838,12 @@
       "frame": 110,
       "timestamp_seconds": 3.67,
       "person_count": 6,
+      "people_delta": -2,
       "total_objects": 6,
       "object_types": {
         "person": 6
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 43.33000183105469,
       "is_crowd": false,
@@ -740,10 +853,12 @@
       "frame": 112,
       "timestamp_seconds": 3.73,
       "person_count": 8,
+      "people_delta": 2,
       "total_objects": 8,
       "object_types": {
         "person": 8
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 48.83000183105469,
       "is_crowd": false,
@@ -753,10 +868,12 @@
       "frame": 114,
       "timestamp_seconds": 3.8,
       "person_count": 8,
+      "people_delta": 0,
       "total_objects": 8,
       "object_types": {
         "person": 8
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 49.58000183105469,
       "is_crowd": false,
@@ -766,10 +883,12 @@
       "frame": 116,
       "timestamp_seconds": 3.87,
       "person_count": 7,
+      "people_delta": -1,
       "total_objects": 7,
       "object_types": {
         "person": 7
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 43.79999923706055,
       "is_crowd": false,
@@ -779,10 +898,12 @@
       "frame": 118,
       "timestamp_seconds": 3.93,
       "person_count": 9,
+      "people_delta": 2,
       "total_objects": 9,
       "object_types": {
         "person": 9
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 49.59000015258789,
       "is_crowd": false,
@@ -792,10 +913,12 @@
       "frame": 120,
       "timestamp_seconds": 4.0,
       "person_count": 5,
+      "people_delta": -4,
       "total_objects": 5,
       "object_types": {
         "person": 5
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 41.060001373291016,
       "is_crowd": false,
@@ -805,10 +928,12 @@
       "frame": 122,
       "timestamp_seconds": 4.07,
       "person_count": 6,
+      "people_delta": 1,
       "total_objects": 6,
       "object_types": {
         "person": 6
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 44.68000030517578,
       "is_crowd": false,
@@ -818,10 +943,12 @@
       "frame": 124,
       "timestamp_seconds": 4.13,
       "person_count": 7,
+      "people_delta": 1,
       "total_objects": 7,
       "object_types": {
         "person": 7
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 45.0,
       "is_crowd": false,
@@ -831,10 +958,12 @@
       "frame": 126,
       "timestamp_seconds": 4.2,
       "person_count": 8,
+      "people_delta": 1,
       "total_objects": 8,
       "object_types": {
         "person": 8
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 45.58000183105469,
       "is_crowd": false,
@@ -844,10 +973,12 @@
       "frame": 128,
       "timestamp_seconds": 4.27,
       "person_count": 5,
+      "people_delta": -3,
       "total_objects": 5,
       "object_types": {
         "person": 5
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 39.81999969482422,
       "is_crowd": false,
@@ -857,10 +988,12 @@
       "frame": 130,
       "timestamp_seconds": 4.33,
       "person_count": 6,
+      "people_delta": 1,
       "total_objects": 6,
       "object_types": {
         "person": 6
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 43.36000061035156,
       "is_crowd": false,
@@ -870,10 +1003,12 @@
       "frame": 132,
       "timestamp_seconds": 4.4,
       "person_count": 8,
+      "people_delta": 2,
       "total_objects": 8,
       "object_types": {
         "person": 8
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 45.77000045776367,
       "is_crowd": false,
@@ -883,10 +1018,12 @@
       "frame": 134,
       "timestamp_seconds": 4.47,
       "person_count": 5,
+      "people_delta": -3,
       "total_objects": 5,
       "object_types": {
         "person": 5
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 41.47999954223633,
       "is_crowd": false,
@@ -896,10 +1033,12 @@
       "frame": 136,
       "timestamp_seconds": 4.53,
       "person_count": 7,
+      "people_delta": 2,
       "total_objects": 7,
       "object_types": {
         "person": 7
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 43.209999084472656,
       "is_crowd": false,
@@ -909,10 +1048,12 @@
       "frame": 138,
       "timestamp_seconds": 4.6,
       "person_count": 6,
+      "people_delta": -1,
       "total_objects": 6,
       "object_types": {
         "person": 6
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 41.70000076293945,
       "is_crowd": false,
@@ -922,10 +1063,12 @@
       "frame": 140,
       "timestamp_seconds": 4.67,
       "person_count": 6,
+      "people_delta": 0,
       "total_objects": 6,
       "object_types": {
         "person": 6
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 42.20000076293945,
       "is_crowd": false,
@@ -935,10 +1078,12 @@
       "frame": 142,
       "timestamp_seconds": 4.73,
       "person_count": 4,
+      "people_delta": -2,
       "total_objects": 4,
       "object_types": {
         "person": 4
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 37.540000915527344,
       "is_crowd": false,
@@ -948,10 +1093,12 @@
       "frame": 144,
       "timestamp_seconds": 4.8,
       "person_count": 6,
+      "people_delta": 2,
       "total_objects": 6,
       "object_types": {
         "person": 6
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 41.220001220703125,
       "is_crowd": false,
@@ -961,10 +1108,12 @@
       "frame": 146,
       "timestamp_seconds": 4.87,
       "person_count": 5,
+      "people_delta": -1,
       "total_objects": 5,
       "object_types": {
         "person": 5
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 43.79999923706055,
       "is_crowd": false,
@@ -974,10 +1123,12 @@
       "frame": 148,
       "timestamp_seconds": 4.93,
       "person_count": 6,
+      "people_delta": 1,
       "total_objects": 6,
       "object_types": {
         "person": 6
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 42.2400016784668,
       "is_crowd": false,
@@ -987,10 +1138,12 @@
       "frame": 150,
       "timestamp_seconds": 5.0,
       "person_count": 6,
+      "people_delta": 0,
       "total_objects": 6,
       "object_types": {
         "person": 6
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 42.36000061035156,
       "is_crowd": false,
@@ -1000,10 +1153,12 @@
       "frame": 152,
       "timestamp_seconds": 5.07,
       "person_count": 6,
+      "people_delta": 0,
       "total_objects": 6,
       "object_types": {
         "person": 6
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 41.65999984741211,
       "is_crowd": false,
@@ -1013,10 +1168,12 @@
       "frame": 154,
       "timestamp_seconds": 5.13,
       "person_count": 7,
+      "people_delta": 1,
       "total_objects": 7,
       "object_types": {
         "person": 7
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 44.5,
       "is_crowd": false,
@@ -1026,10 +1183,12 @@
       "frame": 156,
       "timestamp_seconds": 5.2,
       "person_count": 7,
+      "people_delta": 0,
       "total_objects": 7,
       "object_types": {
         "person": 7
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 41.54999923706055,
       "is_crowd": false,
@@ -1039,10 +1198,12 @@
       "frame": 158,
       "timestamp_seconds": 5.27,
       "person_count": 5,
+      "people_delta": -2,
       "total_objects": 5,
       "object_types": {
         "person": 5
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 40.529998779296875,
       "is_crowd": false,
@@ -1052,10 +1213,12 @@
       "frame": 160,
       "timestamp_seconds": 5.33,
       "person_count": 6,
+      "people_delta": 1,
       "total_objects": 6,
       "object_types": {
         "person": 6
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 42.119998931884766,
       "is_crowd": false,
@@ -1065,10 +1228,12 @@
       "frame": 162,
       "timestamp_seconds": 5.4,
       "person_count": 5,
+      "people_delta": -1,
       "total_objects": 5,
       "object_types": {
         "person": 5
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 40.66999816894531,
       "is_crowd": false,
@@ -1078,10 +1243,12 @@
       "frame": 164,
       "timestamp_seconds": 5.47,
       "person_count": 7,
+      "people_delta": 2,
       "total_objects": 7,
       "object_types": {
         "person": 7
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 46.22999954223633,
       "is_crowd": false,
@@ -1091,10 +1258,12 @@
       "frame": 166,
       "timestamp_seconds": 5.53,
       "person_count": 7,
+      "people_delta": 0,
       "total_objects": 7,
       "object_types": {
         "person": 7
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 45.7599983215332,
       "is_crowd": false,
@@ -1104,10 +1273,12 @@
       "frame": 168,
       "timestamp_seconds": 5.6,
       "person_count": 8,
+      "people_delta": 1,
       "total_objects": 8,
       "object_types": {
         "person": 8
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 47.869998931884766,
       "is_crowd": false,
@@ -1117,10 +1288,12 @@
       "frame": 170,
       "timestamp_seconds": 5.67,
       "person_count": 8,
+      "people_delta": 0,
       "total_objects": 8,
       "object_types": {
         "person": 8
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 47.86000061035156,
       "is_crowd": false,
@@ -1130,10 +1303,12 @@
       "frame": 172,
       "timestamp_seconds": 5.73,
       "person_count": 6,
+      "people_delta": -2,
       "total_objects": 6,
       "object_types": {
         "person": 6
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 44.02000045776367,
       "is_crowd": false,
@@ -1143,10 +1318,12 @@
       "frame": 174,
       "timestamp_seconds": 5.8,
       "person_count": 6,
+      "people_delta": 0,
       "total_objects": 6,
       "object_types": {
         "person": 6
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 43.25,
       "is_crowd": false,
@@ -1156,10 +1333,12 @@
       "frame": 176,
       "timestamp_seconds": 5.87,
       "person_count": 5,
+      "people_delta": -1,
       "total_objects": 5,
       "object_types": {
         "person": 5
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 39.779998779296875,
       "is_crowd": false,
@@ -1169,10 +1348,12 @@
       "frame": 178,
       "timestamp_seconds": 5.93,
       "person_count": 6,
+      "people_delta": 1,
       "total_objects": 6,
       "object_types": {
         "person": 6
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 44.369998931884766,
       "is_crowd": false,
@@ -1182,10 +1363,12 @@
       "frame": 180,
       "timestamp_seconds": 6.0,
       "person_count": 5,
+      "people_delta": -1,
       "total_objects": 5,
       "object_types": {
         "person": 5
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 41.369998931884766,
       "is_crowd": false,
@@ -1195,10 +1378,12 @@
       "frame": 182,
       "timestamp_seconds": 6.07,
       "person_count": 7,
+      "people_delta": 2,
       "total_objects": 7,
       "object_types": {
         "person": 7
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 44.36000061035156,
       "is_crowd": false,
@@ -1208,10 +1393,12 @@
       "frame": 184,
       "timestamp_seconds": 6.13,
       "person_count": 8,
+      "people_delta": 1,
       "total_objects": 8,
       "object_types": {
         "person": 8
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 45.560001373291016,
       "is_crowd": false,
@@ -1221,10 +1408,12 @@
       "frame": 186,
       "timestamp_seconds": 6.2,
       "person_count": 7,
+      "people_delta": -1,
       "total_objects": 7,
       "object_types": {
         "person": 7
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 44.61000061035156,
       "is_crowd": false,
@@ -1234,10 +1423,12 @@
       "frame": 188,
       "timestamp_seconds": 6.27,
       "person_count": 8,
+      "people_delta": 1,
       "total_objects": 8,
       "object_types": {
         "person": 8
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 47.18000030517578,
       "is_crowd": false,
@@ -1247,10 +1438,12 @@
       "frame": 190,
       "timestamp_seconds": 6.33,
       "person_count": 7,
+      "people_delta": -1,
       "total_objects": 7,
       "object_types": {
         "person": 7
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 44.41999816894531,
       "is_crowd": false,
@@ -1260,10 +1453,12 @@
       "frame": 192,
       "timestamp_seconds": 6.4,
       "person_count": 6,
+      "people_delta": -1,
       "total_objects": 6,
       "object_types": {
         "person": 6
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 43.130001068115234,
       "is_crowd": false,
@@ -1273,10 +1468,12 @@
       "frame": 194,
       "timestamp_seconds": 6.47,
       "person_count": 9,
+      "people_delta": 3,
       "total_objects": 9,
       "object_types": {
         "person": 9
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 48.13999938964844,
       "is_crowd": false,
@@ -1286,10 +1483,12 @@
       "frame": 196,
       "timestamp_seconds": 6.53,
       "person_count": 7,
+      "people_delta": -2,
       "total_objects": 7,
       "object_types": {
         "person": 7
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 43.959999084472656,
       "is_crowd": false,
@@ -1299,10 +1498,12 @@
       "frame": 198,
       "timestamp_seconds": 6.6,
       "person_count": 8,
+      "people_delta": 1,
       "total_objects": 8,
       "object_types": {
         "person": 8
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 47.880001068115234,
       "is_crowd": false,
@@ -1312,10 +1513,12 @@
       "frame": 200,
       "timestamp_seconds": 6.67,
       "person_count": 6,
+      "people_delta": -2,
       "total_objects": 6,
       "object_types": {
         "person": 6
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 44.400001525878906,
       "is_crowd": false,
@@ -1325,10 +1528,12 @@
       "frame": 202,
       "timestamp_seconds": 6.73,
       "person_count": 7,
+      "people_delta": 1,
       "total_objects": 7,
       "object_types": {
         "person": 7
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 44.279998779296875,
       "is_crowd": false,
@@ -1338,10 +1543,12 @@
       "frame": 204,
       "timestamp_seconds": 6.8,
       "person_count": 7,
+      "people_delta": 0,
       "total_objects": 7,
       "object_types": {
         "person": 7
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 46.349998474121094,
       "is_crowd": false,
@@ -1351,10 +1558,12 @@
       "frame": 206,
       "timestamp_seconds": 6.87,
       "person_count": 7,
+      "people_delta": 0,
       "total_objects": 7,
       "object_types": {
         "person": 7
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 45.29999923706055,
       "is_crowd": false,
@@ -1364,10 +1573,12 @@
       "frame": 208,
       "timestamp_seconds": 6.93,
       "person_count": 6,
+      "people_delta": -1,
       "total_objects": 6,
       "object_types": {
         "person": 6
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 42.900001525878906,
       "is_crowd": false,
@@ -1377,10 +1588,12 @@
       "frame": 210,
       "timestamp_seconds": 7.0,
       "person_count": 8,
+      "people_delta": 2,
       "total_objects": 8,
       "object_types": {
         "person": 8
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 49.959999084472656,
       "is_crowd": false,
@@ -1390,10 +1603,12 @@
       "frame": 212,
       "timestamp_seconds": 7.07,
       "person_count": 7,
+      "people_delta": -1,
       "total_objects": 7,
       "object_types": {
         "person": 7
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 47.869998931884766,
       "is_crowd": false,
@@ -1403,10 +1618,12 @@
       "frame": 214,
       "timestamp_seconds": 7.13,
       "person_count": 8,
+      "people_delta": 1,
       "total_objects": 8,
       "object_types": {
         "person": 8
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 49.40999984741211,
       "is_crowd": false,
@@ -1416,10 +1633,12 @@
       "frame": 216,
       "timestamp_seconds": 7.2,
       "person_count": 8,
+      "people_delta": 0,
       "total_objects": 8,
       "object_types": {
         "person": 8
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 48.060001373291016,
       "is_crowd": false,
@@ -1429,10 +1648,12 @@
       "frame": 218,
       "timestamp_seconds": 7.27,
       "person_count": 7,
+      "people_delta": -1,
       "total_objects": 7,
       "object_types": {
         "person": 7
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 46.0,
       "is_crowd": false,
@@ -1442,10 +1663,12 @@
       "frame": 220,
       "timestamp_seconds": 7.33,
       "person_count": 7,
+      "people_delta": 0,
       "total_objects": 7,
       "object_types": {
         "person": 7
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 46.720001220703125,
       "is_crowd": false,
@@ -1455,12 +1678,14 @@
       "frame": 222,
       "timestamp_seconds": 7.4,
       "person_count": 7,
+      "people_delta": 0,
       "total_objects": 9,
       "object_types": {
         "person": 7,
         "handbag": 1,
         "backpack": 1
       },
+      "object_type_diversity": 3,
       "motion_detected": true,
       "crowd_density": 45.65999984741211,
       "is_crowd": false,
@@ -1470,12 +1695,14 @@
       "frame": 224,
       "timestamp_seconds": 7.47,
       "person_count": 8,
+      "people_delta": 1,
       "total_objects": 11,
       "object_types": {
         "person": 8,
         "handbag": 2,
         "backpack": 1
       },
+      "object_type_diversity": 3,
       "motion_detected": true,
       "crowd_density": 48.41999816894531,
       "is_crowd": false,
@@ -1485,11 +1712,13 @@
       "frame": 226,
       "timestamp_seconds": 7.53,
       "person_count": 10,
+      "people_delta": 2,
       "total_objects": 11,
       "object_types": {
         "person": 10,
         "handbag": 1
       },
+      "object_type_diversity": 2,
       "motion_detected": true,
       "crowd_density": 52.68000030517578,
       "is_crowd": false,
@@ -1499,11 +1728,13 @@
       "frame": 228,
       "timestamp_seconds": 7.6,
       "person_count": 8,
+      "people_delta": -2,
       "total_objects": 9,
       "object_types": {
         "person": 8,
         "handbag": 1
       },
+      "object_type_diversity": 2,
       "motion_detected": true,
       "crowd_density": 47.5099983215332,
       "is_crowd": false,
@@ -1513,10 +1744,12 @@
       "frame": 230,
       "timestamp_seconds": 7.67,
       "person_count": 8,
+      "people_delta": 0,
       "total_objects": 8,
       "object_types": {
         "person": 8
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 47.290000915527344,
       "is_crowd": false,
@@ -1526,10 +1759,12 @@
       "frame": 232,
       "timestamp_seconds": 7.73,
       "person_count": 8,
+      "people_delta": 0,
       "total_objects": 8,
       "object_types": {
         "person": 8
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 47.22999954223633,
       "is_crowd": false,
@@ -1539,10 +1774,12 @@
       "frame": 234,
       "timestamp_seconds": 7.8,
       "person_count": 7,
+      "people_delta": -1,
       "total_objects": 7,
       "object_types": {
         "person": 7
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 45.7400016784668,
       "is_crowd": false,
@@ -1552,10 +1789,12 @@
       "frame": 236,
       "timestamp_seconds": 7.87,
       "person_count": 8,
+      "people_delta": 1,
       "total_objects": 8,
       "object_types": {
         "person": 8
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 46.0099983215332,
       "is_crowd": false,
@@ -1565,10 +1804,12 @@
       "frame": 238,
       "timestamp_seconds": 7.93,
       "person_count": 8,
+      "people_delta": 0,
       "total_objects": 8,
       "object_types": {
         "person": 8
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 47.060001373291016,
       "is_crowd": false,
@@ -1578,10 +1819,12 @@
       "frame": 240,
       "timestamp_seconds": 8.0,
       "person_count": 8,
+      "people_delta": 0,
       "total_objects": 8,
       "object_types": {
         "person": 8
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 45.09000015258789,
       "is_crowd": false,
@@ -1591,10 +1834,12 @@
       "frame": 242,
       "timestamp_seconds": 8.07,
       "person_count": 8,
+      "people_delta": 0,
       "total_objects": 8,
       "object_types": {
         "person": 8
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 46.16999816894531,
       "is_crowd": false,
@@ -1604,10 +1849,12 @@
       "frame": 244,
       "timestamp_seconds": 8.13,
       "person_count": 9,
+      "people_delta": 1,
       "total_objects": 9,
       "object_types": {
         "person": 9
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 48.16999816894531,
       "is_crowd": false,
@@ -1617,10 +1864,12 @@
       "frame": 246,
       "timestamp_seconds": 8.2,
       "person_count": 9,
+      "people_delta": 0,
       "total_objects": 9,
       "object_types": {
         "person": 9
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 49.90999984741211,
       "is_crowd": false,
@@ -1630,10 +1879,12 @@
       "frame": 248,
       "timestamp_seconds": 8.27,
       "person_count": 7,
+      "people_delta": -2,
       "total_objects": 7,
       "object_types": {
         "person": 7
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 43.939998626708984,
       "is_crowd": false,
@@ -1643,10 +1894,12 @@
       "frame": 250,
       "timestamp_seconds": 8.33,
       "person_count": 7,
+      "people_delta": 0,
       "total_objects": 7,
       "object_types": {
         "person": 7
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 42.93000030517578,
       "is_crowd": false,
@@ -1656,10 +1909,12 @@
       "frame": 252,
       "timestamp_seconds": 8.4,
       "person_count": 7,
+      "people_delta": 0,
       "total_objects": 7,
       "object_types": {
         "person": 7
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 46.0,
       "is_crowd": false,
@@ -1669,10 +1924,12 @@
       "frame": 254,
       "timestamp_seconds": 8.47,
       "person_count": 8,
+      "people_delta": 1,
       "total_objects": 8,
       "object_types": {
         "person": 8
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 46.29999923706055,
       "is_crowd": false,
@@ -1682,10 +1939,12 @@
       "frame": 256,
       "timestamp_seconds": 8.53,
       "person_count": 7,
+      "people_delta": -1,
       "total_objects": 7,
       "object_types": {
         "person": 7
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 43.40999984741211,
       "is_crowd": false,
@@ -1695,10 +1954,12 @@
       "frame": 258,
       "timestamp_seconds": 8.6,
       "person_count": 5,
+      "people_delta": -2,
       "total_objects": 5,
       "object_types": {
         "person": 5
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 38.45000076293945,
       "is_crowd": false,
@@ -1708,10 +1969,12 @@
       "frame": 260,
       "timestamp_seconds": 8.67,
       "person_count": 4,
+      "people_delta": -1,
       "total_objects": 4,
       "object_types": {
         "person": 4
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 38.95000076293945,
       "is_crowd": false,
@@ -1721,10 +1984,12 @@
       "frame": 262,
       "timestamp_seconds": 8.73,
       "person_count": 4,
+      "people_delta": 0,
       "total_objects": 4,
       "object_types": {
         "person": 4
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 38.380001068115234,
       "is_crowd": false,
@@ -1734,10 +1999,12 @@
       "frame": 264,
       "timestamp_seconds": 8.8,
       "person_count": 8,
+      "people_delta": 4,
       "total_objects": 8,
       "object_types": {
         "person": 8
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 46.52000045776367,
       "is_crowd": false,
@@ -1747,10 +2014,12 @@
       "frame": 266,
       "timestamp_seconds": 8.87,
       "person_count": 6,
+      "people_delta": -2,
       "total_objects": 6,
       "object_types": {
         "person": 6
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 43.209999084472656,
       "is_crowd": false,
@@ -1760,10 +2029,12 @@
       "frame": 268,
       "timestamp_seconds": 8.93,
       "person_count": 7,
+      "people_delta": 1,
       "total_objects": 7,
       "object_types": {
         "person": 7
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 44.900001525878906,
       "is_crowd": false,
@@ -1773,10 +2044,12 @@
       "frame": 270,
       "timestamp_seconds": 9.0,
       "person_count": 7,
+      "people_delta": 0,
       "total_objects": 7,
       "object_types": {
         "person": 7
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 45.20000076293945,
       "is_crowd": false,
@@ -1786,10 +2059,12 @@
       "frame": 272,
       "timestamp_seconds": 9.07,
       "person_count": 9,
+      "people_delta": 2,
       "total_objects": 9,
       "object_types": {
         "person": 9
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 48.22999954223633,
       "is_crowd": false,
@@ -1799,10 +2074,12 @@
       "frame": 274,
       "timestamp_seconds": 9.13,
       "person_count": 11,
+      "people_delta": 2,
       "total_objects": 11,
       "object_types": {
         "person": 11
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 52.9900016784668,
       "is_crowd": false,
@@ -1812,10 +2089,12 @@
       "frame": 276,
       "timestamp_seconds": 9.2,
       "person_count": 8,
+      "people_delta": -3,
       "total_objects": 8,
       "object_types": {
         "person": 8
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 47.119998931884766,
       "is_crowd": false,
@@ -1825,10 +2104,12 @@
       "frame": 278,
       "timestamp_seconds": 9.27,
       "person_count": 7,
+      "people_delta": -1,
       "total_objects": 7,
       "object_types": {
         "person": 7
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 43.380001068115234,
       "is_crowd": false,
@@ -1838,10 +2119,12 @@
       "frame": 280,
       "timestamp_seconds": 9.33,
       "person_count": 7,
+      "people_delta": 0,
       "total_objects": 7,
       "object_types": {
         "person": 7
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 45.220001220703125,
       "is_crowd": false,
@@ -1851,10 +2134,12 @@
       "frame": 282,
       "timestamp_seconds": 9.4,
       "person_count": 7,
+      "people_delta": 0,
       "total_objects": 7,
       "object_types": {
         "person": 7
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 43.97999954223633,
       "is_crowd": false,
@@ -1864,10 +2149,12 @@
       "frame": 284,
       "timestamp_seconds": 9.47,
       "person_count": 7,
+      "people_delta": 0,
       "total_objects": 7,
       "object_types": {
         "person": 7
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 50.04999923706055,
       "is_crowd": false,
@@ -1877,10 +2164,12 @@
       "frame": 286,
       "timestamp_seconds": 9.53,
       "person_count": 6,
+      "people_delta": -1,
       "total_objects": 6,
       "object_types": {
         "person": 6
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 42.459999084472656,
       "is_crowd": false,
@@ -1890,10 +2179,12 @@
       "frame": 288,
       "timestamp_seconds": 9.6,
       "person_count": 7,
+      "people_delta": 1,
       "total_objects": 7,
       "object_types": {
         "person": 7
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 46.560001373291016,
       "is_crowd": false,
@@ -1903,10 +2194,12 @@
       "frame": 290,
       "timestamp_seconds": 9.67,
       "person_count": 7,
+      "people_delta": 0,
       "total_objects": 7,
       "object_types": {
         "person": 7
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 43.58000183105469,
       "is_crowd": false,
@@ -1916,10 +2209,12 @@
       "frame": 292,
       "timestamp_seconds": 9.73,
       "person_count": 6,
+      "people_delta": -1,
       "total_objects": 6,
       "object_types": {
         "person": 6
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 40.900001525878906,
       "is_crowd": false,
@@ -1929,10 +2224,12 @@
       "frame": 294,
       "timestamp_seconds": 9.8,
       "person_count": 9,
+      "people_delta": 3,
       "total_objects": 9,
       "object_types": {
         "person": 9
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 46.540000915527344,
       "is_crowd": false,
@@ -1942,10 +2239,12 @@
       "frame": 296,
       "timestamp_seconds": 9.87,
       "person_count": 8,
+      "people_delta": -1,
       "total_objects": 8,
       "object_types": {
         "person": 8
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 47.459999084472656,
       "is_crowd": false,
@@ -1955,10 +2254,12 @@
       "frame": 298,
       "timestamp_seconds": 9.93,
       "person_count": 8,
+      "people_delta": 0,
       "total_objects": 8,
       "object_types": {
         "person": 8
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 48.15999984741211,
       "is_crowd": false,
@@ -1968,10 +2269,12 @@
       "frame": 300,
       "timestamp_seconds": 10.0,
       "person_count": 8,
+      "people_delta": 0,
       "total_objects": 8,
       "object_types": {
         "person": 8
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 49.70000076293945,
       "is_crowd": false,
@@ -1981,10 +2284,12 @@
       "frame": 302,
       "timestamp_seconds": 10.07,
       "person_count": 7,
+      "people_delta": -1,
       "total_objects": 7,
       "object_types": {
         "person": 7
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 45.650001525878906,
       "is_crowd": false,
@@ -1994,10 +2299,12 @@
       "frame": 304,
       "timestamp_seconds": 10.13,
       "person_count": 6,
+      "people_delta": -1,
       "total_objects": 6,
       "object_types": {
         "person": 6
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 43.90999984741211,
       "is_crowd": false,
@@ -2007,10 +2314,12 @@
       "frame": 306,
       "timestamp_seconds": 10.2,
       "person_count": 7,
+      "people_delta": 1,
       "total_objects": 7,
       "object_types": {
         "person": 7
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 48.65999984741211,
       "is_crowd": false,
@@ -2020,10 +2329,12 @@
       "frame": 308,
       "timestamp_seconds": 10.27,
       "person_count": 6,
+      "people_delta": -1,
       "total_objects": 6,
       "object_types": {
         "person": 6
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 46.27000045776367,
       "is_crowd": false,
@@ -2033,10 +2344,12 @@
       "frame": 310,
       "timestamp_seconds": 10.33,
       "person_count": 6,
+      "people_delta": 0,
       "total_objects": 6,
       "object_types": {
         "person": 6
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 44.31999969482422,
       "is_crowd": false,
@@ -2046,10 +2359,12 @@
       "frame": 312,
       "timestamp_seconds": 10.4,
       "person_count": 7,
+      "people_delta": 1,
       "total_objects": 7,
       "object_types": {
         "person": 7
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 46.93000030517578,
       "is_crowd": false,
@@ -2059,10 +2374,12 @@
       "frame": 314,
       "timestamp_seconds": 10.47,
       "person_count": 8,
+      "people_delta": 1,
       "total_objects": 8,
       "object_types": {
         "person": 8
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 47.59000015258789,
       "is_crowd": false,
@@ -2072,10 +2389,12 @@
       "frame": 316,
       "timestamp_seconds": 10.53,
       "person_count": 7,
+      "people_delta": -1,
       "total_objects": 7,
       "object_types": {
         "person": 7
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 45.08000183105469,
       "is_crowd": false,
@@ -2085,10 +2404,12 @@
       "frame": 318,
       "timestamp_seconds": 10.6,
       "person_count": 6,
+      "people_delta": -1,
       "total_objects": 6,
       "object_types": {
         "person": 6
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 42.619998931884766,
       "is_crowd": false,
@@ -2098,10 +2419,12 @@
       "frame": 320,
       "timestamp_seconds": 10.67,
       "person_count": 7,
+      "people_delta": 1,
       "total_objects": 7,
       "object_types": {
         "person": 7
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 44.40999984741211,
       "is_crowd": false,
@@ -2111,10 +2434,12 @@
       "frame": 322,
       "timestamp_seconds": 10.73,
       "person_count": 8,
+      "people_delta": 1,
       "total_objects": 8,
       "object_types": {
         "person": 8
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 45.869998931884766,
       "is_crowd": false,
@@ -2124,10 +2449,12 @@
       "frame": 324,
       "timestamp_seconds": 10.8,
       "person_count": 8,
+      "people_delta": 0,
       "total_objects": 8,
       "object_types": {
         "person": 8
       },
+      "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 47.5,
       "is_crowd": false,
@@ -2137,17 +2464,51 @@
   "max_people": 11,
   "min_people": 2,
   "average_people": 6.94,
+  "median_people": 7.0,
+  "people_std_dev": 1.3,
+  "peak_occupancy_time_seconds": 9.13,
+  "average_people_change_per_sample": 1.15,
+  "average_people_change_per_second": 17.31,
+  "rapid_change_frames": 13,
+  "crowd_trend": {
+    "people_trend_slope_per_sample": 0.0036,
+    "people_trend_direction": "stable",
+    "density_trend_slope_per_sample": 0.0113,
+    "density_trend_direction": "stable"
+  },
   "max_objects": 11,
   "min_objects": 3,
   "average_objects": 7.01,
   "frames_with_motion": 162,
   "motion_percentage": 99.39,
+  "object_analysis": {
+    "unique_object_types": 3,
+    "average_object_type_diversity": 1.06,
+    "max_object_type_diversity": 3,
+    "top_detected_objects": [
+      {
+        "type": "person",
+        "count": 1132
+      },
+      {
+        "type": "handbag",
+        "count": 8
+      },
+      {
+        "type": "backpack",
+        "count": 2
+      }
+    ]
+  },
   "crowd_analysis": {
     "total_crowd_frames": 0,
     "crowd_percentage": 0.0,
     "max_crowd_size": 0,
     "average_crowd_size": 0,
-    "frames_with_crowds": 0
+    "frames_with_crowds": 0,
+    "crowd_event_count": 0,
+    "longest_crowd_event_frames": 0,
+    "longest_crowd_event_seconds": 0.0
   },
   "density_analysis": {
     "max_density": 52.9900016784668,
