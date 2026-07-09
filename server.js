@@ -144,6 +144,15 @@ const dashboardHtml = `<!doctype html>
         font-family: 'Courier New', monospace;
         line-height: 1.15;
       }
+      .metric-good {
+        color: #22c55e;
+      }
+      .metric-bad {
+        color: #ef4444;
+      }
+      .metric-neutral {
+        color: #d4af37;
+      }
       .info-box {
         background: linear-gradient(135deg, #1f1f1f 0%, #2a2a2a 100%);
         border: 1.5px solid #d4af37;
@@ -247,6 +256,18 @@ const dashboardHtml = `<!doctype html>
         background: #000;
         border: 1px solid rgba(212, 175, 55, 0.2);
       }
+      .video-wrap {
+        position: relative;
+        width: 100%;
+      }
+      .bbox-overlay {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        border-radius: 8px;
+      }
       .trend-dot {
         display: inline-block;
         width: 8px;
@@ -267,7 +288,10 @@ const dashboardHtml = `<!doctype html>
       <div class="content">
         <div class="video-panel">
           <div class="panel-box">
-            <video class="stream" controls autoplay loop muted playsinline src="/video.mp4"></video>
+            <div class="video-wrap">
+              <video id="live-video" class="stream" controls autoplay loop muted playsinline src="/video.mp4"></video>
+              <canvas id="bbox-overlay" class="bbox-overlay"></canvas>
+            </div>
             <div class="trend-chart-wrap">
               <div class="trend-caption">📉 Crowd Trend (Live)</div>
               <div class="trend-legend">
@@ -438,6 +462,34 @@ const dashboardHtml = `<!doctype html>
       </div>
     </div>
     <script>
+      let latestAnalytics = null;
+
+      function setMetricState(elementId, numericValue, averageValue) {
+        const element = document.getElementById(elementId);
+        if (!element) return;
+
+        element.classList.remove('metric-good', 'metric-bad', 'metric-neutral');
+
+        const value = Number(numericValue);
+        const average = Number(averageValue);
+        if (!Number.isFinite(value) || !Number.isFinite(average) || average <= 0) {
+          element.classList.add('metric-neutral');
+          return;
+        }
+
+        if (value > average) {
+          element.classList.add('metric-good');
+          return;
+        }
+
+        if (value < average * 0.5) {
+          element.classList.add('metric-bad');
+          return;
+        }
+
+        element.classList.add('metric-neutral');
+      }
+
       function drawSeries(ctx, points, color, width, pad, chartW, chartH) {
         if (!points || points.length === 0) return;
         ctx.beginPath();
@@ -495,6 +547,72 @@ const dashboardHtml = `<!doctype html>
         drawSeries(ctx, peopleNorm, '#d4af37', 2.5, pad, chartW, chartH);
       }
 
+      function getNearestSampleByTime(samples, seconds) {
+        if (!Array.isArray(samples) || samples.length === 0) return null;
+        let best = samples[0];
+        let bestDiff = Math.abs((samples[0].timestamp_seconds || 0) - seconds);
+        for (let i = 1; i < samples.length; i += 1) {
+          const sample = samples[i];
+          const diff = Math.abs((sample.timestamp_seconds || 0) - seconds);
+          if (diff < bestDiff) {
+            best = sample;
+            bestDiff = diff;
+          }
+        }
+        return best;
+      }
+
+      function drawPersonBoxesAtCurrentTime() {
+        const video = document.getElementById('live-video');
+        const canvas = document.getElementById('bbox-overlay');
+        if (!video || !canvas) return;
+
+        const width = Math.max(1, Math.floor(video.clientWidth || 1));
+        const height = Math.max(1, Math.floor(video.clientHeight || 1));
+        if (canvas.width !== width || canvas.height !== height) {
+          canvas.width = width;
+          canvas.height = height;
+        }
+
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+        ctx.clearRect(0, 0, width, height);
+
+        if (!latestAnalytics || !Array.isArray(latestAnalytics.person_counts)) return;
+
+        const currentSec = Number(video.currentTime || 0);
+        const nearestSample = getNearestSampleByTime(latestAnalytics.person_counts, currentSec);
+        if (!nearestSample || !Array.isArray(nearestSample.person_boxes)) return;
+
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = '#34d399';
+        ctx.fillStyle = 'rgba(52, 211, 153, 0.16)';
+        ctx.font = '11px monospace';
+
+        nearestSample.person_boxes.forEach((box) => {
+          const x1 = (Number(box.x1) || 0) * width;
+          const y1 = (Number(box.y1) || 0) * height;
+          const x2 = (Number(box.x2) || 0) * width;
+          const y2 = (Number(box.y2) || 0) * height;
+          const w = Math.max(0, x2 - x1);
+          const h = Math.max(0, y2 - y1);
+          if (w < 2 || h < 2) return;
+
+          ctx.fillRect(x1, y1, w, h);
+          ctx.strokeRect(x1, y1, w, h);
+
+          const conf = Number(box.conf || 0).toFixed(2);
+          const label = 'person ' + conf;
+          const ly = Math.max(11, y1 - 4);
+          ctx.fillStyle = 'rgba(0,0,0,0.65)';
+          const tw = ctx.measureText(label).width + 6;
+          ctx.fillRect(x1, ly - 11, tw, 12);
+          ctx.fillStyle = '#86efac';
+          ctx.fillText(label, x1 + 3, ly - 2);
+          ctx.fillStyle = 'rgba(52, 211, 153, 0.16)';
+        });
+      }
+
       async function refreshAnalytics() {
         try {
           const res = await fetch('/analytics/person_counts.json');
@@ -506,12 +624,18 @@ const dashboardHtml = `<!doctype html>
           document.getElementById('analytics-max').textContent = data.max_people ?? '-';
           document.getElementById('analytics-average').textContent = data.average_people ?? '-';
           document.getElementById('analytics-min').textContent = data.min_people ?? '-';
+          setMetricState('analytics-max', data.max_people, data.average_people);
+          setMetricState('analytics-min', data.min_people, data.average_people);
+          setMetricState('analytics-average', data.average_people, data.average_people);
           
           // Object detection
           document.getElementById('analytics-max-objects').textContent = data.max_objects ?? '-';
           document.getElementById('analytics-avg-objects').textContent = data.average_objects ?? '-';
           document.getElementById('analytics-min-objects').textContent = data.min_objects ?? '-';
           document.getElementById('analytics-motion-percent').textContent = (data.motion_percentage ?? 0) + '%';
+          setMetricState('analytics-max-objects', data.max_objects, data.average_objects);
+          setMetricState('analytics-min-objects', data.min_objects, data.average_objects);
+          setMetricState('analytics-avg-objects', data.average_objects, data.average_objects);
           
           // Crowd analysis
           const crowdAnalysis = data.crowd_analysis || {};
@@ -521,11 +645,17 @@ const dashboardHtml = `<!doctype html>
           document.getElementById('analytics-avg-crowd').textContent = crowdAnalysis.average_crowd_size ?? '-';
           document.getElementById('analytics-avg-crowd-score').textContent = crowdAnalysis.average_crowd_score ?? '-';
           document.getElementById('analytics-peak-crowd-score').textContent = crowdAnalysis.peak_crowd_score ?? '-';
+          setMetricState('analytics-max-crowd', crowdAnalysis.max_crowd_size, crowdAnalysis.average_crowd_size);
+          setMetricState('analytics-avg-crowd', crowdAnalysis.average_crowd_size, crowdAnalysis.average_crowd_size);
+          setMetricState('analytics-peak-crowd-score', crowdAnalysis.peak_crowd_score, crowdAnalysis.average_crowd_score);
+          setMetricState('analytics-avg-crowd-score', crowdAnalysis.average_crowd_score, crowdAnalysis.average_crowd_score);
           
           // Density analysis
           const densityAnalysis = data.density_analysis || {};
           document.getElementById('analytics-max-density').textContent = (densityAnalysis.max_density ?? 0) + '%';
           document.getElementById('analytics-avg-density').textContent = (densityAnalysis.average_density ?? 0) + '%';
+          setMetricState('analytics-max-density', densityAnalysis.max_density, densityAnalysis.average_density);
+          setMetricState('analytics-avg-density', densityAnalysis.average_density, densityAnalysis.average_density);
           
           // Motion analysis
           document.getElementById('analytics-motion-frames').textContent = data.frames_with_motion ?? '-';
@@ -555,7 +685,10 @@ const dashboardHtml = `<!doctype html>
           document.getElementById('analytics-density-trend').textContent = trend.density_trend_direction || '-';
           document.getElementById('analytics-people-slope').textContent = trend.people_trend_slope_per_sample ?? '-';
           document.getElementById('analytics-density-slope').textContent = trend.density_trend_slope_per_sample ?? '-';
+          setMetricState('analytics-median', data.median_people, data.average_people);
 
+          latestAnalytics = data;
+          drawPersonBoxesAtCurrentTime();
           drawCrowdTrend(data);
         } catch (e) {
                     // Keep existing values when refresh fails.
@@ -563,7 +696,16 @@ const dashboardHtml = `<!doctype html>
       }
       refreshAnalytics();
       setInterval(refreshAnalytics, 5000);
-      window.addEventListener('resize', refreshAnalytics);
+      const liveVideo = document.getElementById('live-video');
+      if (liveVideo) {
+        liveVideo.addEventListener('timeupdate', drawPersonBoxesAtCurrentTime);
+        liveVideo.addEventListener('seeked', drawPersonBoxesAtCurrentTime);
+        liveVideo.addEventListener('loadedmetadata', drawPersonBoxesAtCurrentTime);
+      }
+      window.addEventListener('resize', () => {
+        refreshAnalytics();
+        drawPersonBoxesAtCurrentTime();
+      });
     </script>
   </body>
 </html>`;

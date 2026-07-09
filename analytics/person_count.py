@@ -181,7 +181,7 @@ def count_persons_with_crowd_detection(
     conf_threshold: float = DEFAULT_CONFIDENCE,
     imgsz: int = DEFAULT_IMGSZ,
     use_half: bool = False,
-) -> Tuple[int, int, Dict, Dict]:
+) -> Tuple[int, int, Dict, Dict, List[Dict[str, float]]]:
     """
     Run detection with crowd-aware algorithms for better counting accuracy.
     
@@ -190,6 +190,7 @@ def count_persons_with_crowd_detection(
         - total_objects: total detectable objects
         - object_counts: breakdown by object type
         - crowd_info: crowd metrics
+        - person_boxes: normalized person bounding boxes with confidence
     """
     all_boxes = []
 
@@ -221,7 +222,7 @@ def count_persons_with_crowd_detection(
             )
     
     if not all_boxes:
-        return 0, 0, {}, {'density': 0.0, 'is_crowd': False, 'crowd_size': 0}
+        return 0, 0, {}, {'density': 0.0, 'is_crowd': False, 'crowd_size': 0}, []
     
     # Extract person boxes for crowd analysis
     person_boxes = [item['box'] for item in all_boxes if item['names'].get(item['cls']) == 'person']
@@ -264,8 +265,29 @@ def count_persons_with_crowd_detection(
         'proximity_ratio': crowd_metrics['proximity_ratio'],
         'overlap_ratio': crowd_metrics['overlap_ratio'],
     }
+
+    frame_h, frame_w = frame.shape[:2]
+    person_boxes_norm: List[Dict[str, float]] = []
+    for item in all_boxes:
+        obj_name = item['names'].get(item['cls'])
+        if obj_name != 'person':
+            continue
+        x1, y1, x2, y2 = item['box']
+        x1n = max(0.0, min(1.0, float(x1) / max(1, frame_w)))
+        y1n = max(0.0, min(1.0, float(y1) / max(1, frame_h)))
+        x2n = max(0.0, min(1.0, float(x2) / max(1, frame_w)))
+        y2n = max(0.0, min(1.0, float(y2) / max(1, frame_h)))
+        person_boxes_norm.append(
+            {
+                'x1': round(x1n, 4),
+                'y1': round(y1n, 4),
+                'x2': round(x2n, 4),
+                'y2': round(y2n, 4),
+                'conf': round(float(item.get('conf', 0.0)), 3),
+            }
+        )
     
-    return persons, total_objects, object_counts, crowd_info
+    return persons, total_objects, object_counts, crowd_info, person_boxes_norm
 
 
 
@@ -305,7 +327,7 @@ def analyze_video(input_path: str, output_path: str, model_name: str = DEFAULT_M
             continue
 
         # Analyze with enhanced crowd detection
-        persons, total_objects, object_counts, crowd_info = count_persons_with_crowd_detection(
+        persons, total_objects, object_counts, crowd_info, person_boxes = count_persons_with_crowd_detection(
             model,
             frame,
             conf_threshold=DEFAULT_CONFIDENCE,
@@ -365,6 +387,7 @@ def analyze_video(input_path: str, output_path: str, model_name: str = DEFAULT_M
             "crowd_score_raw": crowd_info.get("crowd_score", 0),
             "crowd_proximity_ratio": crowd_info.get("proximity_ratio", 0),
             "crowd_overlap_ratio": crowd_info.get("overlap_ratio", 0),
+            "person_boxes": person_boxes,
         })
         
         prev_frame = frame.copy()
