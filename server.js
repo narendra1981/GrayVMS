@@ -11,19 +11,28 @@ const useTestPattern = process.env.TEST_PATTERN === '1';
 const envVideoFile = process.env.VIDEO_FILE;
 const videoFileDefault = 'video.mp4'; // fallback filename in public/
 
-function resolvePreferredVideo() {
+function resolvePreferredVideo(camera = 1) {
   // Priority: explicit env VIDEO_FILE (absolute or relative to project root),
   // then browser-friendly project-root videos (mp4/webm/ogg),
   // then legacy AVI, then `public/video.mp4`.
-  if (envVideoFile) return path.isAbsolute(envVideoFile) ? envVideoFile : path.join(__dirname, envVideoFile);
+  if (camera === 1 && envVideoFile) return path.isAbsolute(envVideoFile) ? envVideoFile : path.join(__dirname, envVideoFile);
 
-  const playableCandidates = [
-    path.join(__dirname, 'video.mp4'),
-    path.join(__dirname, 'Test.mp4'),
-    path.join(__dirname, 'Test_1.mp4'),
-    path.join(__dirname, 'July_07.mp4'),
-    path.join(__dirname, 'video_1.mp4'),
-  ];
+  const playableCandidates = camera === 1
+    ? [
+        path.join(__dirname, 'video.mp4'),
+        path.join(__dirname, 'Test.mp4'),
+        path.join(__dirname, 'Test_1.mp4'),
+        path.join(__dirname, 'July_07.mp4'),
+        path.join(__dirname, 'video_1.mp4'),
+      ]
+    : [
+        path.join(__dirname, 'video_09_07.mp4'),
+        path.join(__dirname, 'Test.mp4'),
+        path.join(__dirname, 'Test_1.mp4'),
+        path.join(__dirname, 'video_1.mp4'),
+        path.join(__dirname, 'July_07.mp4'),
+        path.join(__dirname, 'video.mp4'),
+      ];
 
   for (const candidate of playableCandidates) {
     if (fs.existsSync(candidate)) return candidate;
@@ -704,13 +713,9 @@ const dashboardHtml = `<!doctype html>
       }
       window.addEventListener('resize', () => {
         refreshAnalytics();
-        drawPersonBoxesAtCurrentTime();
-      });
     </script>
   </body>
 </html>`;
-
-app.get('/', (req, res) => res.type('html').send(dashboardHtml));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -743,7 +748,7 @@ app.get('/stream', (req, res) => {
 // Serve stored video with range requests for HTML5 <video>
 app.get('/video.mp4', (req, res) => {
   // determine which file to serve
-  const filePath = resolvePreferredVideo();
+  const filePath = resolvePreferredVideo(1);
   fs.stat(filePath, (err, stat) => {
     if (err || !stat.isFile()) return res.status(404).end();
 
@@ -776,9 +781,56 @@ app.get('/video.mp4', (req, res) => {
   });
 });
 
-// Provide info about which file is being served
+// Camera 2 video with range requests
+app.get('/video2.mp4', (req, res) => {
+  const filePath = resolvePreferredVideo(2);
+  fs.stat(filePath, (err, stat) => {
+    if (err || !stat.isFile()) return res.status(404).end();
+
+    const range = req.headers.range;
+    const fileSize = stat.size;
+    if (range) {
+      const parts = range.replace(/bytes=/, '').split('-');
+      const start = parseInt(parts[0], 10);
+      const end = parts[1] ? parseInt(parts[1], 10) : fileSize - 1;
+      if (start >= fileSize || end >= fileSize) {
+        res.status(416).set('Content-Range', `bytes */${fileSize}`).end();
+        return;
+      }
+      const chunkSize = (end - start) + 1;
+      res.writeHead(206, {
+        'Content-Range': `bytes ${start}-${end}/${fileSize}`,
+        'Accept-Ranges': 'bytes',
+        'Content-Length': chunkSize,
+        'Content-Type': mimeTypeFor(filePath),
+      });
+      const stream = fs.createReadStream(filePath, { start, end });
+      stream.pipe(res);
+    } else {
+      res.writeHead(200, {
+        'Content-Length': fileSize,
+        'Content-Type': mimeTypeFor(filePath),
+      });
+      fs.createReadStream(filePath).pipe(res);
+    }
+  });
+});
 app.get('/video-info', (req, res) => {
-  const filePath = resolvePreferredVideo();
+  const filePath = resolvePreferredVideo(1);
+  fs.stat(filePath, (err, stat) => {
+    if (err || !stat.isFile()) return res.json({ available: false });
+    return res.json({
+      available: true,
+      file: path.basename(filePath),
+      mime: mimeTypeFor(filePath),
+      size: stat.size,
+    });
+  });
+});
+
+// Camera 2 video info
+app.get('/video2-info', (req, res) => {
+  const filePath = resolvePreferredVideo(2);
   fs.stat(filePath, (err, stat) => {
     if (err || !stat.isFile()) return res.json({ available: false });
     return res.json({
@@ -798,10 +850,19 @@ app.get('/analytics/person_counts.json', (req, res) => {
   });
 });
 
+// Camera 2 analytics
+app.get('/analytics/person_counts2.json', (req, res) => {
+  const filePath = path.join(__dirname, 'analytics', 'person_counts2.json');
+  fs.readFile(filePath, 'utf8', (err, data) => {
+    if (err) return res.status(404).json({ error: 'Analytics not found' });
+    res.type('application/json').send(data);
+  });
+});
+
 // Background analysis task - runs Python analytics periodically
-function runAnalysisTask() {
-  const videoPath = resolvePreferredVideo();
-  const outputPath = path.join(__dirname, 'analytics', 'person_counts.json');
+function runAnalysisTask(camera = 1) {
+  const videoPath = resolvePreferredVideo(camera);
+  const outputPath = path.join(__dirname, 'analytics', camera === 1 ? 'person_counts.json' : 'person_counts2.json');
   const modelPath = path.join(__dirname, 'yolov8n.pt');
   
   // Check if video file exists
@@ -815,35 +876,60 @@ function runAnalysisTask() {
   ], { stdio: ['ignore', 'pipe', 'pipe'] });
 
   python.on('error', (err) => {
-    console.error('Analysis error:', err.message);
+    console.error(`Analysis error (Camera ${camera}):`, err.message);
   });
 }
 
-// Manual endpoint to trigger analysis
+// Manual endpoints to trigger analysis
 app.get('/analyze', (req, res) => {
-  runAnalysisTask();
-  res.json({ status: 'Analysis started' });
+  runAnalysisTask(1);
+  res.json({ status: 'Analysis started (Camera 1)' });
+});
+
+app.get('/analyze2', (req, res) => {
+  runAnalysisTask(2);
+  res.json({ status: 'Analysis started (Camera 2)' });
 });
 
 // Start background analysis every 5 seconds
-let analysisInterval = null;
+let analysisInterval1 = null;
+let analysisInterval2 = null;
 function startBackgroundAnalysis() {
   // Run initial analysis immediately
-  runAnalysisTask();
+  runAnalysisTask(1);
+  runAnalysisTask(2);
   
   // Then run every 5 seconds
-  analysisInterval = setInterval(runAnalysisTask, 5000);
-  console.log('Background analysis started (running every 5 seconds)');
+  analysisInterval1 = setInterval(() => runAnalysisTask(1), 5000);
+  analysisInterval2 = setInterval(() => runAnalysisTask(2), 5000);
+  console.log('Background analysis started for both cameras (running every 5 seconds)');
 }
 
-app.get('/', (req, res) => res.type('html').send(dashboardHtml));
+// Serve main dashboard from index.html
+app.get('/', (req, res) => {
+  fs.readFile(path.join(__dirname, 'public', 'index.html'), 'utf8', (err, data) => {
+    if (err) return res.type('html').send(dashboardHtml); // fallback to embedded HTML
+    res.type('html').send(data);
+  });
+});
+
+// Camera 2 page
+app.get('/camera2', (req, res) => {
+  fs.readFile(path.join(__dirname, 'public', 'camera2.html'), 'utf8', (err, data) => {
+    if (err) return res.status(404).send('Camera 2 page not found');
+    res.type('html').send(data);
+  });
+});
 
 // Stop analysis if port is shut down
 function stopBackgroundAnalysis() {
-  if (analysisInterval) {
-    clearInterval(analysisInterval);
-    console.log('Background analysis stopped');
+  if (analysisInterval1) {
+    clearInterval(analysisInterval1);
   }
+  if (analysisInterval2) {
+    clearInterval(analysisInterval2);
+  }
+  console.log('Background analysis stopped');
 }
 
 app.listen(port, () => {

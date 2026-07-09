@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>GrayVMS — Camera 2 Full View</title>
+    <style>
+      :root { color-scheme: dark; }
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 1rem;
+        background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 25%, #2d2d2d 50%, #1a1a1a 75%, #0a0a0a 100%);
+        color: #e8e8e8;
+        min-height: 100vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+      }
+      .page-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 0.75rem;
+      }
+      h1 {
+        margin: 0;
+        font-size: 1.55rem;
+        letter-spacing: 0.05em;
+        color: #d4af37;
+        text-shadow: 0 2px 10px rgba(212,175,55,0.3);
+        font-weight: 700;
+      }
+      .back-link {
+        color: #1ecbe1;
+        font-size: 0.78rem;
+        text-decoration: none;
+        border: 1px solid rgba(30,203,225,0.5);
+        padding: 0.2rem 0.6rem;
+        border-radius: 4px;
+        white-space: nowrap;
+        transition: background 0.2s;
+      }
+      .back-link:hover { background: rgba(30,203,225,0.1); }
+      .container {
+        max-width: 1600px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+      }
+      .content {
+        display: grid;
+        grid-template-columns: minmax(560px, 1.15fr) minmax(420px, 0.85fr);
+        gap: 0.9rem;
+        align-items: flex-start;
+      }
+      .video-panel .panel-box { padding: 0.75rem; }
+      .video-panel .trend-chart-wrap { margin-top: 0.45rem; }
+      .analytics-section {
+        min-width: 0;
+        transform: scale(0.85);
+        transform-origin: top left;
+        width: 117.5%;
+      }
+      .analytics-title { font-size: 1.05rem; margin: 0 0 0.55rem; letter-spacing: 0.06em; color: #d4af37; font-weight: 700; }
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 0.34rem;
+        margin-bottom: 0.42rem;
+      }
+      .stat-box {
+        background: linear-gradient(135deg, #1f1f1f 0%, #2a2a2a 100%);
+        border: 1.5px solid #d4af37;
+        border-radius: 7px;
+        padding: 0.3rem 0.25rem;
+        text-align: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(212,175,55,0.1);
+        overflow: hidden;
+        min-height: 42px;
+      }
+      .stat-label { font-size: 0.54rem; color: #999; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.14rem; font-weight: 500; line-height: 1.1; }
+      .stat-value { font-size: 0.82rem; color: #d4af37; font-weight: 700; font-family: 'Courier New', monospace; line-height: 1.15; }
+      .metric-good  { color: #22c55e !important; }
+      .metric-bad   { color: #ef4444 !important; }
+      .metric-neutral { color: #d4af37 !important; }
+      .info-box {
+        background: linear-gradient(135deg, #1f1f1f 0%, #2a2a2a 100%);
+        border: 1.5px solid #d4af37;
+        border-radius: 7px;
+        padding: 0.4rem 0.52rem;
+        margin-bottom: 0.42rem;
+      }
+      .info-label { font-size: 0.58rem; color: #999; margin-bottom: 0.1rem; text-transform: uppercase; letter-spacing: 0.05em; }
+      .info-value  { font-size: 0.72rem; color: #e8e8e8; word-break: break-all; font-family: 'Courier New', monospace; }
+      .metric-heading { color: #d4af37; font-size: 0.66rem; margin: 0.35rem 0 0.22rem; font-weight: 600; letter-spacing: 0.03em; }
+      .trend-caption { color: #d4af37; font-size: 0.68rem; margin-bottom: 0.2rem; font-weight: 600; }
+      .trend-legend { display: flex; gap: 0.55rem; margin-bottom: 0.25rem; font-size: 0.62rem; color: #bcbcbc; }
+      .trend-dot { display: inline-block; width: 8px; height: 8px; border-radius: 999px; margin-right: 0.35rem; }
+      .trend-canvas {
+        width: 100%;
+        height: 96px;
+        display: block;
+        border-radius: 8px;
+        background: #111;
+        border: 1px solid rgba(212,175,55,0.25);
+      }
+      .panel-box {
+        border: 2px solid #d4af37;
+        box-shadow: 0 8px 32px rgba(212,175,55,0.15), inset 0 1px 0 rgba(212,175,55,0.1);
+        border-radius: 12px;
+        background: linear-gradient(135deg, #1a1a1a 0%, #242424 100%);
+        padding: 1.2rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .panel-box::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #d4af37, transparent);
+      }
+      .stream {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        aspect-ratio: 16 / 9;
+        display: block;
+        border-radius: 8px;
+        background: #000;
+        border: 1px solid rgba(212,175,55,0.2);
+        object-fit: contain;
+      }
+      .video-wrap { position: relative; width: 100%; }
+      .bbox-overlay {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        border-radius: 8px;
+      }
+      @media (max-width: 1320px) { .stats-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+      @media (max-width: 1100px) {
+        .content { grid-template-columns: 1fr; }
+        .analytics-section { transform: none; width: 100%; }
+        .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="page-header">
+        <h1>📷 Camera 2 — Full View</h1>
+        <a href="/" class="back-link">← Dual View</a>
+      </div>
+      <div class="content">
+        <div class="video-panel">
+          <div class="panel-box">
+            <div class="video-wrap">
+              <video id="c2-video" class="stream" controls autoplay loop muted playsinline src="/video2.mp4"></video>
+              <canvas id="c2-bbox" class="bbox-overlay"></canvas>
+            </div>
+            <div class="trend-chart-wrap">
+              <div class="trend-caption">📉 Crowd Trend (Live)</div>
+              <div class="trend-legend">
+                <span><span class="trend-dot" style="background:#d4af37;"></span>People Count</span>
+                <span><span class="trend-dot" style="background:#1ecbe1;"></span>Crowd Density %</span>
+              </div>
+              <canvas id="c2-trend" class="trend-canvas"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="analytics-section">
+          <div class="analytics-title">📊 Camera 2 Analytics</div>
+          <div class="metric-heading">👤 People Detection</div>
+          <div class="stats-grid">
+            <div class="stat-box"><div class="stat-label">Max People</div><div class="stat-value" id="c2-max">-</div></div>
+            <div class="stat-box"><div class="stat-label">Avg People</div><div class="stat-value" id="c2-average">-</div></div>
+            <div class="stat-box"><div class="stat-label">Min People</div><div class="stat-value" id="c2-min">-</div></div>
+            <div class="stat-box"><div class="stat-label">Sampled</div><div class="stat-value" id="c2-sampled">-</div></div>
+          </div>
+          <div class="metric-heading">🎯 Object Detection</div>
+          <div class="stats-grid">
+            <div class="stat-box"><div class="stat-label">Max Objects</div><div class="stat-value" id="c2-max-objects">-</div></div>
+            <div class="stat-box"><div class="stat-label">Avg Objects</div><div class="stat-value" id="c2-avg-objects">-</div></div>
+            <div class="stat-box"><div class="stat-label">Min Objects</div><div class="stat-value" id="c2-min-objects">-</div></div>
+            <div class="stat-box"><div class="stat-label">Motion %</div><div class="stat-value" id="c2-motion-percent">-</div></div>
+          </div>
+          <div class="metric-heading">👥 Crowd Analysis</div>
+          <div class="stats-grid">
+            <div class="stat-box"><div class="stat-label">Crowd Frames</div><div class="stat-value" id="c2-crowd-frames">-</div></div>
+            <div class="stat-box"><div class="stat-label">Crowd %</div><div class="stat-value" id="c2-crowd-percent">-</div></div>
+            <div class="stat-box"><div class="stat-label">Max Crowd Size</div><div class="stat-value" id="c2-max-crowd">-</div></div>
+            <div class="stat-box"><div class="stat-label">Avg Crowd Size</div><div class="stat-value" id="c2-avg-crowd">-</div></div>
+            <div class="stat-box"><div class="stat-label">Avg Crowd Score</div><div class="stat-value" id="c2-avg-crowd-score">-</div></div>
+            <div class="stat-box"><div class="stat-label">Peak Crowd Score</div><div class="stat-value" id="c2-peak-crowd-score">-</div></div>
+          </div>
+          <div class="metric-heading">📊 Density Analysis</div>
+          <div class="stats-grid">
+            <div class="stat-box"><div class="stat-label">Max Density</div><div class="stat-value" id="c2-max-density">-</div></div>
+            <div class="stat-box"><div class="stat-label">Avg Density</div><div class="stat-value" id="c2-avg-density">-</div></div>
+          </div>
+          <div class="metric-heading">🔍 Motion Analysis</div>
+          <div class="stats-grid">
+            <div class="stat-box"><div class="stat-label">Frames w/ Motion</div><div class="stat-value" id="c2-motion-frames">-</div></div>
+            <div class="stat-box"><div class="stat-label">Total Duration</div><div class="stat-value" id="c2-duration">-</div></div>
+            <div class="stat-box"><div class="stat-label">FPS</div><div class="stat-value" id="c2-fps">-</div></div>
+            <div class="stat-box"><div class="stat-label">Frame Count</div><div class="stat-value" id="c2-frame-count">-</div></div>
+          </div>
+          <div class="metric-heading">📈 Advanced Analytics</div>
+          <div class="stats-grid">
+            <div class="stat-box"><div class="stat-label">Median People</div><div class="stat-value" id="c2-median">-</div></div>
+            <div class="stat-box"><div class="stat-label">People Std Dev</div><div class="stat-value" id="c2-stddev">-</div></div>
+            <div class="stat-box"><div class="stat-label">Peak Time</div><div class="stat-value" id="c2-peak-time">-</div></div>
+            <div class="stat-box"><div class="stat-label">People Change/s</div><div class="stat-value" id="c2-change-sec">-</div></div>
+            <div class="stat-box"><div class="stat-label">Rapid Change Frames</div><div class="stat-value" id="c2-rapid-frames">-</div></div>
+            <div class="stat-box"><div class="stat-label">Unique Obj Types</div><div class="stat-value" id="c2-unique-types">-</div></div>
+            <div class="stat-box"><div class="stat-label">Avg Obj Diversity</div><div class="stat-value" id="c2-diversity">-</div></div>
+            <div class="stat-box"><div class="stat-label">Crowd Events</div><div class="stat-value" id="c2-crowd-events">-</div></div>
+            <div class="stat-box"><div class="stat-label">Longest Crowd</div><div class="stat-value" id="c2-longest-crowd">-</div></div>
+            <div class="stat-box"><div class="stat-label">People Trend</div><div class="stat-value" id="c2-people-trend">-</div></div>
+            <div class="stat-box"><div class="stat-label">Density Trend</div><div class="stat-value" id="c2-density-trend">-</div></div>
+            <div class="stat-box"><div class="stat-label">People Slope</div><div class="stat-value" id="c2-people-slope">-</div></div>
+            <div class="stat-box"><div class="stat-label">Density Slope</div><div class="stat-value" id="c2-density-slope">-</div></div>
+          </div>
+          <div class="info-box">
+            <div class="info-label">Top Detected Objects</div>
+            <div class="info-value" id="c2-top-objects">-</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let latestAnalytics = null;
+
+      function el(id) { return document.getElementById('c2-' + id); }
+
+      function setMetricState(id, numericValue, averageValue) {
+        const e = el(id);
+        if (!e) return;
+        e.classList.remove('metric-good', 'metric-bad', 'metric-neutral');
+        const v = Number(numericValue), avg = Number(averageValue);
+        if (!Number.isFinite(v) || !Number.isFinite(avg) || avg <= 0) { e.classList.add('metric-neutral'); return; }
+        if (v > avg) { e.classList.add('metric-good'); return; }
+        if (v < avg * 0.5) { e.classList.add('metric-bad'); return; }
+        e.classList.add('metric-neutral');
+      }
+
+      function drawSeries(ctx, points, color, lw, pad, cW, cH) {
+        if (!points || !points.length) return;
+        ctx.beginPath(); ctx.lineWidth = lw; ctx.strokeStyle = color;
+        points.forEach((p, i) => {
+          const x = pad + (i * cW) / Math.max(1, points.length - 1);
+          const y = pad + cH - (p * cH);
+          i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        });
+        ctx.stroke();
+      }
+
+      function drawCrowdTrend(data) {
+        const canvas = document.getElementById('c2-trend');
+        if (!canvas || !data || !Array.isArray(data.person_counts) || !data.person_counts.length) return;
+        const w = Math.max(320, Math.floor(canvas.clientWidth || 320)), h = 96;
+        if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; }
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+        const pad = 12, cW = w - pad * 2, cH = h - pad * 2;
+        const pts = data.person_counts;
+        const pVals = pts.map(i => Number(i.person_count) || 0);
+        const dVals = pts.map(i => Number(i.crowd_density) || 0);
+        const maxP = Math.max(1, ...pVals), maxD = Math.max(1, ...dVals);
+        ctx.clearRect(0, 0, w, h);
+        ctx.strokeStyle = 'rgba(255,255,255,0.08)'; ctx.lineWidth = 1;
+        for (let i = 0; i <= 4; i++) {
+          const y = pad + (cH * i) / 4;
+          ctx.beginPath(); ctx.moveTo(pad, y); ctx.lineTo(pad + cW, y); ctx.stroke();
+        }
+        drawSeries(ctx, dVals.map(v => v / maxD), '#1ecbe1', 2, pad, cW, cH);
+        drawSeries(ctx, pVals.map(v => v / maxP), '#d4af37', 2.5, pad, cW, cH);
+      }
+
+      function getNearestSample(samples, sec) {
+        if (!Array.isArray(samples) || !samples.length) return null;
+        let best = samples[0], bestD = Math.abs((samples[0].timestamp_seconds || 0) - sec);
+        for (let i = 1; i < samples.length; i++) {
+          const d = Math.abs((samples[i].timestamp_seconds || 0) - sec);
+          if (d < bestD) { best = samples[i]; bestD = d; }
+        }
+        return best;
+      }
+
+      function drawBoxes() {
+        const video = document.getElementById('c2-video'), canvas = document.getElementById('c2-bbox');
+        if (!video || !canvas) return;
+        const w = Math.max(1, Math.floor(video.clientWidth || 1)), h = Math.max(1, Math.floor(video.clientHeight || 1));
+        if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; }
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+        ctx.clearRect(0, 0, w, h);
+        if (!latestAnalytics || !Array.isArray(latestAnalytics.person_counts)) return;
+        const nearest = getNearestSample(latestAnalytics.person_counts, Number(video.currentTime || 0));
+        if (!nearest || !Array.isArray(nearest.person_boxes)) return;
+        ctx.lineWidth = 2; ctx.strokeStyle = '#34d399'; ctx.fillStyle = 'rgba(52,211,153,0.16)'; ctx.font = '11px monospace';
+        nearest.person_boxes.forEach(box => {
+          const x1 = (Number(box.x1) || 0) * w, y1 = (Number(box.y1) || 0) * h;
+          const x2 = (Number(box.x2) || 0) * w, y2 = (Number(box.y2) || 0) * h;
+          const bw = Math.max(0, x2 - x1), bh = Math.max(0, y2 - y1);
+          if (bw < 2 || bh < 2) return;
+          ctx.fillRect(x1, y1, bw, bh); ctx.strokeRect(x1, y1, bw, bh);
+          const label = 'person ' + Number(box.conf || 0).toFixed(2);
+          const ly = Math.max(11, y1 - 4);
+          ctx.fillStyle = 'rgba(0,0,0,0.65)';
+          ctx.fillRect(x1, ly - 11, ctx.measureText(label).width + 6, 12);
+          ctx.fillStyle = '#86efac'; ctx.fillText(label, x1 + 3, ly - 2);
+          ctx.fillStyle = 'rgba(52,211,153,0.16)';
+        });
+      }
+
+      async function refresh() {
+        try {
+          const res = await fetch('/analytics/person_counts2.json');
+          if (!res.ok) return;
+          const data = await res.json();
+          const set = (id, val) => { const e = el(id); if (e) e.textContent = (val ?? '-'); };
+
+          set('sampled', data.sampled_frames);
+          set('max', data.max_people); set('average', data.average_people); set('min', data.min_people);
+          setMetricState('max', data.max_people, data.average_people);
+          setMetricState('min', data.min_people, data.average_people);
+          setMetricState('average', data.average_people, data.average_people);
+
+          set('max-objects', data.max_objects); set('avg-objects', data.average_objects); set('min-objects', data.min_objects);
+          set('motion-percent', (data.motion_percentage ?? 0) + '%');
+          setMetricState('max-objects', data.max_objects, data.average_objects);
+          setMetricState('min-objects', data.min_objects, data.average_objects);
+          setMetricState('avg-objects', data.average_objects, data.average_objects);
+
+          const ca = data.crowd_analysis || {};
+          set('crowd-frames', ca.total_crowd_frames); set('crowd-percent', (ca.crowd_percentage ?? 0) + '%');
+          set('max-crowd', ca.max_crowd_size); set('avg-crowd', ca.average_crowd_size);
+          set('avg-crowd-score', ca.average_crowd_score); set('peak-crowd-score', ca.peak_crowd_score);
+          setMetricState('max-crowd', ca.max_crowd_size, ca.average_crowd_size);
+          setMetricState('avg-crowd', ca.average_crowd_size, ca.average_crowd_size);
+          setMetricState('peak-crowd-score', ca.peak_crowd_score, ca.average_crowd_score);
+          setMetricState('avg-crowd-score', ca.average_crowd_score, ca.average_crowd_score);
+
+          const da = data.density_analysis || {};
+          set('max-density', (da.max_density ?? 0) + '%'); set('avg-density', (da.average_density ?? 0) + '%');
+          setMetricState('max-density', da.max_density, da.average_density);
+          setMetricState('avg-density', da.average_density, da.average_density);
+
+          set('motion-frames', data.frames_with_motion); set('duration', (data.duration_seconds ?? 0) + 's');
+          set('fps', data.fps); set('frame-count', data.frame_count);
+
+          const oa = data.object_analysis || {};
+          set('top-objects', (oa.top_detected_objects || []).map(i => i.type + ':' + i.count).join(', ') || 'N/A');
+          set('median', data.median_people); set('stddev', data.people_std_dev);
+          set('peak-time', (data.peak_occupancy_time_seconds ?? 0) + 's');
+          set('change-sec', data.average_people_change_per_second);
+          set('rapid-frames', data.rapid_change_frames);
+          set('unique-types', oa.unique_object_types); set('diversity', oa.average_object_type_diversity);
+          set('crowd-events', ca.crowd_event_count); set('longest-crowd', (ca.longest_crowd_event_seconds ?? 0) + 's');
+
+          const trend = data.crowd_trend || {};
+          set('people-trend', trend.people_trend_direction); set('density-trend', trend.density_trend_direction);
+          set('people-slope', trend.people_trend_slope_per_sample); set('density-slope', trend.density_trend_slope_per_sample);
+          setMetricState('median', data.median_people, data.average_people);
+
+          latestAnalytics = data;
+          drawBoxes();
+          drawCrowdTrend(data);
+        } catch (e) {}
+      }
+
+      refresh();
+      setInterval(refresh, 5000);
+      const video = document.getElementById('c2-video');
+      if (video) {
+        video.addEventListener('timeupdate', drawBoxes);
+        video.addEventListener('seeked', drawBoxes);
+        video.addEventListener('loadedmetadata', drawBoxes);
+      }
+      window.addEventListener('resize', () => { refresh(); drawBoxes(); });
+    </script>
+  </body>
+</html>
