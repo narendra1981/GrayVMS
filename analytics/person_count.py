@@ -31,8 +31,8 @@ DEFAULT_IMGSZ = 416
 DEFAULT_FRAME_STRIDE = 2
 
 # Crowd detection parameters
-CROWD_DENSITY_THRESHOLD = 0.15  # If density > 15%, consider it a crowd
-CENTROID_DISTANCE_THRESHOLD = 50  # pixels, for tracking consistency
+CROWD_DENSITY_THRESHOLD = 8.0  # percent of frame area covered by person boxes
+MIN_PEOPLE_FOR_CROWD = 4
 TEMPORAL_WINDOW = 5  # frames to consider for temporal consistency
 
 
@@ -105,32 +105,74 @@ def calculate_iou(box1: np.ndarray, box2: np.ndarray) -> float:
     return 0
 
 
-def detect_crowd_density(boxes: List[np.ndarray], frame_shape: Tuple[int, int]) -> Tuple[float, bool]:
-    """
-    Detect crowd density and return density percentage and crowd flag.
-    Uses clustering to find dense regions.
-    """
-    if len(boxes) < 3:
-        return 0.0, False
-    
+def detect_crowd_density(boxes: List[np.ndarray], frame_shape: Tuple[int, int]) -> Dict[str, float]:
+    """Estimate crowding with density + proximity + overlap signals."""
     frame_height, frame_width = frame_shape[:2]
-    frame_area = frame_height * frame_width
+    frame_area = max(1, frame_height * frame_width)
+    person_count = len(boxes)
+
+    if person_count == 0:
+        return {
+            "density": 0.0,
+            "proximity_ratio": 0.0,
+            "overlap_ratio": 0.0,
+            "crowd_score": 0.0,
+            "is_crowd": False,
+            "crowd_level": "none",
+        }
+
     total_box_area = sum(calculate_box_area(box) for box in boxes)
-    density = (total_box_area / frame_area) * 100
-    
-    # Check spatial clustering - if people are grouped tightly
-    is_crowd = False
-    if len(boxes) >= 5:
+    density = (total_box_area / frame_area) * 100.0
+
+    proximity_ratio = 0.0
+    if person_count > 1:
         centroids = np.array([calculate_centroid(box) for box in boxes])
-        # Calculate average distance between centroids
-        if len(centroids) > 1:
-            distances = cdist(centroids, centroids).flatten()
-            distances = distances[distances > 0]
-            avg_distance = np.mean(distances) if len(distances) > 0 else 100
-            # If people are close together on average, it's a crowd
-            is_crowd = avg_distance < CENTROID_DISTANCE_THRESHOLD and density > CROWD_DENSITY_THRESHOLD
-    
-    return density, is_crowd
+        distance_matrix = cdist(centroids, centroids)
+        np.fill_diagonal(distance_matrix, np.inf)
+        nearest_distances = np.min(distance_matrix, axis=1)
+        frame_diagonal = np.sqrt((frame_width ** 2) + (frame_height ** 2))
+        adaptive_distance = frame_diagonal * 0.09
+        close_neighbors = np.sum(nearest_distances < adaptive_distance)
+        proximity_ratio = close_neighbors / person_count
+
+    overlap_ratio = 0.0
+    if person_count > 1:
+        overlap_hits = 0
+        pair_count = 0
+        for i in range(person_count):
+            for j in range(i + 1, person_count):
+                pair_count += 1
+                if calculate_iou(boxes[i], boxes[j]) > 0.05:
+                    overlap_hits += 1
+        overlap_ratio = (overlap_hits / pair_count) if pair_count else 0.0
+
+    density_component = min(density / 20.0, 1.0)
+    size_component = min(person_count / 12.0, 1.0)
+    crowd_score = (
+        (0.40 * density_component)
+        + (0.30 * proximity_ratio)
+        + (0.20 * min(overlap_ratio * 2.0, 1.0))
+        + (0.10 * size_component)
+    )
+
+    is_crowd = bool(person_count >= MIN_PEOPLE_FOR_CROWD and (density >= CROWD_DENSITY_THRESHOLD or crowd_score >= 0.5))
+    if not is_crowd:
+        crowd_level = "none"
+    elif crowd_score >= 0.75:
+        crowd_level = "high"
+    elif crowd_score >= 0.55:
+        crowd_level = "medium"
+    else:
+        crowd_level = "low"
+
+    return {
+        "density": round(float(density), 2),
+        "proximity_ratio": round(float(proximity_ratio), 3),
+        "overlap_ratio": round(float(overlap_ratio), 3),
+        "crowd_score": round(float(crowd_score), 3),
+        "is_crowd": is_crowd,
+        "crowd_level": crowd_level,
+    }
 
 
 def count_persons_with_crowd_detection(
@@ -185,7 +227,7 @@ def count_persons_with_crowd_detection(
     person_boxes = [item['box'] for item in all_boxes if item['names'].get(item['cls']) == 'person']
     
     # Analyze crowd density
-    density, is_crowd = detect_crowd_density(person_boxes, frame.shape)
+    crowd_metrics = detect_crowd_density(person_boxes, frame.shape)
     
     # Group by class
     class_boxes = {}
@@ -213,10 +255,14 @@ def count_persons_with_crowd_detection(
     
     # Crowd-specific metrics
     crowd_info = {
-        'density': round(density, 2),
-        'is_crowd': bool(is_crowd),
-        'crowd_size': persons if is_crowd else 0,
-        'crowd_confidence': round(density / 100 if is_crowd else 0, 2)  # 0-1 confidence in crowd detection
+        'density': crowd_metrics['density'],
+        'is_crowd': crowd_metrics['is_crowd'],
+        'crowd_size': persons if crowd_metrics['is_crowd'] else 0,
+        'crowd_confidence': round(crowd_metrics['crowd_score'], 2),
+        'crowd_score': crowd_metrics['crowd_score'],
+        'crowd_level': crowd_metrics['crowd_level'],
+        'proximity_ratio': crowd_metrics['proximity_ratio'],
+        'overlap_ratio': crowd_metrics['overlap_ratio'],
     }
     
     return persons, total_objects, object_counts, crowd_info
@@ -246,6 +292,8 @@ def analyze_video(input_path: str, output_path: str, model_name: str = DEFAULT_M
     all_crowd_sizes = []
     object_totals: Dict[str, int] = {}
     object_type_diversity: List[int] = []
+    crowd_score_history: List[float] = []
+    crowd_level_totals: Dict[str, int] = {"none": 0, "low": 0, "medium": 0, "high": 0}
     
     while True:
         ok, frame = cap.read()
@@ -268,12 +316,28 @@ def analyze_video(input_path: str, output_path: str, model_name: str = DEFAULT_M
         # Detect motion between frames
         motion_detected = bool(detect_motion(frame, prev_frame))
         
-        # Track crowd statistics
-        if crowd_info['is_crowd']:
+        crowd_score_history.append(float(crowd_info.get("crowd_score", 0.0)))
+        if len(crowd_score_history) > TEMPORAL_WINDOW:
+            crowd_score_history.pop(0)
+
+        smoothed_crowd_score = float(np.mean(crowd_score_history)) if crowd_score_history else 0.0
+        recent_crowd_votes = sum(1 for score in crowd_score_history if score >= 0.5)
+        stable_crowd = recent_crowd_votes >= max(2, TEMPORAL_WINDOW // 2)
+        smoothed_is_crowd = bool(crowd_info['is_crowd'] and stable_crowd)
+        recent_crowd_sizes = [item["person_count"] for item in counts[-(TEMPORAL_WINDOW - 1):] if item.get("is_crowd")]
+        if smoothed_is_crowd:
+            smoothed_crowd_size = int(round(np.mean(recent_crowd_sizes))) if recent_crowd_sizes else int(persons)
+        else:
+            smoothed_crowd_size = 0
+
+        if smoothed_is_crowd:
             crowd_frames += 1
-            crowd_size = crowd_info['crowd_size']
+            crowd_size = smoothed_crowd_size
             all_crowd_sizes.append(crowd_size)
             max_crowd_size = max(max_crowd_size, crowd_size)
+
+        crowd_level = crowd_info.get("crowd_level", "none") if smoothed_is_crowd else "none"
+        crowd_level_totals[crowd_level] = crowd_level_totals.get(crowd_level, 0) + 1
 
         for obj_name, count in object_counts.items():
             object_totals[obj_name] = object_totals.get(obj_name, 0) + int(count)
@@ -294,8 +358,13 @@ def analyze_video(input_path: str, output_path: str, model_name: str = DEFAULT_M
             "object_type_diversity": object_type_count,
             "motion_detected": motion_detected,
             "crowd_density": crowd_info['density'],
-            "is_crowd": crowd_info['is_crowd'],
-            "crowd_size": crowd_info['crowd_size'],
+            "is_crowd": smoothed_is_crowd,
+            "crowd_size": smoothed_crowd_size if smoothed_is_crowd else 0,
+            "crowd_level": crowd_level,
+            "crowd_score": round(smoothed_crowd_score, 3),
+            "crowd_score_raw": crowd_info.get("crowd_score", 0),
+            "crowd_proximity_ratio": crowd_info.get("proximity_ratio", 0),
+            "crowd_overlap_ratio": crowd_info.get("overlap_ratio", 0),
         })
         
         prev_frame = frame.copy()
@@ -384,6 +453,9 @@ def analyze_video(input_path: str, output_path: str, model_name: str = DEFAULT_M
             "crowd_event_count": crowd_event_count,
             "longest_crowd_event_frames": longest_crowd_event,
             "longest_crowd_event_seconds": round((longest_crowd_event / samples_per_second), 2) if samples_per_second else 0,
+            "average_crowd_score": round(float(np.mean([item.get("crowd_score", 0) for item in counts])), 3) if counts else 0,
+            "peak_crowd_score": round(float(max((item.get("crowd_score", 0) for item in counts), default=0)), 3),
+            "crowd_level_distribution": crowd_level_totals,
         },
         "density_analysis": {
             "max_density": round(max((item.get("crowd_density", 0) for item in counts), default=0), 2),

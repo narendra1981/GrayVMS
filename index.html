@@ -35,16 +35,6 @@
       .analytics h2 { margin: 0 0 0.5rem; font-size: 1.1rem; }
       .analytics p { margin: 0.25rem 0; }
       .analytics strong { display: inline-block; min-width: 140px; }
-      .json-box {
-        margin-top: 0.75rem;
-        padding: 0.75rem;
-        background: #111;
-        color: #f8f8f8;
-        border-radius: 6px;
-        overflow-x: auto;
-        font-size: 0.9rem;
-        white-space: pre-wrap;
-      }
     </style>
   </head>
   <body>
@@ -66,7 +56,6 @@
         <p><strong>Max people:</strong> <span id="analytics-max">-</span></p>
         <p><strong>Average people:</strong> <span id="analytics-average">-</span></p>
         <p><strong>Min people:</strong> <span id="analytics-min">-</span></p>
-        <div class="json-box" id="analytics-json">Loading JSON data...</div>
       </div>
     </div>
 
@@ -95,7 +84,6 @@
           document.getElementById('analytics-max').textContent = data.max_people ?? '-';
           document.getElementById('analytics-average').textContent = data.average_people ?? '-';
           document.getElementById('analytics-min').textContent = data.min_people ?? '-';
-          document.getElementById('analytics-json').textContent = JSON.stringify(data, null, 2);
         } catch (e) {
           /* ignore */
         }

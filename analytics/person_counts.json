@@ -17,9 +17,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": false,
-      "crowd_density": 44.0099983215332,
+      "crowd_density": 44.01,
       "is_crowd": false,
-      "crowd_size": 0
+      "crowd_size": 0,
+      "crowd_level": "none",
+      "crowd_score": 0.754,
+      "crowd_score_raw": 0.754,
+      "crowd_proximity_ratio": 0.857,
+      "crowd_overlap_ratio": 0.095
     },
     {
       "frame": 2,
@@ -32,9 +37,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 44.790000915527344,
+      "crowd_density": 44.79,
       "is_crowd": false,
-      "crowd_size": 0
+      "crowd_size": 0,
+      "crowd_level": "none",
+      "crowd_score": 0.602,
+      "crowd_score_raw": 0.45,
+      "crowd_proximity_ratio": 0.0,
+      "crowd_overlap_ratio": 0.0
     },
     {
       "frame": 4,
@@ -47,9 +57,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 50.56999969482422,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 50.57,
+      "is_crowd": true,
+      "crowd_size": 9,
+      "crowd_level": "high",
+      "crowd_score": 0.663,
+      "crowd_score_raw": 0.786,
+      "crowd_proximity_ratio": 0.889,
+      "crowd_overlap_ratio": 0.111
     },
     {
       "frame": 6,
@@ -62,9 +77,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 42.31999969482422,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 42.32,
+      "is_crowd": true,
+      "crowd_size": 9,
+      "crowd_level": "medium",
+      "crowd_score": 0.642,
+      "crowd_score_raw": 0.577,
+      "crowd_proximity_ratio": 0.333,
+      "crowd_overlap_ratio": 0.067
     },
     {
       "frame": 8,
@@ -77,9 +97,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 42.93000030517578,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 42.93,
+      "is_crowd": true,
+      "crowd_size": 8,
+      "crowd_level": "low",
+      "crowd_score": 0.603,
+      "crowd_score_raw": 0.45,
+      "crowd_proximity_ratio": 0.0,
+      "crowd_overlap_ratio": 0.0
     },
     {
       "frame": 10,
@@ -92,9 +117,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 49.93000030517578,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 49.93,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "medium",
+      "crowd_score": 0.576,
+      "crowd_score_raw": 0.617,
+      "crowd_proximity_ratio": 0.5,
+      "crowd_overlap_ratio": 0.0
     },
     {
       "frame": 12,
@@ -107,9 +137,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 47.209999084472656,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 47.21,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "medium",
+      "crowd_score": 0.599,
+      "crowd_score_raw": 0.563,
+      "crowd_proximity_ratio": 0.286,
+      "crowd_overlap_ratio": 0.048
     },
     {
       "frame": 14,
@@ -122,9 +157,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 49.20000076293945,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 49.2,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "medium",
+      "crowd_score": 0.58,
+      "crowd_score_raw": 0.692,
+      "crowd_proximity_ratio": 0.75,
+      "crowd_overlap_ratio": 0.0
     },
     {
       "frame": 16,
@@ -137,9 +177,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 48.560001373291016,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 48.56,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "medium",
+      "crowd_score": 0.59,
+      "crowd_score_raw": 0.63,
+      "crowd_proximity_ratio": 0.571,
+      "crowd_overlap_ratio": 0.0
     },
     {
       "frame": 18,
@@ -152,9 +197,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 47.790000915527344,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 47.79,
+      "is_crowd": true,
+      "crowd_size": 8,
+      "crowd_level": "medium",
+      "crowd_score": 0.626,
+      "crowd_score_raw": 0.63,
+      "crowd_proximity_ratio": 0.571,
+      "crowd_overlap_ratio": 0.0
     },
     {
       "frame": 20,
@@ -167,9 +217,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 47.97999954223633,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 47.98,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "low",
+      "crowd_score": 0.598,
+      "crowd_score_raw": 0.477,
+      "crowd_proximity_ratio": 0.0,
+      "crowd_overlap_ratio": 0.067
     },
     {
       "frame": 22,
@@ -182,9 +237,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 48.86000061035156,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 48.86,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "medium",
+      "crowd_score": 0.609,
+      "crowd_score_raw": 0.617,
+      "crowd_proximity_ratio": 0.5,
+      "crowd_overlap_ratio": 0.0
     },
     {
       "frame": 24,
@@ -197,9 +257,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 47.900001525878906,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 47.9,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "medium",
+      "crowd_score": 0.592,
+      "crowd_score_raw": 0.608,
+      "crowd_proximity_ratio": 0.375,
+      "crowd_overlap_ratio": 0.071
     },
     {
       "frame": 26,
@@ -213,9 +278,14 @@
       },
       "object_type_diversity": 2,
       "motion_detected": true,
-      "crowd_density": 49.95000076293945,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 49.95,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "high",
+      "crowd_score": 0.617,
+      "crowd_score_raw": 0.753,
+      "crowd_proximity_ratio": 0.778,
+      "crowd_overlap_ratio": 0.111
     },
     {
       "frame": 28,
@@ -228,9 +298,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 49.689998626708984,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 49.69,
+      "is_crowd": true,
+      "crowd_size": 8,
+      "crowd_level": "medium",
+      "crowd_score": 0.628,
+      "crowd_score_raw": 0.683,
+      "crowd_proximity_ratio": 0.625,
+      "crowd_overlap_ratio": 0.071
     },
     {
       "frame": 30,
@@ -243,9 +318,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 47.869998931884766,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 47.87,
+      "is_crowd": true,
+      "crowd_size": 8,
+      "crowd_level": "medium",
+      "crowd_score": 0.658,
+      "crowd_score_raw": 0.631,
+      "crowd_proximity_ratio": 0.5,
+      "crowd_overlap_ratio": 0.036
     },
     {
       "frame": 32,
@@ -258,9 +338,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 45.83000183105469,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 45.83,
+      "is_crowd": true,
+      "crowd_size": 8,
+      "crowd_level": "medium",
+      "crowd_score": 0.67,
+      "crowd_score_raw": 0.673,
+      "crowd_proximity_ratio": 0.714,
+      "crowd_overlap_ratio": 0.0
     },
     {
       "frame": 34,
@@ -273,9 +358,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 42.02000045776367,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 42.02,
+      "is_crowd": true,
+      "crowd_size": 8,
+      "crowd_level": "medium",
+      "crowd_score": 0.658,
+      "crowd_score_raw": 0.55,
+      "crowd_proximity_ratio": 0.333,
+      "crowd_overlap_ratio": 0.0
     },
     {
       "frame": 36,
@@ -288,9 +378,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 37.4900016784668,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 37.49,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "low",
+      "crowd_score": 0.594,
+      "crowd_score_raw": 0.433,
+      "crowd_proximity_ratio": 0.0,
+      "crowd_overlap_ratio": 0.0
     },
     {
       "frame": 38,
@@ -303,9 +398,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 39.130001068115234,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 39.13,
+      "is_crowd": true,
+      "crowd_size": 6,
+      "crowd_level": "low",
+      "crowd_score": 0.546,
+      "crowd_score_raw": 0.442,
+      "crowd_proximity_ratio": 0.0,
+      "crowd_overlap_ratio": 0.0
     },
     {
       "frame": 40,
@@ -318,9 +418,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 37.95000076293945,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 37.95,
+      "is_crowd": true,
+      "crowd_size": 6,
+      "crowd_level": "low",
+      "crowd_score": 0.506,
+      "crowd_score_raw": 0.433,
+      "crowd_proximity_ratio": 0.0,
+      "crowd_overlap_ratio": 0.0
     },
     {
       "frame": 42,
@@ -333,9 +438,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 45.20000076293945,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 45.2,
+      "is_crowd": true,
+      "crowd_size": 5,
+      "crowd_level": "medium",
+      "crowd_score": 0.482,
+      "crowd_score_raw": 0.55,
+      "crowd_proximity_ratio": 0.333,
+      "crowd_overlap_ratio": 0.0
     },
     {
       "frame": 44,
@@ -348,9 +458,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 46.7400016784668,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 46.74,
+      "is_crowd": true,
+      "crowd_size": 5,
+      "crowd_level": "medium",
+      "crowd_score": 0.519,
+      "crowd_score_raw": 0.735,
+      "crowd_proximity_ratio": 0.75,
+      "crowd_overlap_ratio": 0.107
     },
     {
       "frame": 46,
@@ -363,9 +478,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 47.040000915527344,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 47.04,
+      "is_crowd": true,
+      "crowd_size": 6,
+      "crowd_level": "medium",
+      "crowd_score": 0.556,
+      "crowd_score_raw": 0.622,
+      "crowd_proximity_ratio": 0.375,
+      "crowd_overlap_ratio": 0.107
     },
     {
       "frame": 48,
@@ -378,9 +498,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 43.02000045776367,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 43.02,
+      "is_crowd": true,
+      "crowd_size": 6,
+      "crowd_level": "medium",
+      "crowd_score": 0.581,
+      "crowd_score_raw": 0.563,
+      "crowd_proximity_ratio": 0.286,
+      "crowd_overlap_ratio": 0.048
     },
     {
       "frame": 50,
@@ -393,9 +518,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 41.38999938964844,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 41.39,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "low",
+      "crowd_score": 0.584,
+      "crowd_score_raw": 0.45,
+      "crowd_proximity_ratio": 0.0,
+      "crowd_overlap_ratio": 0.0
     },
     {
       "frame": 52,
@@ -408,9 +538,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 38.779998779296875,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 38.78,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "medium",
+      "crowd_score": 0.594,
+      "crowd_score_raw": 0.602,
+      "crowd_proximity_ratio": 0.4,
+      "crowd_overlap_ratio": 0.1
     },
     {
       "frame": 54,
@@ -423,9 +558,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 46.369998931884766,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 46.37,
+      "is_crowd": true,
+      "crowd_size": 6,
+      "crowd_level": "medium",
+      "crowd_score": 0.585,
+      "crowd_score_raw": 0.686,
+      "crowd_proximity_ratio": 0.667,
+      "crowd_overlap_ratio": 0.028
     },
     {
       "frame": 56,
@@ -438,9 +578,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 39.900001525878906,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 39.9,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "low",
+      "crowd_score": 0.556,
+      "crowd_score_raw": 0.477,
+      "crowd_proximity_ratio": 0.0,
+      "crowd_overlap_ratio": 0.067
     },
     {
       "frame": 58,
@@ -453,9 +598,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 38.209999084472656,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 38.21,
+      "is_crowd": true,
+      "crowd_size": 6,
+      "crowd_level": "medium",
+      "crowd_score": 0.555,
+      "crowd_score_raw": 0.562,
+      "crowd_proximity_ratio": 0.4,
+      "crowd_overlap_ratio": 0.0
     },
     {
       "frame": 60,
@@ -468,9 +618,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 41.41999816894531,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 41.42,
+      "is_crowd": true,
+      "crowd_size": 6,
+      "crowd_level": "medium",
+      "crowd_score": 0.585,
+      "crowd_score_raw": 0.6,
+      "crowd_proximity_ratio": 0.5,
+      "crowd_overlap_ratio": 0.0
     },
     {
       "frame": 62,
@@ -483,9 +638,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 48.060001373291016,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 48.06,
+      "is_crowd": true,
+      "crowd_size": 6,
+      "crowd_level": "medium",
+      "crowd_score": 0.591,
+      "crowd_score_raw": 0.631,
+      "crowd_proximity_ratio": 0.5,
+      "crowd_overlap_ratio": 0.036
     },
     {
       "frame": 64,
@@ -498,9 +658,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 45.41999816894531,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 45.42,
+      "is_crowd": true,
+      "crowd_size": 6,
+      "crowd_level": "medium",
+      "crowd_score": 0.592,
+      "crowd_score_raw": 0.692,
+      "crowd_proximity_ratio": 0.714,
+      "crowd_overlap_ratio": 0.048
     },
     {
       "frame": 66,
@@ -514,9 +679,14 @@
       },
       "object_type_diversity": 2,
       "motion_detected": true,
-      "crowd_density": 0.0,
+      "crowd_density": 36.38,
       "is_crowd": false,
-      "crowd_size": 0
+      "crowd_size": 0,
+      "crowd_level": "none",
+      "crowd_score": 0.58,
+      "crowd_score_raw": 0.417,
+      "crowd_proximity_ratio": 0.0,
+      "crowd_overlap_ratio": 0.0
     },
     {
       "frame": 68,
@@ -530,9 +700,14 @@
       },
       "object_type_diversity": 2,
       "motion_detected": true,
-      "crowd_density": 47.060001373291016,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 47.06,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "medium",
+      "crowd_score": 0.603,
+      "crowd_score_raw": 0.674,
+      "crowd_proximity_ratio": 0.5,
+      "crowd_overlap_ratio": 0.143
     },
     {
       "frame": 70,
@@ -545,9 +720,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 49.70000076293945,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 49.7,
+      "is_crowd": true,
+      "crowd_size": 8,
+      "crowd_level": "medium",
+      "crowd_score": 0.618,
+      "crowd_score_raw": 0.675,
+      "crowd_proximity_ratio": 0.556,
+      "crowd_overlap_ratio": 0.083
     },
     {
       "frame": 72,
@@ -560,9 +740,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 47.18000030517578,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 47.18,
+      "is_crowd": true,
+      "crowd_size": 8,
+      "crowd_level": "medium",
+      "crowd_score": 0.615,
+      "crowd_score_raw": 0.619,
+      "crowd_proximity_ratio": 0.333,
+      "crowd_overlap_ratio": 0.111
     },
     {
       "frame": 74,
@@ -575,9 +760,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 44.65999984741211,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 44.66,
+      "is_crowd": true,
+      "crowd_size": 9,
+      "crowd_level": "medium",
+      "crowd_score": 0.59,
+      "crowd_score_raw": 0.563,
+      "crowd_proximity_ratio": 0.286,
+      "crowd_overlap_ratio": 0.048
     },
     {
       "frame": 76,
@@ -590,9 +780,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 42.22999954223633,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 42.23,
+      "is_crowd": true,
+      "crowd_size": 8,
+      "crowd_level": "low",
+      "crowd_score": 0.602,
+      "crowd_score_raw": 0.477,
+      "crowd_proximity_ratio": 0.0,
+      "crowd_overlap_ratio": 0.067
     },
     {
       "frame": 78,
@@ -605,9 +800,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 46.650001525878906,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 46.65,
+      "is_crowd": true,
+      "crowd_size": 8,
+      "crowd_level": "low",
+      "crowd_score": 0.56,
+      "crowd_score_raw": 0.467,
+      "crowd_proximity_ratio": 0.0,
+      "crowd_overlap_ratio": 0.0
     },
     {
       "frame": 80,
@@ -621,8 +821,13 @@
       "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 45.0,
-      "is_crowd": false,
-      "crowd_size": 0
+      "is_crowd": true,
+      "crowd_size": 8,
+      "crowd_level": "low",
+      "crowd_score": 0.521,
+      "crowd_score_raw": 0.481,
+      "crowd_proximity_ratio": 0.0,
+      "crowd_overlap_ratio": 0.036
     },
     {
       "frame": 82,
@@ -635,9 +840,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 44.45000076293945,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 44.45,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "medium",
+      "crowd_score": 0.51,
+      "crowd_score_raw": 0.563,
+      "crowd_proximity_ratio": 0.286,
+      "crowd_overlap_ratio": 0.048
     },
     {
       "frame": 84,
@@ -650,9 +860,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 45.900001525878906,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 45.9,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "medium",
+      "crowd_score": 0.512,
+      "crowd_score_raw": 0.57,
+      "crowd_proximity_ratio": 0.25,
+      "crowd_overlap_ratio": 0.071
     },
     {
       "frame": 86,
@@ -665,9 +880,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 43.13999938964844,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 43.14,
+      "is_crowd": true,
+      "crowd_size": 8,
+      "crowd_level": "low",
+      "crowd_score": 0.508,
+      "crowd_score_raw": 0.458,
+      "crowd_proximity_ratio": 0.0,
+      "crowd_overlap_ratio": 0.0
     },
     {
       "frame": 88,
@@ -680,9 +900,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 44.470001220703125,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 44.47,
+      "is_crowd": true,
+      "crowd_size": 8,
+      "crowd_level": "low",
+      "crowd_score": 0.504,
+      "crowd_score_raw": 0.45,
+      "crowd_proximity_ratio": 0.0,
+      "crowd_overlap_ratio": 0.0
     },
     {
       "frame": 90,
@@ -695,9 +920,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 45.0099983215332,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 45.01,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "low",
+      "crowd_score": 0.504,
+      "crowd_score_raw": 0.477,
+      "crowd_proximity_ratio": 0.0,
+      "crowd_overlap_ratio": 0.067
     },
     {
       "frame": 92,
@@ -710,9 +940,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 45.119998931884766,
+      "crowd_density": 45.12,
       "is_crowd": false,
-      "crowd_size": 0
+      "crowd_size": 0,
+      "crowd_level": "none",
+      "crowd_score": 0.486,
+      "crowd_score_raw": 0.477,
+      "crowd_proximity_ratio": 0.0,
+      "crowd_overlap_ratio": 0.067
     },
     {
       "frame": 94,
@@ -725,9 +960,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 38.880001068115234,
+      "crowd_density": 38.88,
       "is_crowd": false,
-      "crowd_size": 0
+      "crowd_size": 0,
+      "crowd_level": "none",
+      "crowd_score": 0.461,
+      "crowd_score_raw": 0.442,
+      "crowd_proximity_ratio": 0.0,
+      "crowd_overlap_ratio": 0.0
     },
     {
       "frame": 96,
@@ -740,9 +980,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 43.790000915527344,
+      "crowd_density": 43.79,
       "is_crowd": false,
-      "crowd_size": 0
+      "crowd_size": 0,
+      "crowd_level": "none",
+      "crowd_score": 0.499,
+      "crowd_score_raw": 0.649,
+      "crowd_proximity_ratio": 0.571,
+      "crowd_overlap_ratio": 0.048
     },
     {
       "frame": 98,
@@ -755,9 +1000,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 49.34000015258789,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 49.34,
+      "is_crowd": true,
+      "crowd_size": 6,
+      "crowd_level": "medium",
+      "crowd_score": 0.557,
+      "crowd_score_raw": 0.742,
+      "crowd_proximity_ratio": 0.778,
+      "crowd_overlap_ratio": 0.083
     },
     {
       "frame": 100,
@@ -770,9 +1020,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 49.72999954223633,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 49.73,
+      "is_crowd": true,
+      "crowd_size": 9,
+      "crowd_level": "medium",
+      "crowd_score": 0.609,
+      "crowd_score_raw": 0.735,
+      "crowd_proximity_ratio": 0.75,
+      "crowd_overlap_ratio": 0.107
     },
     {
       "frame": 102,
@@ -785,9 +1040,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 46.70000076293945,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 46.7,
+      "is_crowd": true,
+      "crowd_size": 8,
+      "crowd_level": "medium",
+      "crowd_score": 0.643,
+      "crowd_score_raw": 0.649,
+      "crowd_proximity_ratio": 0.571,
+      "crowd_overlap_ratio": 0.048
     },
     {
       "frame": 104,
@@ -800,9 +1060,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 43.45000076293945,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 43.45,
+      "is_crowd": true,
+      "crowd_size": 8,
+      "crowd_level": "medium",
+      "crowd_score": 0.69,
+      "crowd_score_raw": 0.677,
+      "crowd_proximity_ratio": 0.667,
+      "crowd_overlap_ratio": 0.067
     },
     {
       "frame": 106,
@@ -815,9 +1080,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 44.540000915527344,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 44.54,
+      "is_crowd": true,
+      "crowd_size": 8,
+      "crowd_level": "medium",
+      "crowd_score": 0.691,
+      "crowd_score_raw": 0.65,
+      "crowd_proximity_ratio": 0.667,
+      "crowd_overlap_ratio": 0.0
     },
     {
       "frame": 108,
@@ -831,8 +1101,13 @@
       "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 48.75,
-      "is_crowd": false,
-      "crowd_size": 0
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "medium",
+      "crowd_score": 0.686,
+      "crowd_score_raw": 0.72,
+      "crowd_proximity_ratio": 0.75,
+      "crowd_overlap_ratio": 0.071
     },
     {
       "frame": 110,
@@ -845,9 +1120,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 43.33000183105469,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 43.33,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "medium",
+      "crowd_score": 0.649,
+      "crowd_score_raw": 0.55,
+      "crowd_proximity_ratio": 0.333,
+      "crowd_overlap_ratio": 0.0
     },
     {
       "frame": 112,
@@ -860,9 +1140,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 48.83000183105469,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 48.83,
+      "is_crowd": true,
+      "crowd_size": 6,
+      "crowd_level": "medium",
+      "crowd_score": 0.653,
+      "crowd_score_raw": 0.668,
+      "crowd_proximity_ratio": 0.625,
+      "crowd_overlap_ratio": 0.036
     },
     {
       "frame": 114,
@@ -875,9 +1160,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 49.58000183105469,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 49.58,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "medium",
+      "crowd_score": 0.639,
+      "crowd_score_raw": 0.608,
+      "crowd_proximity_ratio": 0.375,
+      "crowd_overlap_ratio": 0.071
     },
     {
       "frame": 116,
@@ -890,9 +1180,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 43.79999923706055,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 43.8,
+      "is_crowd": true,
+      "crowd_size": 8,
+      "crowd_level": "medium",
+      "crowd_score": 0.626,
+      "crowd_score_raw": 0.582,
+      "crowd_proximity_ratio": 0.286,
+      "crowd_overlap_ratio": 0.095
     },
     {
       "frame": 118,
@@ -905,9 +1200,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 49.59000015258789,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 49.59,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "medium",
+      "crowd_score": 0.608,
+      "crowd_score_raw": 0.631,
+      "crowd_proximity_ratio": 0.444,
+      "crowd_overlap_ratio": 0.056
     },
     {
       "frame": 120,
@@ -920,9 +1220,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 41.060001373291016,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 41.06,
+      "is_crowd": true,
+      "crowd_size": 8,
+      "crowd_level": "medium",
+      "crowd_score": 0.61,
+      "crowd_score_raw": 0.562,
+      "crowd_proximity_ratio": 0.4,
+      "crowd_overlap_ratio": 0.0
     },
     {
       "frame": 122,
@@ -935,9 +1240,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 44.68000030517578,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 44.68,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "medium",
+      "crowd_score": 0.607,
+      "crowd_score_raw": 0.653,
+      "crowd_proximity_ratio": 0.5,
+      "crowd_overlap_ratio": 0.133
     },
     {
       "frame": 124,
@@ -951,8 +1261,13 @@
       "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 45.0,
-      "is_crowd": false,
-      "crowd_size": 0
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "medium",
+      "crowd_score": 0.615,
+      "crowd_score_raw": 0.649,
+      "crowd_proximity_ratio": 0.571,
+      "crowd_overlap_ratio": 0.048
     },
     {
       "frame": 126,
@@ -965,9 +1280,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 45.58000183105469,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 45.58,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "medium",
+      "crowd_score": 0.636,
+      "crowd_score_raw": 0.683,
+      "crowd_proximity_ratio": 0.625,
+      "crowd_overlap_ratio": 0.071
     },
     {
       "frame": 128,
@@ -980,9 +1300,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 39.81999969482422,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 39.82,
+      "is_crowd": true,
+      "crowd_size": 6,
+      "crowd_level": "low",
+      "crowd_score": 0.598,
+      "crowd_score_raw": 0.442,
+      "crowd_proximity_ratio": 0.0,
+      "crowd_overlap_ratio": 0.0
     },
     {
       "frame": 130,
@@ -995,9 +1320,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 43.36000061035156,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 43.36,
+      "is_crowd": true,
+      "crowd_size": 6,
+      "crowd_level": "medium",
+      "crowd_score": 0.606,
+      "crowd_score_raw": 0.603,
+      "crowd_proximity_ratio": 0.333,
+      "crowd_overlap_ratio": 0.133
     },
     {
       "frame": 132,
@@ -1010,9 +1340,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 45.77000045776367,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 45.77,
+      "is_crowd": true,
+      "crowd_size": 6,
+      "crowd_level": "medium",
+      "crowd_score": 0.622,
+      "crowd_score_raw": 0.735,
+      "crowd_proximity_ratio": 0.75,
+      "crowd_overlap_ratio": 0.107
     },
     {
       "frame": 134,
@@ -1025,9 +1360,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 41.47999954223633,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 41.48,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "medium",
+      "crowd_score": 0.625,
+      "crowd_score_raw": 0.662,
+      "crowd_proximity_ratio": 0.6,
+      "crowd_overlap_ratio": 0.1
     },
     {
       "frame": 136,
@@ -1040,9 +1380,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 43.209999084472656,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 43.21,
+      "is_crowd": true,
+      "crowd_size": 6,
+      "crowd_level": "medium",
+      "crowd_score": 0.613,
+      "crowd_score_raw": 0.625,
+      "crowd_proximity_ratio": 0.429,
+      "crowd_overlap_ratio": 0.095
     },
     {
       "frame": 138,
@@ -1055,9 +1400,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 41.70000076293945,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 41.7,
+      "is_crowd": true,
+      "crowd_size": 6,
+      "crowd_level": "low",
+      "crowd_score": 0.62,
+      "crowd_score_raw": 0.477,
+      "crowd_proximity_ratio": 0.0,
+      "crowd_overlap_ratio": 0.067
     },
     {
       "frame": 140,
@@ -1070,9 +1420,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 42.20000076293945,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 42.2,
+      "is_crowd": true,
+      "crowd_size": 6,
+      "crowd_level": "medium",
+      "crowd_score": 0.625,
+      "crowd_score_raw": 0.627,
+      "crowd_proximity_ratio": 0.5,
+      "crowd_overlap_ratio": 0.067
     },
     {
       "frame": 142,
@@ -1085,9 +1440,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 37.540000915527344,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 37.54,
+      "is_crowd": true,
+      "crowd_size": 6,
+      "crowd_level": "low",
+      "crowd_score": 0.578,
+      "crowd_score_raw": 0.5,
+      "crowd_proximity_ratio": 0.0,
+      "crowd_overlap_ratio": 0.167
     },
     {
       "frame": 144,
@@ -1100,9 +1460,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 41.220001220703125,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 41.22,
+      "is_crowd": true,
+      "crowd_size": 6,
+      "crowd_level": "low",
+      "crowd_score": 0.536,
+      "crowd_score_raw": 0.45,
+      "crowd_proximity_ratio": 0.0,
+      "crowd_overlap_ratio": 0.0
     },
     {
       "frame": 146,
@@ -1115,9 +1480,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 43.79999923706055,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 43.8,
+      "is_crowd": true,
+      "crowd_size": 6,
+      "crowd_level": "low",
+      "crowd_score": 0.499,
+      "crowd_score_raw": 0.442,
+      "crowd_proximity_ratio": 0.0,
+      "crowd_overlap_ratio": 0.0
     },
     {
       "frame": 148,
@@ -1130,9 +1500,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 42.2400016784668,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 42.24,
+      "is_crowd": true,
+      "crowd_size": 5,
+      "crowd_level": "medium",
+      "crowd_score": 0.519,
+      "crowd_score_raw": 0.577,
+      "crowd_proximity_ratio": 0.333,
+      "crowd_overlap_ratio": 0.067
     },
     {
       "frame": 150,
@@ -1145,9 +1520,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 42.36000061035156,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 42.36,
+      "is_crowd": true,
+      "crowd_size": 5,
+      "crowd_level": "medium",
+      "crowd_score": 0.534,
+      "crowd_score_raw": 0.703,
+      "crowd_proximity_ratio": 0.667,
+      "crowd_overlap_ratio": 0.133
     },
     {
       "frame": 152,
@@ -1160,9 +1540,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 41.65999984741211,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 41.66,
+      "is_crowd": true,
+      "crowd_size": 6,
+      "crowd_level": "medium",
+      "crowd_score": 0.544,
+      "crowd_score_raw": 0.55,
+      "crowd_proximity_ratio": 0.333,
+      "crowd_overlap_ratio": 0.0
     },
     {
       "frame": 154,
@@ -1176,8 +1561,13 @@
       "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 44.5,
-      "is_crowd": false,
-      "crowd_size": 0
+      "is_crowd": true,
+      "crowd_size": 6,
+      "crowd_level": "medium",
+      "crowd_score": 0.571,
+      "crowd_score_raw": 0.582,
+      "crowd_proximity_ratio": 0.286,
+      "crowd_overlap_ratio": 0.095
     },
     {
       "frame": 156,
@@ -1190,9 +1580,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 41.54999923706055,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 41.55,
+      "is_crowd": true,
+      "crowd_size": 6,
+      "crowd_level": "low",
+      "crowd_score": 0.591,
+      "crowd_score_raw": 0.544,
+      "crowd_proximity_ratio": 0.286,
+      "crowd_overlap_ratio": 0.0
     },
     {
       "frame": 158,
@@ -1205,9 +1600,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 40.529998779296875,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 40.53,
+      "is_crowd": true,
+      "crowd_size": 6,
+      "crowd_level": "medium",
+      "crowd_score": 0.588,
+      "crowd_score_raw": 0.562,
+      "crowd_proximity_ratio": 0.4,
+      "crowd_overlap_ratio": 0.0
     },
     {
       "frame": 160,
@@ -1220,9 +1620,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 42.119998931884766,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 42.12,
+      "is_crowd": true,
+      "crowd_size": 6,
+      "crowd_level": "medium",
+      "crowd_score": 0.593,
+      "crowd_score_raw": 0.727,
+      "crowd_proximity_ratio": 0.833,
+      "crowd_overlap_ratio": 0.067
     },
     {
       "frame": 162,
@@ -1235,9 +1640,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 40.66999816894531,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 40.67,
+      "is_crowd": true,
+      "crowd_size": 6,
+      "crowd_level": "medium",
+      "crowd_score": 0.595,
+      "crowd_score_raw": 0.562,
+      "crowd_proximity_ratio": 0.4,
+      "crowd_overlap_ratio": 0.0
     },
     {
       "frame": 164,
@@ -1250,9 +1660,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 46.22999954223633,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 46.23,
+      "is_crowd": true,
+      "crowd_size": 6,
+      "crowd_level": "medium",
+      "crowd_score": 0.592,
+      "crowd_score_raw": 0.563,
+      "crowd_proximity_ratio": 0.286,
+      "crowd_overlap_ratio": 0.048
     },
     {
       "frame": 166,
@@ -1265,9 +1680,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 45.7599983215332,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 45.76,
+      "is_crowd": true,
+      "crowd_size": 6,
+      "crowd_level": "low",
+      "crowd_score": 0.592,
+      "crowd_score_raw": 0.544,
+      "crowd_proximity_ratio": 0.286,
+      "crowd_overlap_ratio": 0.0
     },
     {
       "frame": 168,
@@ -1280,9 +1700,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 47.869998931884766,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 47.87,
+      "is_crowd": true,
+      "crowd_size": 6,
+      "crowd_level": "medium",
+      "crowd_score": 0.593,
+      "crowd_score_raw": 0.57,
+      "crowd_proximity_ratio": 0.25,
+      "crowd_overlap_ratio": 0.071
     },
     {
       "frame": 170,
@@ -1295,9 +1720,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 47.86000061035156,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 47.86,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "medium",
+      "crowd_score": 0.559,
+      "crowd_score_raw": 0.556,
+      "crowd_proximity_ratio": 0.25,
+      "crowd_overlap_ratio": 0.036
     },
     {
       "frame": 172,
@@ -1310,9 +1740,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 44.02000045776367,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 44.02,
+      "is_crowd": true,
+      "crowd_size": 8,
+      "crowd_level": "low",
+      "crowd_score": 0.537,
+      "crowd_score_raw": 0.45,
+      "crowd_proximity_ratio": 0.0,
+      "crowd_overlap_ratio": 0.0
     },
     {
       "frame": 174,
@@ -1326,8 +1761,13 @@
       "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 43.25,
-      "is_crowd": false,
-      "crowd_size": 0
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "medium",
+      "crowd_score": 0.539,
+      "crowd_score_raw": 0.577,
+      "crowd_proximity_ratio": 0.333,
+      "crowd_overlap_ratio": 0.067
     },
     {
       "frame": 176,
@@ -1340,9 +1780,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 39.779998779296875,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 39.78,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "medium",
+      "crowd_score": 0.543,
+      "crowd_score_raw": 0.562,
+      "crowd_proximity_ratio": 0.4,
+      "crowd_overlap_ratio": 0.0
     },
     {
       "frame": 178,
@@ -1355,9 +1800,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 44.369998931884766,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 44.37,
+      "is_crowd": true,
+      "crowd_size": 6,
+      "crowd_level": "low",
+      "crowd_score": 0.519,
+      "crowd_score_raw": 0.45,
+      "crowd_proximity_ratio": 0.0,
+      "crowd_overlap_ratio": 0.0
     },
     {
       "frame": 180,
@@ -1370,9 +1820,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 41.369998931884766,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 41.37,
+      "is_crowd": true,
+      "crowd_size": 6,
+      "crowd_level": "medium",
+      "crowd_score": 0.536,
+      "crowd_score_raw": 0.642,
+      "crowd_proximity_ratio": 0.4,
+      "crowd_overlap_ratio": 0.2
     },
     {
       "frame": 182,
@@ -1385,9 +1840,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 44.36000061035156,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 44.36,
+      "is_crowd": true,
+      "crowd_size": 6,
+      "crowd_level": "medium",
+      "crowd_score": 0.572,
+      "crowd_score_raw": 0.63,
+      "crowd_proximity_ratio": 0.571,
+      "crowd_overlap_ratio": 0.0
     },
     {
       "frame": 184,
@@ -1400,9 +1860,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 45.560001373291016,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 45.56,
+      "is_crowd": true,
+      "crowd_size": 6,
+      "crowd_level": "medium",
+      "crowd_score": 0.59,
+      "crowd_score_raw": 0.668,
+      "crowd_proximity_ratio": 0.625,
+      "crowd_overlap_ratio": 0.036
     },
     {
       "frame": 186,
@@ -1415,9 +1880,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 44.61000061035156,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 44.61,
+      "is_crowd": true,
+      "crowd_size": 6,
+      "crowd_level": "low",
+      "crowd_score": 0.57,
+      "crowd_score_raw": 0.458,
+      "crowd_proximity_ratio": 0.0,
+      "crowd_overlap_ratio": 0.0
     },
     {
       "frame": 188,
@@ -1430,9 +1900,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 47.18000030517578,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 47.18,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "medium",
+      "crowd_score": 0.601,
+      "crowd_score_raw": 0.608,
+      "crowd_proximity_ratio": 0.375,
+      "crowd_overlap_ratio": 0.071
     },
     {
       "frame": 190,
@@ -1445,9 +1920,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 44.41999816894531,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 44.42,
+      "is_crowd": true,
+      "crowd_size": 8,
+      "crowd_level": "medium",
+      "crowd_score": 0.603,
+      "crowd_score_raw": 0.649,
+      "crowd_proximity_ratio": 0.571,
+      "crowd_overlap_ratio": 0.048
     },
     {
       "frame": 192,
@@ -1460,9 +1940,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 43.130001068115234,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 43.13,
+      "is_crowd": true,
+      "crowd_size": 8,
+      "crowd_level": "medium",
+      "crowd_score": 0.607,
+      "crowd_score_raw": 0.65,
+      "crowd_proximity_ratio": 0.667,
+      "crowd_overlap_ratio": 0.0
     },
     {
       "frame": 194,
@@ -1475,9 +1960,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 48.13999938964844,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 48.14,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "high",
+      "crowd_score": 0.632,
+      "crowd_score_raw": 0.797,
+      "crowd_proximity_ratio": 0.889,
+      "crowd_overlap_ratio": 0.139
     },
     {
       "frame": 196,
@@ -1490,9 +1980,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 43.959999084472656,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 43.96,
+      "is_crowd": true,
+      "crowd_size": 8,
+      "crowd_level": "medium",
+      "crowd_score": 0.674,
+      "crowd_score_raw": 0.668,
+      "crowd_proximity_ratio": 0.571,
+      "crowd_overlap_ratio": 0.095
     },
     {
       "frame": 198,
@@ -1505,9 +2000,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 47.880001068115234,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 47.88,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "medium",
+      "crowd_score": 0.674,
+      "crowd_score_raw": 0.608,
+      "crowd_proximity_ratio": 0.375,
+      "crowd_overlap_ratio": 0.071
     },
     {
       "frame": 200,
@@ -1520,9 +2020,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 44.400001525878906,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 44.4,
+      "is_crowd": true,
+      "crowd_size": 8,
+      "crowd_level": "medium",
+      "crowd_score": 0.66,
+      "crowd_score_raw": 0.577,
+      "crowd_proximity_ratio": 0.333,
+      "crowd_overlap_ratio": 0.067
     },
     {
       "frame": 202,
@@ -1535,9 +2040,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 44.279998779296875,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 44.28,
+      "is_crowd": true,
+      "crowd_size": 8,
+      "crowd_level": "medium",
+      "crowd_score": 0.672,
+      "crowd_score_raw": 0.711,
+      "crowd_proximity_ratio": 0.714,
+      "crowd_overlap_ratio": 0.095
     },
     {
       "frame": 204,
@@ -1550,9 +2060,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 46.349998474121094,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 46.35,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "medium",
+      "crowd_score": 0.659,
+      "crowd_score_raw": 0.73,
+      "crowd_proximity_ratio": 0.714,
+      "crowd_overlap_ratio": 0.143
     },
     {
       "frame": 206,
@@ -1565,9 +2080,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 45.29999923706055,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 45.3,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "high",
+      "crowd_score": 0.676,
+      "crowd_score_raw": 0.754,
+      "crowd_proximity_ratio": 0.857,
+      "crowd_overlap_ratio": 0.095
     },
     {
       "frame": 208,
@@ -1580,9 +2100,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 42.900001525878906,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 42.9,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "high",
+      "crowd_score": 0.705,
+      "crowd_score_raw": 0.753,
+      "crowd_proximity_ratio": 0.833,
+      "crowd_overlap_ratio": 0.133
     },
     {
       "frame": 210,
@@ -1595,9 +2120,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 49.959999084472656,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 49.96,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "medium",
+      "crowd_score": 0.722,
+      "crowd_score_raw": 0.66,
+      "crowd_proximity_ratio": 0.5,
+      "crowd_overlap_ratio": 0.107
     },
     {
       "frame": 212,
@@ -1610,9 +2140,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 47.869998931884766,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 47.87,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "medium",
+      "crowd_score": 0.704,
+      "crowd_score_raw": 0.625,
+      "crowd_proximity_ratio": 0.429,
+      "crowd_overlap_ratio": 0.095
     },
     {
       "frame": 214,
@@ -1625,9 +2160,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 49.40999984741211,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 49.41,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "high",
+      "crowd_score": 0.71,
+      "crowd_score_raw": 0.758,
+      "crowd_proximity_ratio": 0.875,
+      "crowd_overlap_ratio": 0.071
     },
     {
       "frame": 216,
@@ -1640,9 +2180,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 48.060001373291016,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 48.06,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "medium",
+      "crowd_score": 0.696,
+      "crowd_score_raw": 0.683,
+      "crowd_proximity_ratio": 0.625,
+      "crowd_overlap_ratio": 0.071
     },
     {
       "frame": 218,
@@ -1656,8 +2201,13 @@
       "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 46.0,
-      "is_crowd": false,
-      "crowd_size": 0
+      "is_crowd": true,
+      "crowd_size": 8,
+      "crowd_level": "medium",
+      "crowd_score": 0.658,
+      "crowd_score_raw": 0.563,
+      "crowd_proximity_ratio": 0.286,
+      "crowd_overlap_ratio": 0.048
     },
     {
       "frame": 220,
@@ -1670,9 +2220,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 46.720001220703125,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 46.72,
+      "is_crowd": true,
+      "crowd_size": 8,
+      "crowd_level": "medium",
+      "crowd_score": 0.638,
+      "crowd_score_raw": 0.563,
+      "crowd_proximity_ratio": 0.286,
+      "crowd_overlap_ratio": 0.048
     },
     {
       "frame": 222,
@@ -1687,9 +2242,14 @@
       },
       "object_type_diversity": 3,
       "motion_detected": true,
-      "crowd_density": 45.65999984741211,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 45.66,
+      "is_crowd": true,
+      "crowd_size": 8,
+      "crowd_level": "medium",
+      "crowd_score": 0.638,
+      "crowd_score_raw": 0.625,
+      "crowd_proximity_ratio": 0.429,
+      "crowd_overlap_ratio": 0.095
     },
     {
       "frame": 224,
@@ -1704,9 +2264,14 @@
       },
       "object_type_diversity": 3,
       "motion_detected": true,
-      "crowd_density": 48.41999816894531,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 48.42,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "medium",
+      "crowd_score": 0.608,
+      "crowd_score_raw": 0.608,
+      "crowd_proximity_ratio": 0.375,
+      "crowd_overlap_ratio": 0.071
     },
     {
       "frame": 226,
@@ -1720,9 +2285,14 @@
       },
       "object_type_diversity": 2,
       "motion_detected": true,
-      "crowd_density": 52.68000030517578,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 52.68,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "medium",
+      "crowd_score": 0.592,
+      "crowd_score_raw": 0.6,
+      "crowd_proximity_ratio": 0.3,
+      "crowd_overlap_ratio": 0.067
     },
     {
       "frame": 228,
@@ -1736,9 +2306,14 @@
       },
       "object_type_diversity": 2,
       "motion_detected": true,
-      "crowd_density": 47.5099983215332,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 47.51,
+      "is_crowd": true,
+      "crowd_size": 8,
+      "crowd_level": "medium",
+      "crowd_score": 0.593,
+      "crowd_score_raw": 0.57,
+      "crowd_proximity_ratio": 0.25,
+      "crowd_overlap_ratio": 0.071
     },
     {
       "frame": 230,
@@ -1751,9 +2326,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 47.290000915527344,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 47.29,
+      "is_crowd": true,
+      "crowd_size": 8,
+      "crowd_level": "medium",
+      "crowd_score": 0.595,
+      "crowd_score_raw": 0.57,
+      "crowd_proximity_ratio": 0.25,
+      "crowd_overlap_ratio": 0.071
     },
     {
       "frame": 232,
@@ -1766,9 +2346,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 47.22999954223633,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 47.23,
+      "is_crowd": true,
+      "crowd_size": 8,
+      "crowd_level": "medium",
+      "crowd_score": 0.584,
+      "crowd_score_raw": 0.57,
+      "crowd_proximity_ratio": 0.25,
+      "crowd_overlap_ratio": 0.071
     },
     {
       "frame": 234,
@@ -1781,9 +2366,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 45.7400016784668,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 45.74,
+      "is_crowd": true,
+      "crowd_size": 8,
+      "crowd_level": "low",
+      "crowd_score": 0.557,
+      "crowd_score_raw": 0.477,
+      "crowd_proximity_ratio": 0.0,
+      "crowd_overlap_ratio": 0.048
     },
     {
       "frame": 236,
@@ -1796,9 +2386,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 46.0099983215332,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 46.01,
+      "is_crowd": true,
+      "crowd_size": 8,
+      "crowd_level": "medium",
+      "crowd_score": 0.551,
+      "crowd_score_raw": 0.57,
+      "crowd_proximity_ratio": 0.25,
+      "crowd_overlap_ratio": 0.071
     },
     {
       "frame": 238,
@@ -1811,9 +2406,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 47.060001373291016,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 47.06,
+      "is_crowd": true,
+      "crowd_size": 8,
+      "crowd_level": "medium",
+      "crowd_score": 0.566,
+      "crowd_score_raw": 0.645,
+      "crowd_proximity_ratio": 0.5,
+      "crowd_overlap_ratio": 0.071
     },
     {
       "frame": 240,
@@ -1826,9 +2426,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 45.09000015258789,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 45.09,
+      "is_crowd": true,
+      "crowd_size": 8,
+      "crowd_level": "medium",
+      "crowd_score": 0.581,
+      "crowd_score_raw": 0.645,
+      "crowd_proximity_ratio": 0.5,
+      "crowd_overlap_ratio": 0.071
     },
     {
       "frame": 242,
@@ -1841,9 +2446,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 46.16999816894531,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 46.17,
+      "is_crowd": true,
+      "crowd_size": 8,
+      "crowd_level": "medium",
+      "crowd_score": 0.599,
+      "crowd_score_raw": 0.66,
+      "crowd_proximity_ratio": 0.5,
+      "crowd_overlap_ratio": 0.107
     },
     {
       "frame": 244,
@@ -1856,9 +2466,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 48.16999816894531,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 48.17,
+      "is_crowd": true,
+      "crowd_size": 8,
+      "crowd_level": "medium",
+      "crowd_score": 0.637,
+      "crowd_score_raw": 0.664,
+      "crowd_proximity_ratio": 0.556,
+      "crowd_overlap_ratio": 0.056
     },
     {
       "frame": 246,
@@ -1871,9 +2486,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 49.90999984741211,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 49.91,
+      "is_crowd": true,
+      "crowd_size": 8,
+      "crowd_level": "medium",
+      "crowd_score": 0.658,
+      "crowd_score_raw": 0.675,
+      "crowd_proximity_ratio": 0.556,
+      "crowd_overlap_ratio": 0.083
     },
     {
       "frame": 248,
@@ -1886,9 +2506,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 43.939998626708984,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 43.94,
+      "is_crowd": true,
+      "crowd_size": 8,
+      "crowd_level": "medium",
+      "crowd_score": 0.662,
+      "crowd_score_raw": 0.668,
+      "crowd_proximity_ratio": 0.571,
+      "crowd_overlap_ratio": 0.095
     },
     {
       "frame": 250,
@@ -1901,9 +2526,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 42.93000030517578,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 42.93,
+      "is_crowd": true,
+      "crowd_size": 8,
+      "crowd_level": "medium",
+      "crowd_score": 0.667,
+      "crowd_score_raw": 0.668,
+      "crowd_proximity_ratio": 0.571,
+      "crowd_overlap_ratio": 0.095
     },
     {
       "frame": 252,
@@ -1917,8 +2547,13 @@
       "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 46.0,
-      "is_crowd": false,
-      "crowd_size": 0
+      "is_crowd": true,
+      "crowd_size": 8,
+      "crowd_level": "medium",
+      "crowd_score": 0.672,
+      "crowd_score_raw": 0.687,
+      "crowd_proximity_ratio": 0.571,
+      "crowd_overlap_ratio": 0.143
     },
     {
       "frame": 254,
@@ -1931,9 +2566,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 46.29999923706055,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 46.3,
+      "is_crowd": true,
+      "crowd_size": 8,
+      "crowd_level": "medium",
+      "crowd_score": 0.679,
+      "crowd_score_raw": 0.697,
+      "crowd_proximity_ratio": 0.625,
+      "crowd_overlap_ratio": 0.107
     },
     {
       "frame": 256,
@@ -1946,9 +2586,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 43.40999984741211,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 43.41,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "low",
+      "crowd_score": 0.636,
+      "crowd_score_raw": 0.458,
+      "crowd_proximity_ratio": 0.0,
+      "crowd_overlap_ratio": 0.0
     },
     {
       "frame": 258,
@@ -1961,9 +2606,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 38.45000076293945,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 38.45,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "low",
+      "crowd_score": 0.59,
+      "crowd_score_raw": 0.442,
+      "crowd_proximity_ratio": 0.0,
+      "crowd_overlap_ratio": 0.0
     },
     {
       "frame": 260,
@@ -1976,9 +2626,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 38.95000076293945,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 38.95,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "low",
+      "crowd_score": 0.543,
+      "crowd_score_raw": 0.433,
+      "crowd_proximity_ratio": 0.0,
+      "crowd_overlap_ratio": 0.0
     },
     {
       "frame": 262,
@@ -1991,9 +2646,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 38.380001068115234,
+      "crowd_density": 38.38,
       "is_crowd": false,
-      "crowd_size": 0
+      "crowd_size": 0,
+      "crowd_level": "none",
+      "crowd_score": 0.493,
+      "crowd_score_raw": 0.433,
+      "crowd_proximity_ratio": 0.0,
+      "crowd_overlap_ratio": 0.0
     },
     {
       "frame": 264,
@@ -2006,9 +2666,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 46.52000045776367,
+      "crowd_density": 46.52,
       "is_crowd": false,
-      "crowd_size": 0
+      "crowd_size": 0,
+      "crowd_level": "none",
+      "crowd_score": 0.498,
+      "crowd_score_raw": 0.726,
+      "crowd_proximity_ratio": 0.625,
+      "crowd_overlap_ratio": 0.179
     },
     {
       "frame": 266,
@@ -2021,9 +2686,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 43.209999084472656,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 43.21,
+      "is_crowd": true,
+      "crowd_size": 4,
+      "crowd_level": "medium",
+      "crowd_score": 0.527,
+      "crowd_score_raw": 0.603,
+      "crowd_proximity_ratio": 0.333,
+      "crowd_overlap_ratio": 0.133
     },
     {
       "frame": 268,
@@ -2036,9 +2706,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 44.900001525878906,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 44.9,
+      "is_crowd": true,
+      "crowd_size": 5,
+      "crowd_level": "medium",
+      "crowd_score": 0.559,
+      "crowd_score_raw": 0.601,
+      "crowd_proximity_ratio": 0.286,
+      "crowd_overlap_ratio": 0.143
     },
     {
       "frame": 270,
@@ -2051,9 +2726,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 45.20000076293945,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 45.2,
+      "is_crowd": true,
+      "crowd_size": 6,
+      "crowd_level": "medium",
+      "crowd_score": 0.589,
+      "crowd_score_raw": 0.582,
+      "crowd_proximity_ratio": 0.286,
+      "crowd_overlap_ratio": 0.095
     },
     {
       "frame": 272,
@@ -2066,9 +2746,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 48.22999954223633,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 48.23,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "medium",
+      "crowd_score": 0.635,
+      "crowd_score_raw": 0.664,
+      "crowd_proximity_ratio": 0.556,
+      "crowd_overlap_ratio": 0.056
     },
     {
       "frame": 274,
@@ -2081,9 +2766,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 52.9900016784668,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 52.99,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "medium",
+      "crowd_score": 0.634,
+      "crowd_score_raw": 0.719,
+      "crowd_proximity_ratio": 0.636,
+      "crowd_overlap_ratio": 0.091
     },
     {
       "frame": 276,
@@ -2096,9 +2786,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 47.119998931884766,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 47.12,
+      "is_crowd": true,
+      "crowd_size": 8,
+      "crowd_level": "low",
+      "crowd_score": 0.607,
+      "crowd_score_raw": 0.467,
+      "crowd_proximity_ratio": 0.0,
+      "crowd_overlap_ratio": 0.0
     },
     {
       "frame": 278,
@@ -2111,9 +2806,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 43.380001068115234,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 43.38,
+      "is_crowd": true,
+      "crowd_size": 9,
+      "crowd_level": "medium",
+      "crowd_score": 0.599,
+      "crowd_score_raw": 0.563,
+      "crowd_proximity_ratio": 0.286,
+      "crowd_overlap_ratio": 0.048
     },
     {
       "frame": 280,
@@ -2126,9 +2826,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 45.220001220703125,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 45.22,
+      "is_crowd": true,
+      "crowd_size": 9,
+      "crowd_level": "low",
+      "crowd_score": 0.578,
+      "crowd_score_raw": 0.477,
+      "crowd_proximity_ratio": 0.0,
+      "crowd_overlap_ratio": 0.048
     },
     {
       "frame": 282,
@@ -2141,9 +2846,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 43.97999954223633,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 43.98,
+      "is_crowd": true,
+      "crowd_size": 8,
+      "crowd_level": "medium",
+      "crowd_score": 0.579,
+      "crowd_score_raw": 0.668,
+      "crowd_proximity_ratio": 0.571,
+      "crowd_overlap_ratio": 0.095
     },
     {
       "frame": 284,
@@ -2156,9 +2866,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 50.04999923706055,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 50.05,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "medium",
+      "crowd_score": 0.555,
+      "crowd_score_raw": 0.601,
+      "crowd_proximity_ratio": 0.286,
+      "crowd_overlap_ratio": 0.143
     },
     {
       "frame": 286,
@@ -2171,9 +2886,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 42.459999084472656,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 42.46,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "low",
+      "crowd_score": 0.552,
+      "crowd_score_raw": 0.45,
+      "crowd_proximity_ratio": 0.0,
+      "crowd_overlap_ratio": 0.0
     },
     {
       "frame": 288,
@@ -2186,9 +2906,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 46.560001373291016,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 46.56,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "low",
+      "crowd_score": 0.538,
+      "crowd_score_raw": 0.496,
+      "crowd_proximity_ratio": 0.0,
+      "crowd_overlap_ratio": 0.095
     },
     {
       "frame": 290,
@@ -2201,9 +2926,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 43.58000183105469,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 43.58,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "medium",
+      "crowd_score": 0.559,
+      "crowd_score_raw": 0.582,
+      "crowd_proximity_ratio": 0.286,
+      "crowd_overlap_ratio": 0.095
     },
     {
       "frame": 292,
@@ -2216,9 +2946,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 40.900001525878906,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 40.9,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "medium",
+      "crowd_score": 0.541,
+      "crowd_score_raw": 0.577,
+      "crowd_proximity_ratio": 0.333,
+      "crowd_overlap_ratio": 0.067
     },
     {
       "frame": 294,
@@ -2231,9 +2966,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 46.540000915527344,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 46.54,
+      "is_crowd": true,
+      "crowd_size": 6,
+      "crowd_level": "medium",
+      "crowd_score": 0.547,
+      "crowd_score_raw": 0.631,
+      "crowd_proximity_ratio": 0.444,
+      "crowd_overlap_ratio": 0.056
     },
     {
       "frame": 296,
@@ -2246,9 +2986,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 47.459999084472656,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 47.46,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "medium",
+      "crowd_score": 0.574,
+      "crowd_score_raw": 0.585,
+      "crowd_proximity_ratio": 0.25,
+      "crowd_overlap_ratio": 0.107
     },
     {
       "frame": 298,
@@ -2261,9 +3006,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 48.15999984741211,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 48.16,
+      "is_crowd": true,
+      "crowd_size": 8,
+      "crowd_level": "medium",
+      "crowd_score": 0.597,
+      "crowd_score_raw": 0.608,
+      "crowd_proximity_ratio": 0.375,
+      "crowd_overlap_ratio": 0.071
     },
     {
       "frame": 300,
@@ -2276,9 +3026,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 49.70000076293945,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 49.7,
+      "is_crowd": true,
+      "crowd_size": 8,
+      "crowd_level": "medium",
+      "crowd_score": 0.625,
+      "crowd_score_raw": 0.726,
+      "crowd_proximity_ratio": 0.625,
+      "crowd_overlap_ratio": 0.179
     },
     {
       "frame": 302,
@@ -2291,9 +3046,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 45.650001525878906,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 45.65,
+      "is_crowd": true,
+      "crowd_size": 8,
+      "crowd_level": "medium",
+      "crowd_score": 0.66,
+      "crowd_score_raw": 0.749,
+      "crowd_proximity_ratio": 0.714,
+      "crowd_overlap_ratio": 0.19
     },
     {
       "frame": 304,
@@ -2306,9 +3066,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 43.90999984741211,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 43.91,
+      "is_crowd": true,
+      "crowd_size": 8,
+      "crowd_level": "medium",
+      "crowd_score": 0.649,
+      "crowd_score_raw": 0.577,
+      "crowd_proximity_ratio": 0.333,
+      "crowd_overlap_ratio": 0.067
     },
     {
       "frame": 306,
@@ -2321,9 +3086,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 48.65999984741211,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 48.66,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "medium",
+      "crowd_score": 0.657,
+      "crowd_score_raw": 0.625,
+      "crowd_proximity_ratio": 0.429,
+      "crowd_overlap_ratio": 0.095
     },
     {
       "frame": 308,
@@ -2336,9 +3106,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 46.27000045776367,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 46.27,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "medium",
+      "crowd_score": 0.661,
+      "crowd_score_raw": 0.627,
+      "crowd_proximity_ratio": 0.5,
+      "crowd_overlap_ratio": 0.067
     },
     {
       "frame": 310,
@@ -2351,9 +3126,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 44.31999969482422,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 44.32,
+      "is_crowd": true,
+      "crowd_size": 6,
+      "crowd_level": "medium",
+      "crowd_score": 0.641,
+      "crowd_score_raw": 0.627,
+      "crowd_proximity_ratio": 0.5,
+      "crowd_overlap_ratio": 0.067
     },
     {
       "frame": 312,
@@ -2366,9 +3146,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 46.93000030517578,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 46.93,
+      "is_crowd": true,
+      "crowd_size": 6,
+      "crowd_level": "medium",
+      "crowd_score": 0.616,
+      "crowd_score_raw": 0.625,
+      "crowd_proximity_ratio": 0.429,
+      "crowd_overlap_ratio": 0.095
     },
     {
       "frame": 314,
@@ -2381,9 +3166,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 47.59000015258789,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 47.59,
+      "is_crowd": true,
+      "crowd_size": 6,
+      "crowd_level": "medium",
+      "crowd_score": 0.636,
+      "crowd_score_raw": 0.674,
+      "crowd_proximity_ratio": 0.5,
+      "crowd_overlap_ratio": 0.143
     },
     {
       "frame": 316,
@@ -2396,9 +3186,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 45.08000183105469,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 45.08,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "medium",
+      "crowd_score": 0.631,
+      "crowd_score_raw": 0.601,
+      "crowd_proximity_ratio": 0.286,
+      "crowd_overlap_ratio": 0.143
     },
     {
       "frame": 318,
@@ -2411,9 +3206,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 42.619998931884766,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 42.62,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "medium",
+      "crowd_score": 0.641,
+      "crowd_score_raw": 0.68,
+      "crowd_proximity_ratio": 0.5,
+      "crowd_overlap_ratio": 0.2
     },
     {
       "frame": 320,
@@ -2426,9 +3226,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 44.40999984741211,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 44.41,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "medium",
+      "crowd_score": 0.637,
+      "crowd_score_raw": 0.606,
+      "crowd_proximity_ratio": 0.429,
+      "crowd_overlap_ratio": 0.048
     },
     {
       "frame": 322,
@@ -2441,9 +3246,14 @@
       },
       "object_type_diversity": 1,
       "motion_detected": true,
-      "crowd_density": 45.869998931884766,
-      "is_crowd": false,
-      "crowd_size": 0
+      "crowd_density": 45.87,
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "medium",
+      "crowd_score": 0.634,
+      "crowd_score_raw": 0.608,
+      "crowd_proximity_ratio": 0.375,
+      "crowd_overlap_ratio": 0.071
     },
     {
       "frame": 324,
@@ -2457,8 +3267,13 @@
       "object_type_diversity": 1,
       "motion_detected": true,
       "crowd_density": 47.5,
-      "is_crowd": false,
-      "crowd_size": 0
+      "is_crowd": true,
+      "crowd_size": 7,
+      "crowd_level": "medium",
+      "crowd_score": 0.641,
+      "crowd_score_raw": 0.711,
+      "crowd_proximity_ratio": 0.625,
+      "crowd_overlap_ratio": 0.143
     }
   ],
   "max_people": 11,
@@ -2473,7 +3288,7 @@
   "crowd_trend": {
     "people_trend_slope_per_sample": 0.0036,
     "people_trend_direction": "stable",
-    "density_trend_slope_per_sample": 0.0113,
+    "density_trend_slope_per_sample": 0.0065,
     "density_trend_direction": "stable"
   },
   "max_objects": 11,
@@ -2501,17 +3316,25 @@
     ]
   },
   "crowd_analysis": {
-    "total_crowd_frames": 0,
-    "crowd_percentage": 0.0,
-    "max_crowd_size": 0,
-    "average_crowd_size": 0,
-    "frames_with_crowds": 0,
-    "crowd_event_count": 0,
-    "longest_crowd_event_frames": 0,
-    "longest_crowd_event_seconds": 0.0
+    "total_crowd_frames": 155,
+    "crowd_percentage": 95.09,
+    "max_crowd_size": 9,
+    "average_crowd_size": 7.05,
+    "frames_with_crowds": 155,
+    "crowd_event_count": 4,
+    "longest_crowd_event_frames": 82,
+    "longest_crowd_event_seconds": 5.47,
+    "average_crowd_score": 0.599,
+    "peak_crowd_score": 0.754,
+    "crowd_level_distribution": {
+      "none": 8,
+      "low": 31,
+      "medium": 118,
+      "high": 6
+    }
   },
   "density_analysis": {
-    "max_density": 52.9900016784668,
-    "average_density": 44.83
+    "max_density": 52.99,
+    "average_density": 45.06
   }
 }

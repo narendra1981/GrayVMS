@@ -55,32 +55,170 @@ const dashboardHtml = `<!doctype html>
       body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         margin: 0;
-        padding: 2rem;
+        padding: 1rem;
         background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 25%, #2d2d2d 50%, #1a1a1a 75%, #0a0a0a 100%);
         color: #e8e8e8;
         min-height: 100vh;
+        overflow-y: auto;
+        overflow-x: hidden;
       }
       h1 {
-        margin: 0 0 2rem;
-        font-size: 2.2rem;
+        margin: 0 0 0.6rem;
+        font-size: 1.55rem;
         letter-spacing: 0.05em;
         color: #d4af37;
         text-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
         font-weight: 700;
       }
       .container {
-        max-width: 1400px;
+        max-width: 1600px;
         margin: 0 auto;
+        min-height: calc(100vh - 2rem);
+        display: flex;
+        flex-direction: column;
+        transform: scale(0.95);
+        transform-origin: top center;
+        width: 105.2632%;
       }
       .content {
-        display: flex;
-        gap: 2rem;
+        display: grid;
+        grid-template-columns: minmax(560px, 1.15fr) minmax(420px, 0.85fr);
+        gap: 0.9rem;
         align-items: flex-start;
-        flex-wrap: wrap;
+        flex: 1;
+        min-height: 0;
       }
       .video-panel {
-        flex: 1 1 560px;
-        min-width: 300px;
+        min-width: 0;
+      }
+      .video-panel .panel-box {
+        padding: 0.75rem;
+      }
+      .video-panel .trend-chart-wrap {
+        margin-top: 0.45rem;
+      }
+      .analytics-section {
+        min-width: 0;
+        max-height: none;
+        overflow: visible;
+        transform: scale(0.85);
+        transform-origin: top left;
+        width: 117.5%;
+      }
+      .analytics-title {
+        font-size: 1.05rem;
+        margin: 0 0 0.55rem;
+        letter-spacing: 0.06em;
+      }
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 0.34rem;
+        margin-bottom: 0.42rem;
+      }
+      .stat-box {
+        background: linear-gradient(135deg, #1f1f1f 0%, #2a2a2a 100%);
+        border: 1.5px solid #d4af37;
+        border-radius: 7px;
+        padding: 0.3rem 0.25rem;
+        text-align: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(212, 175, 55, 0.1);
+        position: relative;
+        overflow: hidden;
+        min-height: 42px;
+      }
+      .stat-label {
+        font-size: 0.54rem;
+        color: #999;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        margin-bottom: 0.14rem;
+        font-weight: 500;
+        line-height: 1.1;
+      }
+      .stat-value {
+        font-size: 0.82rem;
+        color: #d4af37;
+        font-weight: 700;
+        font-family: 'Courier New', monospace;
+        line-height: 1.15;
+      }
+      .info-box {
+        background: linear-gradient(135deg, #1f1f1f 0%, #2a2a2a 100%);
+        border: 1.5px solid #d4af37;
+        border-radius: 7px;
+        padding: 0.4rem 0.52rem;
+        margin-bottom: 0.42rem;
+      }
+      .info-label {
+        font-size: 0.58rem;
+        color: #999;
+        margin-bottom: 0.1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      .info-value {
+        font-size: 0.72rem;
+        color: #e8e8e8;
+        word-break: break-all;
+        font-family: 'Courier New', monospace;
+      }
+      .trend-caption {
+        color: #d4af37;
+        font-size: 0.68rem;
+        margin-bottom: 0.2rem;
+        font-weight: 600;
+      }
+      .trend-legend {
+        display: flex;
+        gap: 0.55rem;
+        margin-bottom: 0.25rem;
+        font-size: 0.62rem;
+        color: #bcbcbc;
+      }
+      .trend-canvas {
+        width: 100%;
+        height: 96px;
+        display: block;
+        border-radius: 8px;
+        background: #111;
+        border: 1px solid rgba(212, 175, 55, 0.25);
+      }
+      .metric-heading {
+        color: #d4af37;
+        font-size: 0.66rem;
+        margin: 0.35rem 0 0.22rem;
+        font-weight: 600;
+        letter-spacing: 0.03em;
+      }
+
+      @media (max-width: 1320px) {
+        .stats-grid {
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+      }
+      @media (max-width: 1100px) {
+        body {
+          height: auto;
+          overflow: auto;
+        }
+        .container {
+          height: auto;
+          transform: none;
+          width: 100%;
+        }
+        .content {
+          grid-template-columns: 1fr;
+          gap: 1rem;
+        }
+        .analytics-section {
+          transform: none;
+          width: 100%;
+        }
+        .stats-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
       }
       .panel-box {
         border: 2px solid #d4af37;
@@ -109,112 +247,6 @@ const dashboardHtml = `<!doctype html>
         background: #000;
         border: 1px solid rgba(212, 175, 55, 0.2);
       }
-      .analytics-section {
-        flex: 1 1 380px;
-        min-width: 300px;
-      }
-      .analytics-title {
-        font-size: 1.4rem;
-        color: #d4af37;
-        margin: 0 0 1.5rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-      }
-      .stats-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 1rem;
-        margin-bottom: 1.5rem;
-      }
-      .stat-box {
-        background: linear-gradient(135deg, #1f1f1f 0%, #2a2a2a 100%);
-        border: 1.5px solid #d4af37;
-        border-radius: 10px;
-        padding: 1rem;
-        text-align: center;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(212, 175, 55, 0.1);
-        position: relative;
-        overflow: hidden;
-      }
-      .stat-box::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
-        transition: left 0.5s;
-      }
-      .stat-box:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(212, 175, 55, 0.2);
-        border-color: #f0d46f;
-      }
-      .stat-label {
-        font-size: 0.85rem;
-        color: #999;
-        text-transform: uppercase;
-        letter-spacing: 0.06em;
-        margin-bottom: 0.5rem;
-        font-weight: 500;
-      }
-      .stat-value {
-        font-size: 2rem;
-        color: #d4af37;
-        font-weight: 700;
-        font-family: 'Courier New', monospace;
-      }
-      .info-box {
-        background: linear-gradient(135deg, #1f1f1f 0%, #2a2a2a 100%);
-        border: 1.5px solid #d4af37;
-        border-radius: 10px;
-        padding: 1rem;
-        margin-bottom: 1rem;
-      }
-      .info-label {
-        font-size: 0.9rem;
-        color: #999;
-        margin-bottom: 0.3rem;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-      }
-      .info-value {
-        font-size: 1rem;
-        color: #e8e8e8;
-        word-break: break-all;
-        font-family: 'Courier New', monospace;
-      }
-      .json-box {
-        margin-top: 1rem;
-        padding: 1rem;
-        background: rgba(15, 15, 15, 0.8);
-        color: #b0b0b0;
-        border-radius: 8px;
-        overflow-x: auto;
-        font-size: 0.8rem;
-        white-space: pre-wrap;
-        border: 1px solid #d4af37;
-        max-height: 300px;
-        overflow-y: auto;
-        font-family: 'Courier New', monospace;
-      }
-      .trend-chart-wrap {
-        margin-top: 0.8rem;
-        padding: 0.8rem;
-        border: 1.5px solid #d4af37;
-        border-radius: 10px;
-        background: rgba(15, 15, 15, 0.8);
-      }
-      .trend-legend {
-        display: flex;
-        gap: 1rem;
-        margin-bottom: 0.6rem;
-        font-size: 0.8rem;
-        color: #bcbcbc;
-      }
       .trend-dot {
         display: inline-block;
         width: 8px;
@@ -222,17 +254,9 @@ const dashboardHtml = `<!doctype html>
         border-radius: 999px;
         margin-right: 0.35rem;
       }
-      .trend-canvas {
-        width: 100%;
-        height: 190px;
-        display: block;
-        border-radius: 8px;
-        background: #111;
-        border: 1px solid rgba(212, 175, 55, 0.25);
-      }
       @media (max-width: 768px) {
         h1 { font-size: 1.8rem; }
-        .content { flex-direction: column; gap: 1.5rem; }
+        .content { gap: 1rem; }
         .stats-grid { grid-template-columns: 1fr; }
       }
     </style>
@@ -244,41 +268,19 @@ const dashboardHtml = `<!doctype html>
         <div class="video-panel">
           <div class="panel-box">
             <video class="stream" controls autoplay loop muted playsinline src="/video.mp4"></video>
-          </div>
-          <div style="color: #d4af37; font-size: 0.9rem; margin-bottom: 0.8rem; margin-top: 1.2rem; font-weight: 600;">📉 Crowd Trend</div>
-          <div class="stats-grid">
-            <div class="stat-box">
-              <div class="stat-label">People Trend</div>
-              <div class="stat-value" id="analytics-people-trend">-</div>
+            <div class="trend-chart-wrap">
+              <div class="trend-caption">📉 Crowd Trend (Live)</div>
+              <div class="trend-legend">
+                <span><span class="trend-dot" style="background:#d4af37;"></span>People Count</span>
+                <span><span class="trend-dot" style="background:#1ecbe1;"></span>Crowd Density %</span>
+              </div>
+              <canvas id="analytics-trend-canvas" class="trend-canvas"></canvas>
             </div>
-            <div class="stat-box">
-              <div class="stat-label">Density Trend</div>
-              <div class="stat-value" id="analytics-density-trend">-</div>
-            </div>
-            <div class="stat-box">
-              <div class="stat-label">People Slope</div>
-              <div class="stat-value" id="analytics-people-slope">-</div>
-            </div>
-            <div class="stat-box">
-              <div class="stat-label">Density Slope</div>
-              <div class="stat-value" id="analytics-density-slope">-</div>
-            </div>
-          </div>
-          <div class="trend-chart-wrap">
-            <div class="trend-legend">
-              <span><span class="trend-dot" style="background:#d4af37;"></span>People Count</span>
-              <span><span class="trend-dot" style="background:#1ecbe1;"></span>Crowd Density %</span>
-            </div>
-            <canvas id="analytics-trend-canvas" class="trend-canvas"></canvas>
           </div>
         </div>
         <div class="analytics-section">
           <div class="analytics-title">📊 Person Analytics</div>
-          <div class="info-box">
-            <div class="info-label">Video File</div>
-            <div class="info-value" id="analytics-video">Loading...</div>
-          </div>
-          <div style="color: #d4af37; font-size: 0.9rem; margin-bottom: 0.8rem; font-weight: 600;">👤 People Detection</div>
+          <div class="metric-heading">👤 People Detection</div>
           <div class="stats-grid">
             <div class="stat-box">
               <div class="stat-label">Max People</div>
@@ -297,7 +299,7 @@ const dashboardHtml = `<!doctype html>
               <div class="stat-value" id="analytics-sampled">-</div>
             </div>
           </div>
-          <div style="color: #d4af37; font-size: 0.9rem; margin-bottom: 0.8rem; margin-top: 1.2rem; font-weight: 600;">🎯 Object Detection</div>
+          <div class="metric-heading">🎯 Object Detection</div>
           <div class="stats-grid">
             <div class="stat-box">
               <div class="stat-label">Max Objects</div>
@@ -316,7 +318,7 @@ const dashboardHtml = `<!doctype html>
               <div class="stat-value" id="analytics-motion-percent">-</div>
             </div>
           </div>
-          <div style="color: #d4af37; font-size: 0.9rem; margin-bottom: 0.8rem; margin-top: 1.2rem; font-weight: 600;">� Crowd Analysis</div>
+          <div class="metric-heading">👥 Crowd Analysis</div>
           <div class="stats-grid">
             <div class="stat-box">
               <div class="stat-label">Crowd Frames</div>
@@ -334,8 +336,16 @@ const dashboardHtml = `<!doctype html>
               <div class="stat-label">Avg Crowd Size</div>
               <div class="stat-value" id="analytics-avg-crowd">-</div>
             </div>
+            <div class="stat-box">
+              <div class="stat-label">Avg Crowd Score</div>
+              <div class="stat-value" id="analytics-avg-crowd-score">-</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Peak Crowd Score</div>
+              <div class="stat-value" id="analytics-peak-crowd-score">-</div>
+            </div>
           </div>
-          <div style="color: #d4af37; font-size: 0.9rem; margin-bottom: 0.8rem; margin-top: 1.2rem; font-weight: 600;">📊 Density Analysis</div>
+          <div class="metric-heading">📊 Density Analysis</div>
           <div class="stats-grid">
             <div class="stat-box">
               <div class="stat-label">Max Density</div>
@@ -346,7 +356,7 @@ const dashboardHtml = `<!doctype html>
               <div class="stat-value" id="analytics-avg-density">-</div>
             </div>
           </div>
-          <div style="color: #d4af37; font-size: 0.9rem; margin-bottom: 0.8rem; margin-top: 1.2rem; font-weight: 600;">�🔍 Motion Analysis</div>
+          <div class="metric-heading">🔍 Motion Analysis</div>
           <div class="stats-grid">
             <div class="stat-box">
               <div class="stat-label">Frames w/ Motion</div>
@@ -365,7 +375,7 @@ const dashboardHtml = `<!doctype html>
               <div class="stat-value" id="analytics-frame-count">-</div>
             </div>
           </div>
-          <div style="color: #d4af37; font-size: 0.9rem; margin-bottom: 0.8rem; margin-top: 1.2rem; font-weight: 600;">📈 Advanced Analytics</div>
+          <div class="metric-heading">📈 Advanced Analytics</div>
           <div class="stats-grid">
             <div class="stat-box">
               <div class="stat-label">Median People</div>
@@ -403,14 +413,26 @@ const dashboardHtml = `<!doctype html>
               <div class="stat-label">Longest Crowd</div>
               <div class="stat-value" id="analytics-longest-crowd">-</div>
             </div>
+            <div class="stat-box">
+              <div class="stat-label">People Trend</div>
+              <div class="stat-value" id="analytics-people-trend">-</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Density Trend</div>
+              <div class="stat-value" id="analytics-density-trend">-</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">People Slope</div>
+              <div class="stat-value" id="analytics-people-slope">-</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Density Slope</div>
+              <div class="stat-value" id="analytics-density-slope">-</div>
+            </div>
           </div>
           <div class="info-box">
             <div class="info-label">Top Detected Objects</div>
             <div class="info-value" id="analytics-top-objects">-</div>
-          </div>
-          <div class="panel-box">
-            <div style="color: #d4af37; font-size: 0.9rem; margin-bottom: 0.5rem; font-weight: 600;">Raw Data</div>
-            <div class="json-box" id="analytics-json">Loading JSON data...</div>
           </div>
         </div>
       </div>
@@ -435,7 +457,7 @@ const dashboardHtml = `<!doctype html>
         if (!canvas || !data || !Array.isArray(data.person_counts) || data.person_counts.length === 0) return;
 
         const width = Math.max(320, Math.floor(canvas.clientWidth || 320));
-        const height = 190;
+        const height = 96;
         if (canvas.width !== width || canvas.height !== height) {
           canvas.width = width;
           canvas.height = height;
@@ -444,7 +466,7 @@ const dashboardHtml = `<!doctype html>
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
-        const pad = 20;
+        const pad = 12;
         const chartW = width - pad * 2;
         const chartH = height - pad * 2;
 
@@ -479,9 +501,6 @@ const dashboardHtml = `<!doctype html>
           if (!res.ok) return;
           const data = await res.json();
           
-          // Video info
-          document.getElementById('analytics-video').textContent = data.video || 'N/A';
-          
           // People detection
           document.getElementById('analytics-sampled').textContent = data.sampled_frames ?? '-';
           document.getElementById('analytics-max').textContent = data.max_people ?? '-';
@@ -500,6 +519,8 @@ const dashboardHtml = `<!doctype html>
           document.getElementById('analytics-crowd-percent').textContent = (crowdAnalysis.crowd_percentage ?? 0) + '%';
           document.getElementById('analytics-max-crowd').textContent = crowdAnalysis.max_crowd_size ?? '-';
           document.getElementById('analytics-avg-crowd').textContent = crowdAnalysis.average_crowd_size ?? '-';
+          document.getElementById('analytics-avg-crowd-score').textContent = crowdAnalysis.average_crowd_score ?? '-';
+          document.getElementById('analytics-peak-crowd-score').textContent = crowdAnalysis.peak_crowd_score ?? '-';
           
           // Density analysis
           const densityAnalysis = data.density_analysis || {};
@@ -536,10 +557,8 @@ const dashboardHtml = `<!doctype html>
           document.getElementById('analytics-density-slope').textContent = trend.density_trend_slope_per_sample ?? '-';
 
           drawCrowdTrend(data);
-          
-          document.getElementById('analytics-json').textContent = JSON.stringify(data, null, 2);
         } catch (e) {
-          document.getElementById('analytics-json').textContent = 'Analytics unavailable: ' + e.message;
+                    // Keep existing values when refresh fails.
         }
       }
       refreshAnalytics();
