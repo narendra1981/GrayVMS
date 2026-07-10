@@ -1,7 +1,10 @@
+require('dotenv').config();
+
 const express = require('express');
 const { spawn } = require('child_process');
 const path = require('path');
 const fs = require('fs');
+const twilio = require('twilio');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -10,6 +13,28 @@ const device = process.env.VIDEO_DEVICE || '/dev/video0';
 const useTestPattern = process.env.TEST_PATTERN === '1';
 const envVideoFile = process.env.VIDEO_FILE;
 const videoFileDefault = 'video.mp4'; // fallback filename in public/
+const camera1AlertThreshold = Number(process.env.CAMERA1_MAX_PEOPLE_ALERT_THRESHOLD || 10);
+const smsAlertCooldownMs = Math.max(30, Number(process.env.SMS_ALERT_COOLDOWN_SECONDS || 300)) * 1000;
+const twilioAccountSid = process.env.TWILIO_ACCOUNT_SID || '';
+const twilioAuthToken = process.env.TWILIO_AUTH_TOKEN || '';
+const twilioFromNumber = process.env.TWILIO_FROM_NUMBER || '';
+const twilioToNumbers = (process.env.TWILIO_TO_NUMBERS || '')
+  .split(',')
+  .map((value) => value.trim())
+  .filter(Boolean);
+const twilioWhatsappFrom = process.env.TWILIO_WHATSAPP_FROM || '';
+const twilioWhatsappToNumbers = (process.env.TWILIO_WHATSAPP_TO_NUMBERS || '')
+  .split(',')
+  .map((value) => value.trim())
+  .filter(Boolean);
+
+const twilioClient = twilioAccountSid && twilioAuthToken
+  ? twilio(twilioAccountSid, twilioAuthToken)
+  : null;
+
+let smsConfigWarningShown = false;
+let camera1AlertPreviousActive = false;
+let lastCamera1SmsSentAt = 0;
 
 function resolvePreferredVideo(camera = 1) {
   // Priority: explicit env VIDEO_FILE (absolute or relative to project root),
@@ -859,6 +884,188 @@ app.get('/analytics/person_counts2.json', (req, res) => {
   });
 });
 
+function evaluateCamera1Alert(callback) {
+  const filePath = path.join(__dirname, 'analytics', 'person_counts.json');
+  fs.readFile(filePath, 'utf8', (err, raw) => {
+    if (err) {
+      return callback({
+        ok: false,
+        statusCode: 404,
+        payload: {
+          camera: 1,
+          threshold: camera1AlertThreshold,
+          active: false,
+          max_people: null,
+          message: 'Analytics not found',
+        },
+      });
+    }
+
+    let parsed;
+    try {
+      parsed = JSON.parse(raw);
+    } catch (parseErr) {
+      return callback({
+        ok: false,
+        statusCode: 500,
+        payload: {
+          camera: 1,
+          threshold: camera1AlertThreshold,
+          active: false,
+          max_people: null,
+          message: 'Analytics parse error',
+        },
+      });
+    }
+
+    const maxPeople = Number(parsed.max_people || 0);
+    const active = Number.isFinite(maxPeople) && maxPeople > camera1AlertThreshold;
+
+    return callback({
+      ok: true,
+      statusCode: 200,
+      payload: {
+        camera: 1,
+        threshold: camera1AlertThreshold,
+        active,
+        max_people: maxPeople,
+        message: active
+          ? `ALERT: Camera 1 reached ${maxPeople} people (threshold ${camera1AlertThreshold})`
+          : `Camera 1 is normal (${maxPeople}/${camera1AlertThreshold})`,
+        source_file: 'analytics/person_counts.json',
+        updated_at: new Date().toISOString(),
+      },
+    });
+  });
+}
+
+async function sendCamera1SmsAlert(message) {
+  const smsConfigured = twilioClient && twilioFromNumber && twilioToNumbers.length > 0;
+  const whatsappConfigured = twilioClient && twilioWhatsappFrom && twilioWhatsappToNumbers.length > 0;
+
+  if (!smsConfigured && !whatsappConfigured) {
+    if (!smsConfigWarningShown) {
+      console.log('SMS/WhatsApp alerts disabled. Set TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN and channel-specific env vars to enable.');
+      smsConfigWarningShown = true;
+    }
+    return;
+  }
+
+  const sends = [];
+  if (smsConfigured) {
+    twilioToNumbers.forEach((to) => {
+      sends.push({
+        channel: 'sms',
+        to,
+        promise: twilioClient.messages.create({
+          body: message,
+          from: twilioFromNumber,
+          to,
+        }),
+      });
+    });
+  }
+
+  if (whatsappConfigured) {
+    twilioWhatsappToNumbers.forEach((toRaw) => {
+      const to = toRaw.startsWith('whatsapp:') ? toRaw : `whatsapp:${toRaw}`;
+      const from = twilioWhatsappFrom.startsWith('whatsapp:') ? twilioWhatsappFrom : `whatsapp:${twilioWhatsappFrom}`;
+      sends.push({
+        channel: 'whatsapp',
+        to,
+        promise: twilioClient.messages.create({
+          body: message,
+          from,
+          to,
+        }),
+      });
+    });
+  }
+
+  const results = await Promise.allSettled(sends.map((entry) => entry.promise));
+  results.forEach((result, index) => {
+    const target = sends[index];
+    if (result.status === 'fulfilled') {
+      console.log(`${target.channel.toUpperCase()} alert sent to ${target.to}: sid=${result.value.sid}`);
+    } else {
+      console.error(`${target.channel.toUpperCase()} alert failed for ${target.to}:`, result.reason?.message || result.reason);
+    }
+  });
+}
+
+function checkAndSendCamera1SmsAlert() {
+  evaluateCamera1Alert(async (result) => {
+    if (!result.ok) return;
+
+    const { active, message } = result.payload;
+    const now = Date.now();
+    const shouldSend = active && (
+      !camera1AlertPreviousActive ||
+      now - lastCamera1SmsSentAt >= smsAlertCooldownMs
+    );
+
+    if (shouldSend) {
+      try {
+        await sendCamera1SmsAlert(message);
+        lastCamera1SmsSentAt = now;
+      } catch (err) {
+        console.error('SMS alert send error:', err.message || err);
+      }
+    }
+
+    camera1AlertPreviousActive = active;
+  });
+}
+
+function maskConfigValue(value) {
+  if (!value) return null;
+  const raw = String(value);
+  if (raw.length <= 4) return '****';
+  return `${'*'.repeat(raw.length - 4)}${raw.slice(-4)}`;
+}
+
+app.get('/alerts/channels/status', (req, res) => {
+  const twilioConfigured = Boolean(twilioClient);
+  const smsConfigured = twilioConfigured && Boolean(twilioFromNumber) && twilioToNumbers.length > 0;
+  const whatsappConfigured = twilioConfigured && Boolean(twilioWhatsappFrom) && twilioWhatsappToNumbers.length > 0;
+
+  res.json({
+    camera: 1,
+    threshold: camera1AlertThreshold,
+    cooldown_seconds: Math.floor(smsAlertCooldownMs / 1000),
+    twilio: {
+      configured: twilioConfigured,
+      account_sid_masked: maskConfigValue(twilioAccountSid),
+    },
+    channels: {
+      sms: {
+        ready: smsConfigured,
+        from_masked: maskConfigValue(twilioFromNumber),
+        recipients_count: twilioToNumbers.length,
+      },
+      whatsapp: {
+        ready: whatsappConfigured,
+        from_masked: maskConfigValue(twilioWhatsappFrom),
+        recipients_count: twilioWhatsappToNumbers.length,
+      },
+    },
+    alert_state: {
+      previously_active: camera1AlertPreviousActive,
+      last_sent_at: lastCamera1SmsSentAt ? new Date(lastCamera1SmsSentAt).toISOString() : null,
+    },
+  });
+});
+
+app.get('/alerts/camera1/current', (req, res) => {
+  evaluateCamera1Alert((result) => {
+    if (!result.ok) {
+      return res.status(result.statusCode).json(result.payload);
+    }
+
+    return res.status(200).json(result.payload);
+  });
+});
+
 // Background analysis task - runs Python analytics periodically
 function runAnalysisTask(camera = 1) {
   const videoPath = resolvePreferredVideo(camera);
@@ -894,14 +1101,17 @@ app.get('/analyze2', (req, res) => {
 // Start background analysis every 5 seconds
 let analysisInterval1 = null;
 let analysisInterval2 = null;
+let camera1SmsAlertInterval = null;
 function startBackgroundAnalysis() {
   // Run initial analysis immediately
   runAnalysisTask(1);
   runAnalysisTask(2);
+  checkAndSendCamera1SmsAlert();
   
   // Then run every 5 seconds
   analysisInterval1 = setInterval(() => runAnalysisTask(1), 5000);
   analysisInterval2 = setInterval(() => runAnalysisTask(2), 5000);
+  camera1SmsAlertInterval = setInterval(checkAndSendCamera1SmsAlert, 5000);
   console.log('Background analysis started for both cameras (running every 5 seconds)');
 }
 
@@ -928,6 +1138,9 @@ function stopBackgroundAnalysis() {
   }
   if (analysisInterval2) {
     clearInterval(analysisInterval2);
+  }
+  if (camera1SmsAlertInterval) {
+    clearInterval(camera1SmsAlertInterval);
   }
   console.log('Background analysis stopped');
 }

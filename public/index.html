@@ -53,6 +53,34 @@
         transition: background 0.2s;
       }
       .cam-link:hover { background: rgba(30,203,225,0.1); }
+      .alert-banner {
+        margin: 0 0 0.5rem;
+        padding: 0.45rem 0.6rem;
+        border-radius: 8px;
+        border: 1px solid #3f3f46;
+        background: rgba(63, 63, 70, 0.35);
+        color: #d4d4d8;
+        font-size: 0.72rem;
+        letter-spacing: 0.02em;
+        min-height: 1.1rem;
+      }
+      .alert-banner.alert-active {
+        border-color: rgba(239,68,68,0.9);
+        background: linear-gradient(90deg, rgba(127,29,29,0.7), rgba(153,27,27,0.45));
+        color: #fecaca;
+        box-shadow: 0 0 0 1px rgba(239,68,68,0.35), 0 0 16px rgba(239,68,68,0.25);
+        animation: alertPulse 1.2s ease-in-out infinite;
+      }
+      .alert-banner.alert-normal {
+        border-color: rgba(34,197,94,0.65);
+        background: linear-gradient(90deg, rgba(20,83,45,0.45), rgba(21,128,61,0.25));
+        color: #bbf7d0;
+      }
+      @keyframes alertPulse {
+        0% { opacity: 1; }
+        50% { opacity: 0.75; }
+        100% { opacity: 1; }
+      }
       .panel-box {
         border: 2px solid #d4af37;
         box-shadow: 0 8px 32px rgba(212,175,55,0.15), inset 0 1px 0 rgba(212,175,55,0.1);
@@ -162,6 +190,7 @@
           <div class="cam-header">
             <span class="cam-title">📷 Camera 1</span>
           </div>
+          <div id="c1-alert-banner" class="alert-banner">Alert status: loading...</div>
           <div class="panel-box">
             <div class="video-wrap">
               <video id="c1-video" class="stream" controls autoplay loop muted playsinline src="/video.mp4"></video>
@@ -320,6 +349,69 @@
     </div>
 
     <script>
+      const camera1AlertState = {
+        lastActive: false,
+        lastMessage: '',
+      };
+
+      function playAlertTone() {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        const ctx = new AudioCtx();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'square';
+        osc.frequency.value = 880;
+        gain.gain.value = 0.0001;
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        const now = ctx.currentTime;
+        gain.gain.exponentialRampToValueAtTime(0.06, now + 0.03);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.32);
+        osc.start(now);
+        osc.stop(now + 0.35);
+      }
+
+      function notifyBrowser(message) {
+        if (!('Notification' in window)) return;
+        if (Notification.permission === 'granted') {
+          new Notification('GrayVMS Camera 1 Alert', { body: message });
+        }
+      }
+
+      async function refreshCamera1Alert() {
+        const banner = document.getElementById('c1-alert-banner');
+        if (!banner) return;
+
+        try {
+          const res = await fetch('/alerts/camera1/current');
+          if (!res.ok) throw new Error('Alert endpoint unavailable');
+          const data = await res.json();
+
+          const active = Boolean(data.active);
+          const threshold = Number(data.threshold || 10);
+          const maxPeople = Number(data.max_people || 0);
+          const message = active
+            ? ('ALERT: Camera 1 people count is ' + maxPeople + ' (threshold > ' + threshold + ')')
+            : ('Camera 1 normal: max people ' + maxPeople + ' (threshold > ' + threshold + ')');
+
+          banner.textContent = message;
+          banner.classList.remove('alert-active', 'alert-normal');
+          banner.classList.add(active ? 'alert-active' : 'alert-normal');
+
+          if (active && (!camera1AlertState.lastActive || camera1AlertState.lastMessage !== message)) {
+            playAlertTone();
+            notifyBrowser(message);
+          }
+
+          camera1AlertState.lastActive = active;
+          camera1AlertState.lastMessage = message;
+        } catch (err) {
+          banner.textContent = 'Alert status unavailable';
+          banner.classList.remove('alert-active', 'alert-normal');
+        }
+      }
+
       function setupCamera(camId, videoId, bboxId, trendId, dataUrl) {
         let latestAnalytics = null;
 
@@ -475,6 +567,12 @@
 
       setupCamera('c1', 'c1-video', 'c1-bbox', 'c1-trend', '/analytics/person_counts.json');
       setupCamera('c2', 'c2-video', 'c2-bbox', 'c2-trend', '/analytics/person_counts2.json');
+
+      if ('Notification' in window && Notification.permission === 'default') {
+        Notification.requestPermission().catch(() => {});
+      }
+      refreshCamera1Alert();
+      setInterval(refreshCamera1Alert, 5000);
     </script>
   </body>
 </html>
