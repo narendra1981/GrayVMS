@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>GrayVMS Live View</title>
     <style>
+      @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&family=JetBrains+Mono:wght@500;700&display=swap');
       :root { color-scheme: dark; }
       body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-family: 'Plus Jakarta Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         margin: 0;
         padding: 1rem;
         background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 25%, #2d2d2d 50%, #1a1a1a 75%, #0a0a0a 100%);
@@ -54,7 +55,7 @@
       }
       .cam-link:hover { background: rgba(30,203,225,0.1); }
       .alert-banner {
-        margin: 0 0 0.5rem;
+        margin: 0 0 0.9rem;
         padding: 0.45rem 0.6rem;
         border-radius: 8px;
         border: 1px solid #3f3f46;
@@ -129,60 +130,173 @@
         background: #111;
         border: 1px solid rgba(212,175,55,0.25);
       }
-      .analytics-section { margin-top: 0.6rem; }
+      .analytics-section {
+        margin-top: 0.7rem;
+        padding: 0.85rem;
+        border-radius: 14px;
+        border: 1px solid rgba(46, 57, 72, 0.95);
+        background:
+          radial-gradient(120% 120% at 0% 0%, rgba(56, 189, 248, 0.12) 0%, rgba(56, 189, 248, 0) 52%),
+          linear-gradient(165deg, rgba(15, 23, 42, 0.92), rgba(15, 23, 42, 0.72));
+        box-shadow:
+          0 18px 40px rgba(2, 6, 23, 0.45),
+          inset 0 1px 0 rgba(148, 163, 184, 0.2);
+        backdrop-filter: blur(8px);
+      }
       .analytics-title {
-        font-size: 0.9rem;
-        margin: 0 0 0.42rem;
-        letter-spacing: 0.06em;
-        color: #d4af37;
+        font-size: 0.98rem;
+        margin: 0 0 0.55rem;
+        letter-spacing: 0.08em;
+        color: #f8fafc;
         font-weight: 700;
+        text-transform: uppercase;
       }
       .metric-heading {
-        color: #d4af37;
-        font-size: 0.62rem;
-        margin: 0.32rem 0 0.2rem;
-        font-weight: 600;
-        letter-spacing: 0.03em;
+        color: #7dd3fc;
+        font-size: 0.61rem;
+        margin: 0.42rem 0 0.22rem;
+        font-weight: 700;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
       }
       .stats-grid {
         display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 0.3rem;
-        margin-bottom: 0.3rem;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 0.38rem;
+        margin-bottom: 0.42rem;
       }
       .stat-box {
-        background: linear-gradient(135deg, #1f1f1f 0%, #2a2a2a 100%);
-        border: 1.5px solid #d4af37;
-        border-radius: 7px;
-        padding: 0.28rem 0.2rem;
+        background: linear-gradient(165deg, rgba(30, 41, 59, 0.92), rgba(15, 23, 42, 0.86));
+        border: 1px solid rgba(100, 116, 139, 0.45);
+        border-radius: 10px;
+        padding: 0.2rem 0.32rem;
         text-align: center;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(212,175,55,0.1);
+        transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+        box-shadow: 0 8px 20px rgba(2, 6, 23, 0.28);
         overflow: hidden;
-        min-height: 38px;
+        min-height: 28px;
+        position: relative;
       }
-      .stat-label { font-size: 0.5rem; color: #999; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.1rem; font-weight: 500; line-height: 1.1; }
-      .stat-value { font-size: 0.76rem; color: #d4af37; font-weight: 700; font-family: 'Courier New', monospace; line-height: 1.15; }
+      .stat-box::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, rgba(125, 211, 252, 0.1), rgba(125, 211, 252, 0.85), rgba(125, 211, 252, 0.1));
+      }
+      .stat-box:hover {
+        transform: translateY(-1px);
+        border-color: rgba(125, 211, 252, 0.9);
+        box-shadow: 0 12px 26px rgba(14, 116, 144, 0.28);
+      }
+      .stat-label {
+        font-size: 0.49rem;
+        color: #d4af37;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        margin-bottom: 0.15rem;
+        font-weight: 600;
+        line-height: 1.1;
+      }
+      .stat-value {
+        font-size: 0.82rem;
+        color: #f8fafc;
+        font-weight: 700;
+        font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
+        line-height: 1.15;
+      }
       .metric-good { color: #22c55e !important; }
       .metric-bad  { color: #ef4444 !important; }
-      .metric-neutral { color: #d4af37 !important; }
+      .metric-neutral { color: #7dd3fc !important; }
       .info-box {
-        background: linear-gradient(135deg, #1f1f1f 0%, #2a2a2a 100%);
-        border: 1.5px solid #d4af37;
-        border-radius: 7px;
-        padding: 0.38rem 0.5rem;
-        margin-bottom: 0.3rem;
+        background: linear-gradient(165deg, rgba(30, 41, 59, 0.88), rgba(15, 23, 42, 0.84));
+        border: 1px solid rgba(100, 116, 139, 0.55);
+        border-radius: 10px;
+        padding: 0.46rem 0.58rem;
+        margin-bottom: 0.35rem;
       }
-      .info-label { font-size: 0.54rem; color: #999; margin-bottom: 0.08rem; text-transform: uppercase; letter-spacing: 0.05em; }
-      .info-value { font-size: 0.68rem; color: #e8e8e8; word-break: break-all; font-family: 'Courier New', monospace; }
+      .info-label { font-size: 0.54rem; color: #93a4bb; margin-bottom: 0.08rem; text-transform: uppercase; letter-spacing: 0.06em; }
+      .info-value { font-size: 0.68rem; color: #f1f5f9; word-break: break-all; font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace; }
       @media (max-width: 1100px) {
         .dual-view { grid-template-columns: 1fr; }
+        .stats-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      }
+      @media (max-width: 780px) {
+        .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      }
+      @media (max-width: 500px) {
+        .stats-grid { grid-template-columns: 1fr; }
+      }
+      .db-section {
+        margin-top: 1rem;
+        border: 1px solid rgba(100, 116, 139, 0.45);
+        border-radius: 12px;
+        background: linear-gradient(165deg, rgba(15, 23, 42, 0.92), rgba(30, 41, 59, 0.82));
+        box-shadow: 0 12px 26px rgba(2, 6, 23, 0.32);
+        overflow: hidden;
+      }
+      .db-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.6rem 0.75rem;
+        border-bottom: 1px solid rgba(100, 116, 139, 0.35);
+      }
+      .db-title {
+        color: #d4af37;
+        font-size: 0.78rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        font-weight: 700;
+      }
+      .db-meta {
+        color: #cbd5e1;
+        font-size: 0.64rem;
+      }
+      .db-table-wrap {
+        overflow-x: auto;
+      }
+      .db-table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 760px;
+      }
+      .db-table th,
+      .db-table td {
+        padding: 0.45rem 0.55rem;
+        border-bottom: 1px solid rgba(71, 85, 105, 0.45);
+        text-align: left;
+        white-space: nowrap;
+      }
+      .db-table th {
+        color: #7dd3fc;
+        font-size: 0.62rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        font-weight: 700;
+        background: rgba(15, 23, 42, 0.65);
+      }
+      .db-table td {
+        color: #f1f5f9;
+        font-size: 0.66rem;
+        font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
+      }
+      .db-table tbody tr:nth-child(even) td {
+        background: rgba(30, 41, 59, 0.26);
+      }
+      .db-empty {
+        color: #94a3b8;
+        font-size: 0.68rem;
+        padding: 0.7rem 0.75rem;
       }
     </style>
   </head>
   <body>
     <div style="max-width:1800px;margin:0 auto;">
       <h1>🎬 GrayVMS Live View</h1>
+      <div id="global-alert-banner" class="alert-banner">Alert status: loading...</div>
       <div class="dual-view">
 
         <!-- ── Camera 1 ── -->
@@ -190,7 +304,6 @@
           <div class="cam-header">
             <span class="cam-title">📷 Camera 1</span>
           </div>
-          <div id="c1-alert-banner" class="alert-banner">Alert status: loading...</div>
           <div class="panel-box">
             <div class="video-wrap">
               <video id="c1-video" class="stream" controls autoplay loop muted playsinline src="/video.mp4"></video>
@@ -346,6 +459,31 @@
         </div>
 
       </div>
+
+      <div class="db-section">
+        <div class="db-head">
+          <div class="db-title">Analytics DB Snapshots</div>
+          <div id="db-meta" class="db-meta">Loading...</div>
+        </div>
+        <div class="db-table-wrap">
+          <table class="db-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Camera</th>
+                <th>Max</th>
+                <th>Avg</th>
+                <th>Min</th>
+                <th>Sampled</th>
+                <th>Points</th>
+                <th>Created At</th>
+              </tr>
+            </thead>
+            <tbody id="db-table-body"></tbody>
+          </table>
+          <div id="db-empty" class="db-empty" style="display:none;">No database records yet.</div>
+        </div>
+      </div>
     </div>
 
     <script>
@@ -380,7 +518,7 @@
       }
 
       async function refreshCamera1Alert() {
-        const banner = document.getElementById('c1-alert-banner');
+        const banner = document.getElementById('global-alert-banner');
         if (!banner) return;
 
         try {
@@ -409,6 +547,54 @@
         } catch (err) {
           banner.textContent = 'Alert status unavailable';
           banner.classList.remove('alert-active', 'alert-normal');
+        }
+      }
+
+      function safeCellValue(value) {
+        if (value === null || value === undefined || value === '') return '-';
+        return String(value);
+      }
+
+      async function refreshDbTable() {
+        const body = document.getElementById('db-table-body');
+        const meta = document.getElementById('db-meta');
+        const empty = document.getElementById('db-empty');
+        if (!body || !meta || !empty) return;
+
+        try {
+          const res = await fetch('/analytics/db/recent?limit=30');
+          if (!res.ok) throw new Error('db endpoint unavailable');
+          const data = await res.json();
+
+          const rows = Array.isArray(data.rows) ? data.rows : [];
+          const totals = data.totals || { total_snapshots: 0, total_person_samples: 0 };
+          meta.textContent =
+            'Snapshots: ' + safeCellValue(totals.total_snapshots) +
+            ' | Person Samples: ' + safeCellValue(totals.total_person_samples);
+
+          if (rows.length === 0) {
+            body.innerHTML = '';
+            empty.style.display = 'block';
+            return;
+          }
+
+          empty.style.display = 'none';
+          body.innerHTML = rows.map((row) => {
+            return '<tr>' +
+              '<td>' + safeCellValue(row.id) + '</td>' +
+              '<td>' + safeCellValue(row.camera_id) + '</td>' +
+              '<td>' + safeCellValue(row.max_people) + '</td>' +
+              '<td>' + safeCellValue(row.average_people) + '</td>' +
+              '<td>' + safeCellValue(row.min_people) + '</td>' +
+              '<td>' + safeCellValue(row.sampled_frames) + '</td>' +
+              '<td>' + safeCellValue(row.sample_points) + '</td>' +
+              '<td>' + safeCellValue(row.created_at) + '</td>' +
+            '</tr>';
+          }).join('');
+        } catch (err) {
+          body.innerHTML = '';
+          empty.style.display = 'block';
+          meta.textContent = 'Database unavailable';
         }
       }
 
@@ -573,6 +759,8 @@
       }
       refreshCamera1Alert();
       setInterval(refreshCamera1Alert, 5000);
+      refreshDbTable();
+      setInterval(refreshDbTable, 10000);
     </script>
   </body>
 </html>

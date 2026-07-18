@@ -5,6 +5,7 @@ const { spawn } = require('child_process');
 const path = require('path');
 const fs = require('fs');
 const twilio = require('twilio');
+const sqlite3 = require('sqlite3').verbose();
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -27,6 +28,7 @@ const twilioWhatsappToNumbers = (process.env.TWILIO_WHATSAPP_TO_NUMBERS || '')
   .split(',')
   .map((value) => value.trim())
   .filter(Boolean);
+const analyticsDbPath = process.env.ANALYTICS_DB_PATH || path.join(__dirname, 'analytics', 'grayvms_analytics.db');
 
 const twilioClient = twilioAccountSid && twilioAuthToken
   ? twilio(twilioAccountSid, twilioAuthToken)
@@ -35,6 +37,216 @@ const twilioClient = twilioAccountSid && twilioAuthToken
 let smsConfigWarningShown = false;
 let camera1AlertPreviousActive = false;
 let lastCamera1SmsSentAt = 0;
+let analyticsDb = null;
+let analyticsDbReady = false;
+let analyticsDbWriteQueue = Promise.resolve();
+
+function dbRun(sql, params = []) {
+  return new Promise((resolve, reject) => {
+    if (!analyticsDb) {
+      resolve({ lastID: null, changes: 0 });
+      return;
+    }
+
+    analyticsDb.run(sql, params, function onRun(err) {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve({ lastID: this.lastID, changes: this.changes });
+    });
+  });
+}
+
+function dbAll(sql, params = []) {
+  return new Promise((resolve, reject) => {
+    if (!analyticsDb) {
+      resolve([]);
+      return;
+    }
+
+    analyticsDb.all(sql, params, (err, rows) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve(rows || []);
+    });
+  });
+}
+
+function toFiniteNumberOrNull(value) {
+  const num = Number(value);
+  return Number.isFinite(num) ? num : null;
+}
+
+async function setupAnalyticsDbSchema() {
+  await dbRun(`
+    CREATE TABLE IF NOT EXISTS analytics_snapshots (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      camera_id INTEGER NOT NULL,
+      video TEXT,
+      sampled_frames INTEGER,
+      frame_count INTEGER,
+      fps REAL,
+      max_people REAL,
+      average_people REAL,
+      min_people REAL,
+      payload_json TEXT NOT NULL,
+      created_at TEXT NOT NULL DEFAULT (datetime('now'))
+    )
+  `);
+
+  await dbRun(`
+    CREATE TABLE IF NOT EXISTS analytics_person_counts (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      snapshot_id INTEGER NOT NULL,
+      camera_id INTEGER NOT NULL,
+      sample_index INTEGER NOT NULL,
+      timestamp_seconds REAL,
+      person_count INTEGER,
+      crowd_density REAL,
+      is_crowd INTEGER,
+      crowd_size INTEGER,
+      FOREIGN KEY(snapshot_id) REFERENCES analytics_snapshots(id)
+    )
+  `);
+
+  await dbRun('CREATE INDEX IF NOT EXISTS idx_snapshots_camera_created_at ON analytics_snapshots(camera_id, created_at DESC)');
+  await dbRun('CREATE INDEX IF NOT EXISTS idx_person_counts_snapshot_id ON analytics_person_counts(snapshot_id)');
+}
+
+async function persistAnalyticsForCamera(camera = 1) {
+  if (!analyticsDbReady || !analyticsDb) return;
+
+  const filePath = path.join(__dirname, 'analytics', camera === 1 ? 'person_counts.json' : 'person_counts2.json');
+  let raw;
+  let payload;
+
+  try {
+    raw = await fs.promises.readFile(filePath, 'utf8');
+    payload = JSON.parse(raw);
+  } catch (err) {
+    return;
+  }
+
+  await dbRun('BEGIN TRANSACTION');
+  try {
+    const snapshotInsert = await dbRun(
+      `INSERT INTO analytics_snapshots (
+        camera_id,
+        video,
+        sampled_frames,
+        frame_count,
+        fps,
+        max_people,
+        average_people,
+        min_people,
+        payload_json,
+        created_at
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)` ,
+      [
+        camera,
+        payload.video || null,
+        toFiniteNumberOrNull(payload.sampled_frames),
+        toFiniteNumberOrNull(payload.frame_count),
+        toFiniteNumberOrNull(payload.fps),
+        toFiniteNumberOrNull(payload.max_people),
+        toFiniteNumberOrNull(payload.average_people),
+        toFiniteNumberOrNull(payload.min_people),
+        raw,
+        new Date().toISOString(),
+      ],
+    );
+
+    const snapshotId = snapshotInsert.lastID;
+    if (snapshotId && Array.isArray(payload.person_counts)) {
+      for (let i = 0; i < payload.person_counts.length; i += 1) {
+        const sample = payload.person_counts[i] || {};
+        await dbRun(
+          `INSERT INTO analytics_person_counts (
+            snapshot_id,
+            camera_id,
+            sample_index,
+            timestamp_seconds,
+            person_count,
+            crowd_density,
+            is_crowd,
+            crowd_size
+          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+          [
+            snapshotId,
+            camera,
+            i,
+            toFiniteNumberOrNull(sample.timestamp_seconds),
+            toFiniteNumberOrNull(sample.person_count),
+            toFiniteNumberOrNull(sample.crowd_density),
+            sample.is_crowd ? 1 : 0,
+            toFiniteNumberOrNull(sample.crowd_size),
+          ],
+        );
+      }
+    }
+
+    await dbRun('COMMIT');
+  } catch (err) {
+    try {
+      await dbRun('ROLLBACK');
+    } catch (rollbackErr) {
+      // Ignore rollback failures and report original error below.
+    }
+    console.error(`Analytics DB persist failed for camera ${camera}:`, err.message || err);
+  }
+}
+
+function queueAnalyticsPersist(camera = 1) {
+  if (!analyticsDbReady || !analyticsDb) return;
+  analyticsDbWriteQueue = analyticsDbWriteQueue
+    .then(() => persistAnalyticsForCamera(camera))
+    .catch((err) => {
+      console.error('Analytics DB queue error:', err.message || err);
+    });
+}
+
+function initAnalyticsDb() {
+  try {
+    fs.mkdirSync(path.dirname(analyticsDbPath), { recursive: true });
+    analyticsDb = new sqlite3.Database(analyticsDbPath, async (err) => {
+      if (err) {
+        console.error('Analytics DB initialization failed:', err.message || err);
+        analyticsDb = null;
+        analyticsDbReady = false;
+        return;
+      }
+
+      try {
+        await setupAnalyticsDbSchema();
+        analyticsDbReady = true;
+        console.log(`Analytics DB ready at ${analyticsDbPath}`);
+        queueAnalyticsPersist(1);
+        queueAnalyticsPersist(2);
+      } catch (schemaErr) {
+        console.error('Analytics DB schema setup failed:', schemaErr.message || schemaErr);
+        analyticsDbReady = false;
+      }
+    });
+  } catch (err) {
+    console.error('Analytics DB startup failed:', err.message || err);
+  }
+}
+
+function closeAnalyticsDb() {
+  if (!analyticsDb) return;
+  analyticsDb.close((err) => {
+    if (err) {
+      console.error('Analytics DB close failed:', err.message || err);
+      return;
+    }
+    console.log('Analytics DB closed');
+  });
+  analyticsDb = null;
+  analyticsDbReady = false;
+}
 
 function resolvePreferredVideo(camera = 1) {
   // Priority: explicit env VIDEO_FILE (absolute or relative to project root),
@@ -884,6 +1096,65 @@ app.get('/analytics/person_counts2.json', (req, res) => {
   });
 });
 
+app.get('/analytics/db/recent', async (req, res) => {
+  if (!analyticsDbReady || !analyticsDb) {
+    return res.status(503).json({
+      ready: false,
+      rows: [],
+      message: 'Analytics DB not ready',
+    });
+  }
+
+  const limitParam = Number.parseInt(req.query.limit, 10);
+  const limit = Number.isFinite(limitParam) && limitParam > 0
+    ? Math.min(limitParam, 200)
+    : 30;
+
+  try {
+    const rows = await dbAll(
+      `SELECT
+         s.id,
+         s.camera_id,
+         s.max_people,
+         s.average_people,
+         s.min_people,
+         s.sampled_frames,
+         s.created_at,
+         COALESCE(pc.sample_points, 0) AS sample_points
+       FROM analytics_snapshots s
+       LEFT JOIN (
+         SELECT snapshot_id, COUNT(*) AS sample_points
+         FROM analytics_person_counts
+         GROUP BY snapshot_id
+       ) pc
+       ON pc.snapshot_id = s.id
+       ORDER BY s.id DESC
+       LIMIT ?`,
+      [limit],
+    );
+
+    const totals = await dbAll(
+      `SELECT
+         (SELECT COUNT(*) FROM analytics_snapshots) AS total_snapshots,
+         (SELECT COUNT(*) FROM analytics_person_counts) AS total_person_samples`,
+      [],
+    );
+
+    return res.json({
+      ready: true,
+      totals: totals[0] || { total_snapshots: 0, total_person_samples: 0 },
+      rows,
+      generated_at: new Date().toISOString(),
+    });
+  } catch (err) {
+    return res.status(500).json({
+      ready: false,
+      rows: [],
+      message: err.message || 'Failed to read analytics database',
+    });
+  }
+});
+
 function evaluateCamera1Alert(callback) {
   const filePath = path.join(__dirname, 'analytics', 'person_counts.json');
   fs.readFile(filePath, 'utf8', (err, raw) => {
@@ -1085,6 +1356,12 @@ function runAnalysisTask(camera = 1) {
   python.on('error', (err) => {
     console.error(`Analysis error (Camera ${camera}):`, err.message);
   });
+
+  python.on('close', (code) => {
+    if (code === 0) {
+      queueAnalyticsPersist(camera);
+    }
+  });
 }
 
 // Manual endpoints to trigger analysis
@@ -1149,6 +1426,7 @@ app.listen(port, () => {
   console.log(`Testing GrayVMS streamer running on http://localhost:${port}`);
   if (useTestPattern) console.log('Using test pattern (TEST_PATTERN=1)');
   else if (!rtsp) console.log(`Using local device: ${device} (set RTSP_URL to stream from RTSP)`);
+  initAnalyticsDb();
   
   // Start background analysis task
   startBackgroundAnalysis();
@@ -1157,5 +1435,6 @@ app.listen(port, () => {
 // Handle graceful shutdown
 process.on('SIGINT', () => {
   stopBackgroundAnalysis();
+  closeAnalyticsDb();
   process.exit(0);
 });

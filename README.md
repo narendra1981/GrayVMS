@@ -10,7 +10,7 @@ Prerequisites:
 Install and run:
 
 ```bash
-cd "Somatics/Source_Local_Copied/Integration_ GrayVMS/Testing_GrayVMS"
+cd "Testing_GrayVMS"
 npm install
 # Local webcam
 npm start
