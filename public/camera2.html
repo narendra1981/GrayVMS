@@ -147,14 +147,231 @@
         .analytics-section { transform: none; width: 100%; }
         .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       }
+
+      /* Dashboard.PNG-inspired visual layer (camera logic unchanged) */
+      :root {
+        --bg-main: #04070d;
+        --bg-card: #0c141f;
+        --bg-card-soft: #101c2b;
+        --line: rgba(105, 168, 255, 0.26);
+        --line-strong: rgba(105, 168, 255, 0.5);
+        --text-main: #e6f0ff;
+        --text-soft: #9fb5d2;
+        --accent: #5bb6ff;
+        --accent-2: #49e0b8;
+      }
+
+      body {
+        font-family: 'Plus Jakarta Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background:
+          radial-gradient(1200px 480px at 12% -8%, rgba(91, 182, 255, 0.2), transparent 55%),
+          radial-gradient(900px 480px at 88% -12%, rgba(73, 224, 184, 0.12), transparent 56%),
+          linear-gradient(180deg, #02050a 0%, var(--bg-main) 100%);
+        color: var(--text-main);
+      }
+
+      h1 {
+        color: var(--text-main);
+        text-shadow: none;
+        letter-spacing: 0.02em;
+      }
+
+      .back-link {
+        border-color: var(--line-strong);
+        color: var(--text-main);
+        background: rgba(91, 182, 255, 0.12);
+        border-radius: 999px;
+      }
+
+      .back-link:hover { background: rgba(91, 182, 255, 0.26); }
+
+      .panel-box,
+      .analytics-section {
+        border: 1px solid var(--line);
+        background: linear-gradient(150deg, rgba(12, 20, 31, 0.96), rgba(8, 16, 26, 0.9));
+        box-shadow:
+          0 12px 28px rgba(0, 0, 0, 0.32),
+          inset 0 1px 0 rgba(255, 255, 255, 0.04);
+        border-radius: 14px;
+      }
+
+      .panel-box::before {
+        background: linear-gradient(90deg, transparent, rgba(91, 182, 255, 0.8), transparent);
+      }
+
+      .stream,
+      .trend-canvas,
+      .bbox-overlay {
+        border-radius: 10px;
+      }
+
+      .stream,
+      .trend-canvas {
+        border: 1px solid rgba(105, 168, 255, 0.32);
+        background: #020811;
+      }
+
+      .analytics-title,
+      .trend-caption {
+        color: var(--text-main);
+      }
+
+      .metric-heading,
+      .trend-legend,
+      .stat-label,
+      .info-label {
+        color: var(--text-soft);
+      }
+
+      .stat-box {
+        background: linear-gradient(160deg, rgba(16, 28, 43, 0.95), rgba(11, 20, 31, 0.92));
+        border: 1px solid rgba(105, 168, 255, 0.26);
+        box-shadow: none;
+        border-radius: 10px;
+      }
+
+      .stat-box:hover {
+        border-color: rgba(105, 168, 255, 0.58);
+        transform: translateY(-2px);
+      }
+
+      .stat-value,
+      .info-value {
+        color: var(--text-main);
+      }
+
+      .metric-good  { color: #3be7ac !important; }
+      .metric-bad   { color: #ff6c78 !important; }
+      .metric-neutral { color: #80c4ff !important; }
+
+      .info-box {
+        border: 1px solid rgba(73, 224, 184, 0.3);
+        background: linear-gradient(160deg, rgba(10, 27, 31, 0.9), rgba(9, 20, 29, 0.84));
+      }
+
+      .app-shell {
+        display: grid;
+        grid-template-columns: 220px minmax(0, 1fr);
+        gap: 1rem;
+        max-width: 1920px;
+        margin: 0 auto;
+      }
+
+      .sidebar {
+        position: sticky;
+        top: 0.8rem;
+        align-self: start;
+        border: 1px solid var(--line);
+        background: linear-gradient(160deg, rgba(10, 18, 29, 0.96), rgba(8, 15, 23, 0.92));
+        border-radius: 14px;
+        padding: 0.75rem;
+      }
+
+      .sidebar-title {
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--text-soft);
+        margin-bottom: 0.55rem;
+      }
+
+      .sidebar-nav {
+        display: grid;
+        gap: 0.45rem;
+      }
+
+      .sidebar-nav-btn {
+        width: 100%;
+        border: 1px solid var(--line);
+        color: var(--text-main);
+        background: rgba(91, 182, 255, 0.07);
+        border-radius: 10px;
+        padding: 0.58rem 0.62rem;
+        text-align: left;
+        cursor: pointer;
+        font-size: 0.73rem;
+        font-weight: 600;
+      }
+
+      .sidebar-nav-btn small {
+        display: block;
+        color: var(--text-soft);
+        font-size: 0.62rem;
+        font-weight: 500;
+        margin-top: 0.12rem;
+      }
+
+      .sidebar-nav-btn:hover {
+        border-color: var(--line-strong);
+        background: rgba(91, 182, 255, 0.18);
+      }
+
+      .sidebar-nav-btn.active {
+        border-color: rgba(73, 224, 184, 0.6);
+        background: rgba(73, 224, 184, 0.16);
+      }
+
+      .main-content {
+        min-width: 0;
+      }
+
+      .alert-banner {
+        margin: 0 0 0.75rem;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: linear-gradient(130deg, rgba(13, 24, 38, 0.95), rgba(8, 16, 27, 0.9));
+        color: var(--text-soft);
+        padding: 0.5rem 0.7rem;
+        font-size: 0.72rem;
+      }
+
+      body.page-live .analytics-section {
+        display: none;
+      }
+
+      body.page-analytics .video-panel,
+      body.page-analytics .alert-banner {
+        display: none;
+      }
+
+      @media (max-width: 980px) {
+        .app-shell {
+          grid-template-columns: 1fr;
+        }
+
+        .sidebar {
+          position: static;
+        }
+
+        .sidebar-nav {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
     </style>
   </head>
-  <body>
+  <body class="page-live">
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Camera 2 navigation">
+        <div class="sidebar-title">Views</div>
+        <div class="sidebar-nav">
+          <button class="sidebar-nav-btn" data-page="live" type="button">
+            Page 1: Live Camera
+            <small>Camera 2 stream and status</small>
+          </button>
+          <button class="sidebar-nav-btn" data-page="analytics" type="button">
+            Page 2: Analytics
+            <small>Camera 2 metrics and trends</small>
+          </button>
+        </div>
+      </aside>
+
+      <main class="main-content">
     <div class="container">
       <div class="page-header">
         <h1>📷 Camera 2 — Full View</h1>
         <a href="/" class="back-link">← Dual View</a>
       </div>
+      <div class="alert-banner">Camera 2 live monitoring is active.</div>
       <div class="content">
         <div class="video-panel">
           <div class="panel-box">
@@ -232,6 +449,8 @@
           </div>
         </div>
       </div>
+    </div>
+      </main>
     </div>
 
     <script>
@@ -385,6 +604,51 @@
         video.addEventListener('loadedmetadata', drawBoxes);
       }
       window.addEventListener('resize', () => { refresh(); drawBoxes(); });
+
+      function applyPageMode(mode) {
+        const normalized = mode === 'analytics' ? 'analytics' : 'live';
+        document.body.classList.remove('page-live', 'page-analytics');
+        document.body.classList.add('page-' + normalized);
+
+        document.querySelectorAll('.sidebar-nav-btn').forEach((btn) => {
+          btn.classList.toggle('active', btn.dataset.page === normalized);
+        });
+
+        try {
+          localStorage.setItem('grayvms-camera2-page-mode', normalized);
+        } catch (e) {
+          // Ignore localStorage failures.
+        }
+      }
+
+      function getInitialPageMode() {
+        const hashMode = (window.location.hash || '').replace('#', '').trim();
+        if (hashMode === 'live' || hashMode === 'analytics') return hashMode;
+
+        try {
+          const stored = localStorage.getItem('grayvms-camera2-page-mode');
+          if (stored === 'live' || stored === 'analytics') return stored;
+        } catch (e) {
+          // Ignore localStorage failures.
+        }
+
+        return 'live';
+      }
+
+      document.querySelectorAll('.sidebar-nav-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const nextMode = btn.dataset.page === 'analytics' ? 'analytics' : 'live';
+          window.location.hash = nextMode;
+          applyPageMode(nextMode);
+        });
+      });
+
+      window.addEventListener('hashchange', () => {
+        const mode = (window.location.hash || '').replace('#', '').trim();
+        applyPageMode(mode);
+      });
+
+      applyPageMode(getInitialPageMode());
     </script>
   </body>
 </html>
